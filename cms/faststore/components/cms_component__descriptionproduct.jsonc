@@ -1,0 +1,52 @@
+{
+  "$extends": [
+    "#/$defs/base-component"
+  ],
+  "$componentKey": "DescriptionProduct",
+  "$componentTitle": "Description Product",
+  "title": "Description Product",
+  "description": "Standalone PDP section with the product short description (specs) and the description accordion",
+  "type": "object",
+  "properties": {
+    "productDescription": {
+      "title": "Product Description",
+      "type": "object",
+      "properties": {
+        "initiallyExpanded": {
+          "title": "Initially Expanded?",
+          "type": "string",
+          "enumNames": [
+            "First",
+            "All",
+            "None"
+          ],
+          "enum": [
+            "first",
+            "all",
+            "none"
+          ],
+          "default": "first"
+        },
+        "displayDescription": {
+          "title": "Should display description?",
+          "type": "boolean",
+          "default": true
+        },
+        "title": {
+          "title": "Description section title",
+          "type": "string",
+          "default": "Description"
+        },
+        "accordionAriaLabel": {
+          "title": "Product description accordion aria label",
+          "type": "string",
+          "default": "Product Description Content"
+        }
+      }
+    }
+  },
+  "readOnly": false,
+  "writeOnly": false,
+  "deprecated": false,
+  "$abstract": false
+}

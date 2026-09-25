@@ -1,0 +1,221 @@
+.gallery_container {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+
+  // Vertical (PDP): thumbnail column to the left of the main image on wide
+  // screens; stacked below it on narrow screens.
+  &[data-orientation="vertical"] {
+    @media (max-width: 1024px) {
+      flex-direction: column-reverse;
+      align-items: stretch;
+    }
+  }
+
+  // Horizontal (Quick Buy): thumbnail row always below the main image.
+  &[data-orientation="horizontal"] {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+}
+
+.gallery_thumbnnail {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 700px;
+  overflow-y: auto;
+  flex-shrink: 0;
+
+  @media (max-width: 1024px) {
+    flex-direction: row;
+    max-height: none;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+}
+
+// Paginated thumbnail slider (prev/next arrows), driven by the generic `Slider`
+// in src/components/ui/Slider.
+.gallery_thumbnnail_slider {
+  width: 100%;
+
+  // Vertical column: fixed to the thumbnail width so it sits as a narrow rail
+  // beside the main image (only on the wide layout, matching Thumbnails' own
+  // orientation breakpoint).
+  &[data-orientation="vertical"] {
+    @media (min-width: 1025px) {
+      width: 96px;
+      flex-shrink: 0;
+    }
+  }
+  &[data-orientation="horizontal"] {
+    button {
+      &[aria-label="Próximo"],
+      &[aria-label="Anterior"] {
+        display: none !important;
+      }
+    }
+    .track {
+      padding-right: 60px;
+    }
+
+    
+  }
+}
+
+// Horizontal slide: the thumbnail fills the slot the slider gives it.
+.thumb_slide {
+  .thumb {
+    width: 100%;
+    height: auto;
+  }
+
+  .thumb img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+  }
+}
+
+// Vertical slide: the thumbnail keeps its fixed 96px box, centered in the rail.
+.thumb_slide_vertical {
+  display: flex;
+  justify-content: center;
+}
+
+.thumb {
+  padding: 0;
+  border: 1px solid transparent;
+  background: none;
+  cursor: pointer;
+  line-height: 0;
+  flex-shrink: 0;
+  // Explicit box (border drawn inside via border-box) so the vertical rail's
+  // flex-stretch can't squeeze the content area below the image's fixed 96px
+  // height — that mismatch was clipping the bottom border, leaving only the
+  // top edge visible on the active thumb.
+  box-sizing: border-box;
+  width: 96px;
+  height: 96px;
+
+  &[data-active] {
+    border-color: #110b0d;
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.gallery {
+  flex: 1;
+  min-width: 0;
+  position: relative;
+}
+
+.viewer {
+  position: relative;
+  overflow: hidden;
+  cursor: grab;
+  touch-action: pan-y;
+
+  &:active {
+    cursor: grabbing;
+  }
+}
+
+.track {
+  display: flex;
+  transition: transform 0.4s ease;
+  will-change: transform;
+}
+
+.slide {
+  flex: 0 0 100%;
+  width: 100%;
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: none;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 1rem;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.35;
+    cursor: default;
+  }
+}
+
+.arrowPrev {
+  left: 0.5rem;
+  background-image: url('data:image/svg+xml,<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 13.3334L4.66669 8.00008L10 2.66675L10.9467 3.61341L6.56002 8.00008L10.9467 12.3867L10 13.3334Z" fill="%23110B0D"/></svg>');
+}
+
+.arrowNext {
+  right: 0.5rem;
+  background-image: url('data:image/svg+xml,<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.00004 13.3334L11.3334 8.00008L6.00004 2.66675L5.05337 3.61341L9.44004 8.00008L5.05337 12.3867L6.00004 13.3334Z" fill="%23110B0D"/></svg>');
+}
+
+.bullets {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 0;
+  position: absolute;
+  width: 100%;
+  bottom: 12px;
+ 
+}
+
+.bullet {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 1px solid #D9D9D9;
+  border-radius: 50%;
+  background-color: transparent;
+  cursor: pointer;
+
+  &[data-active] {
+    background-color: #110b0d;
+    border-color: #110b0d;
+  }
+}
+
+ @media(max-width:1024px){
+  .bullets{
+    margin-top: 0;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+  }    
+ }
+
+
+  
+
+
+

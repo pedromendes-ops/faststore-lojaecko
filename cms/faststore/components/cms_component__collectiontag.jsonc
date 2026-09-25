@@ -1,0 +1,36 @@
+{
+  "$extends": [
+    "#/$defs/base-component"
+  ],
+  "$componentKey": "CollectionTag",
+  "$componentTitle": "CollectionTag",
+  "title": "CollectionTag",
+  "description": "flag de coleção",
+  "type": "object",
+  "required": [
+    "collectionId",
+    "label",
+    "color"
+  ],
+  "properties": {
+    "collectionId": {
+      "title": "collection id",
+      "type": "string",
+      "description": "id da colecao"
+    },
+    "label": {
+      "title": "label",
+      "type": "string",
+      "description": "texto que vai mostra no site: ex: New Arrivals"
+    },
+    "color": {
+      "title": "color",
+      "type": "string",
+      "description": "color em hex ex: #000"
+    }
+  },
+  "readOnly": false,
+  "writeOnly": false,
+  "deprecated": false,
+  "$abstract": false
+}

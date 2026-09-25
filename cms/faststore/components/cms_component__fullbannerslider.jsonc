@@ -1,0 +1,110 @@
+{
+  "$extends": [
+    "#/$defs/base-component"
+  ],
+  "$componentKey": "FullBannerSlider",
+  "$componentTitle": "Full Banner Slider",
+  "title": "Full Banner Slider",
+  "description": "A full-width banner.",
+  "type": "object",
+  "required": [
+    "items",
+    "height"
+  ],
+  "properties": {
+    "items": {
+      "type": "array",
+      "title": "Banner Items",
+      "description": "List of banner items to display in the carousel",
+      "items": {
+        "type": "object",
+        "title": "Banner Item",
+        "properties": {
+          "image": {
+            "type": "string",
+            "title": "Image",
+            "description": "URL or path to the banner image for desktop",
+            "widget": {
+              "ui:widget": "media-gallery",
+              "restrictMediaTypes": {
+                "video": true,
+                "image": [
+                  "png",
+                  "jpg",
+                  "jpeg",
+                  "gif",
+                  "svg",
+                  "webp"
+                ]
+              }
+            }
+          },
+          "imageMobile": {
+            "type": "string",
+            "title": "Mobile Image",
+            "description": "URL or path to the banner image for mobile devices",
+            "widget": {
+              "ui:widget": "media-gallery",
+              "restrictMediaTypes": {
+                "video": true,
+                "image": [
+                  "png",
+                  "jpg",
+                  "jpeg",
+                  "gif",
+                  "svg",
+                  "webp"
+                ]
+              }
+            }
+          },
+          "href": {
+            "type": "string",
+            "title": "Link URL",
+            "description": "URL where the banner should redirect when clicked (optional)"
+          },
+          "target": {
+            "type": "string",
+            "title": "Link Target",
+            "description": "How the link should open",
+            "enum": [
+              "_blank",
+              "_self"
+            ],
+            "enumNames": [
+              "New Tab",
+              "Same Tab"
+            ],
+            "default": "_self"
+          }
+        }
+      },
+      "minItems": 1
+    },
+    "height": {
+      "type": "number",
+      "title": "Height",
+      "description": "Height of the banner in pixels",
+      "minimum": 100,
+      "default": 700
+    },
+    "loading": {
+      "type": "string",
+      "title": "Loading Strategy",
+      "description": "Loading strategy for the images",
+      "enum": [
+        "eager",
+        "lazy"
+      ],
+      "enumNames": [
+        "Eager",
+        "Lazy"
+      ],
+      "default": "lazy"
+    }
+  },
+  "readOnly": false,
+  "writeOnly": false,
+  "deprecated": false,
+  "$abstract": false
+}

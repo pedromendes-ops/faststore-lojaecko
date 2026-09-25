@@ -1,0 +1,15 @@
+type UpdateNewsletterGenderResponse {
+  success: Boolean!
+  message: String!
+}
+
+input UpdateNewsletterGenderInput {
+  email: String!
+  gender: String!
+}
+
+type Mutation {
+  updateNewsletterGender(
+    input: UpdateNewsletterGenderInput!
+  ): UpdateNewsletterGenderResponse!
+}

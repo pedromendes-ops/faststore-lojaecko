@@ -1,0 +1,443 @@
+// Pull in the @faststore/ui component styles this section relies on. The
+// store theme only loads a subset globally (Search*, Input, ProductPrice), so
+// without these the SkuSelector renders as a bare list (its clickable link
+// overlay has no positioning) and the buy box/badges are unstyled.
+// Nested under the wrapper class to keep CSS Modules purity (the imports add
+// global `[data-fs-*]` selectors that must not sit at the module root).
+.productDetails {
+  @import "@faststore/ui/src/components/atoms/Link/styles.scss";
+  @import "@faststore/ui/src/components/atoms/Button/styles.scss";
+  @import "@faststore/ui/src/components/atoms/Price/styles.scss";
+  @import "@faststore/ui/src/components/atoms/Icon/styles.scss";
+  @import "@faststore/ui/src/components/molecules/ProductPrice/styles.scss";
+  @import "@faststore/ui/src/components/molecules/ProductTitle/styles.scss";
+  @import "@faststore/ui/src/components/molecules/DiscountBadge/styles.scss";
+  @import "@faststore/ui/src/components/molecules/QuantitySelector/styles.scss";
+  @import "@faststore/ui/src/components/molecules/BuyButton/styles.scss";
+  @import "@faststore/ui/src/components/molecules/SkuSelector/styles.scss";
+  @import "@faststore/ui/src/components/molecules/Accordion/styles.scss";
+}
+
+@layer components {
+  .productDetails {
+    margin-top: 1.5rem !important;
+    [data-fs-product-context]{
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 1.5rem;
+    }
+    [data-fs-product-title-header] h1{
+      color: #110B0D;
+      font-size: 20px !important;
+      font-style: normal;
+      font-weight: 700 !important;
+      line-height: normal !important;
+    }
+
+    [data-fs-product-details-values-wrapper]{
+      margin-top: 5px;
+    }
+    [data-product-spot-price]{
+      [data-fs-price]{
+        color: #110B0D;
+        font-size: 16px !important;
+        font-style: normal;
+        font-weight: 700 !important;
+        line-height: normal !important;
+      }
+    }
+
+    [data-fs-product-details-info] {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      @media(min-width: 1025px){
+        position: relative;
+        [data-fs-wishlist-button] {
+          right: auto;
+          left: -64px;
+          top: 6px;
+        }
+      }      
+    }
+
+    [data-fs-product-details-values] {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    [data-fs-product-details-values-wrapper] {
+      display: flex;
+      flex-direction: column;
+    }
+
+    [data-fs-product-details-installments] {
+      margin-top: 4px;
+      color: #6D686A;
+      font-size: 14px;
+      line-height: normal;
+      font-weight: 300;
+    }
+    // Mesmo tratamento do selo na shelf (ver ProductCard.module.scss
+    // `.pixDiscount`): 12px/400 no mesmo verde.
+    [data-fs-price-disconter-pix]  {
+      margin-top: 4px;
+      span{
+        color: #267949;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+      }
+    }
+    [data-fs-product-details-selectors]{
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #DBDBDB;
+    }
+  
+
+    .installments-modal-trigger {
+      margin-top: 4px;
+      padding: 0;
+      align-self: flex-start;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: var(--Primary-BLK, #110B0D);
+      font-family: Arial;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 24px; /* 150% */
+      text-decoration-line: underline;
+      text-decoration-style: solid;
+      text-decoration-skip-ink: none;
+      text-decoration-thickness: auto;
+      text-underline-offset: auto;
+      text-underline-position: from-font;
+    }
+
+    [data-fs-product-details-selectors] {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    // The in-place SKU swap overlay is a <button> instead of the core <a>
+    // (see SkuVariations.tsx), so it needs its native chrome reset. Position/
+    // sizing already come from the imported SkuSelector styles above.
+    [data-fs-sku-selector-option-link] {
+      padding: 0;
+      margin: 0;
+
+      &:where(button) {
+        appearance: none;
+        background: transparent;
+        border: 0;
+        cursor: pointer;
+      }
+    }
+
+    // Out-of-stock variation options. Default treatment (dimmed + struck
+    // through); restyle freely via the `data-unavailable` hook.
+    [data-fs-sku-selector-option][data-unavailable] {
+      opacity: 0.4;
+      display: none !important;
+
+      > span {
+        text-decoration: line-through;
+      }
+    }
+    [data-fs-sku-selector-list]{
+      display: grid !important;
+      width: 100%;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 8px;
+       [data-fs-sku-selector-option]{
+          height: 40px !important;
+          background-color: #fff;
+          width: 100% !important;
+
+         span{
+          border-radius: 0 !important;
+          border-color: #DBDBDB !important;
+          border-width: 1px !important;
+          box-shadow: none !important;
+          padding: 0 5px !important;
+          font-size: 13px !important;
+          letter-spacing: -1px !important;
+          transition: all .3s ease-in-out;
+          white-space: nowrap;
+         }
+       }
+       [data-fs-sku-selector-option][data-fs-sku-selector-checked="true"]{
+        span {
+          border-color: #110b0d !important;
+          border-width: 1px !important;
+          font-weight: 500 !important;
+        }
+       }
+    }
+
+    [data-fs-product-actions]{
+      display: flex;
+      margin-top: 2rem;
+      gap: 1rem;
+    }
+
+    [data-fs-buy-button]{
+      width: 100% !important;
+      height: 56px !important;
+
+      [data-fs-button-wrapper]{
+        border-radius: 0 !important;
+        background-color: #110B0D !important;
+        border: 0 !important;
+        position: relative;
+        overflow: hidden;
+        &::before{
+          content: "";
+          position: absolute;
+          inset: -1px;
+          background-color: #C41230;
+          transform: scaleY(0);
+          transform-origin: bottom;
+          transition: transform 0.3s ease-in-out;
+          z-index: 0;
+        }
+        &:hover{
+          &::before{
+            transform: scaleY(1);
+          }
+          span {
+            position: relative;
+            z-index: 1;
+          }
+        }
+      }
+      [data-fs-icon]{
+        display: none !important;
+      }
+    }
+
+    [data-fs-shipping-simulation] {
+      margin-top: 1rem;
+      padding-top: 12px;
+      border-top: 1px solid #DBDBDB;
+
+      [data-fs-shipping-simulation-title] {
+        margin: 0;
+        color: #6D686A;
+        font-size: 12px;
+        font-weight: normal;
+        line-height: 24px;
+      }
+    }
+    [data-fs-shipping-container]{
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+  
+
+    [data-fs-shipping-cep-field] {
+      display: flex;
+      align-items: center;
+      max-width: 260px;
+      height: 40px;
+      padding: 0 0.5rem 0 1rem;
+      border: 1px solid #DBDBDB;
+      background: #fff;
+
+      &[data-fs-shipping-cep-field-error="true"] {
+        border-color: #c41230;
+      }
+
+      input {
+        flex: 1;
+        min-width: 0;
+        height: 100%;
+        border: 0;
+        outline: none;
+        background: transparent;
+        font-size: 16px;
+        color: #110b0d;
+
+        &::placeholder {
+          color: #BEB8B9;
+        }
+      }
+
+      button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        min-width: 84px;
+        padding: 0.5rem 0.75rem;
+        border: 0;
+        background: transparent;
+        font-size: 14px;
+        font-weight: 700;
+        color: #6D686A;
+        cursor: pointer;
+
+        &:disabled {
+          color: #b5b5b5;
+          cursor: not-allowed;
+        }
+      }
+    }
+    
+
+    .shipping-simulation-spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(17, 11, 13, 0.25);
+      border-top-color: #110b0d;
+      border-radius: 50%;
+      animation: shipping-simulation-spin 0.6s linear infinite;
+    }
+
+    @keyframes shipping-simulation-spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    [data-fs-shipping-simulation-error] {
+      margin: 0.5rem 0 0;
+      font-size: 13px;
+      color: #c41230;
+    }
+
+    [data-fs-shipping-simulation-footer] {
+
+      [data-fs-shipping-simulation-link] {
+        display: inline-flex;
+        align-items: center;
+        gap: .25rem;
+        font-size: 12px;
+        text-decoration: underline !important;
+        color: #6D686A  !important;
+        font-weight: 400;
+        line-height: 22px;
+
+        svg {
+          color: #6D686A;
+        }
+      }
+    }
+
+    .shipping-simulation-clear {
+      border: 0;
+      background: transparent;
+      font-size: 14px;
+      text-decoration: underline;
+      color: #777;
+      cursor: pointer;
+    }
+
+    .shipping-simulation-link-icon {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    [data-fs-shipping-simulation-result] {
+      margin-top: 1.25rem;
+
+      [data-fs-shipping-simulation-table] {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      [data-fs-shipping-simulation-table-header] {
+        padding: 0.5rem;
+        font-size: 12px;
+        font-weight: 700;
+        color: #110b0d;
+        text-align: left;
+
+        &:last-child {
+          text-align: right;
+        }
+      }
+
+      tbody [data-fs-shipping-simulation-table-row] {
+        background: #f1f1f1;
+      }
+
+      [data-fs-shipping-simulation-table-cell] {
+        padding: .5rem;
+        font-size: 12px;
+        color: #222222;
+        vertical-align: middle;
+
+        &[data-fs-shipping-simulation-option-price] {
+          text-align: right;
+          white-space: nowrap;
+          font-weight: 700;
+        }
+      }
+
+      [data-fs-shipping-simulation-note] {
+        margin: 0.75rem 0 0;
+        font-size: 12px;
+        line-height: 18px;
+      
+      }
+    }
+
+    @media(max-width: 1024px){
+      [data-fs-product-context]{
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        position: relative;
+        [data-fs-wishlist-button] {
+          right: auto;
+          right: 0;
+          top: 0;
+        }
+      }
+      [data-fs-sku-selector-list] [data-fs-sku-selector-option] span {
+        font-size: 12px !important;
+      }
+      [data-fs-sku-selector-list]{
+        grid-template-columns: 1fr 1fr 1fr;        
+      }
+      [data-fs-shipping-container]{
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        [data-fs-link-variant]{
+          padding: 0 !important;
+        }
+      }
+    }
+  }
+  .product-details-sku-variations{
+    margin-top: 1.375rem;
+    padding-top: 1rem;
+    border-top: 1px solid #DBDBDB;
+  }
+  .dots-color{
+    margin-top: 1rem;
+  }
+  .label-color{
+    color: #110B0D;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+}
+
+.ctadetail {
+  position: relative;
+}
+

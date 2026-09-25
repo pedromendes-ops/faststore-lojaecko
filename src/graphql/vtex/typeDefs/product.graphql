@@ -1,0 +1,76 @@
+scalar JSON
+
+extend type StoreProduct {
+  availableInstallments: [Installments!]!
+  productClusters: [ProductCluster!]!
+  clusterHighlights: [ProductCluster!]!
+  similars: [SimilarColor!]!
+}
+
+# Lightweight sibling used by the color swatches on the ProductCard. Just enough
+# to draw the dot and, on click, fetch the full sibling product (session-priced)
+# via useProductQuery using `sku`. Not the full StoreProduct on purpose.
+type SimilarColor {
+  # Catalog product id of the sibling.
+  productId: String!
+  # Default SKU (items[0].itemId). Drives the in-place swap via useProductQuery.
+  sku: String!
+  # linkText / PDP slug of the sibling.
+  slug: String!
+  # Value of the "Cor" specification (accessible label for the swatch).
+  colorName: String!
+  # Value of the "ColorHex" specification (e.g. "#7895C1"); drives the swatch
+  # color. Empty string when the catalog has no ColorHex for this product.
+  colorHex: String!
+  # First image of the default SKU, for the swatch preview.
+  image: String!
+}
+
+type ProductCluster {
+  id: String!
+  name: String!
+}
+
+
+type ItemOffered {
+  isVariantOf: CustomProductVariant!
+  brand: CustomBrand!
+  sku: String!
+  name: String!
+  gtin: String!
+  additionalProperty: [String!]!
+  image: [CustomImage!]!
+  unitMultiplier: Float!
+}
+
+type CustomProductVariant {
+  name: String!
+  productGroupID: String!
+  skuVariants: CustomSkuVariants!
+}
+
+type CustomSkuVariants {
+  activeVariations: JSON
+  availableVariations: [String!]!
+  slugsMap: JSON
+}
+
+type CustomBrand {
+  name: String!
+}
+
+type CustomImage {
+  url: String!
+  alternateName: String!
+}
+
+type CustomSeller {
+  identifier: String!
+}
+
+type Installments {
+  installmentPaymentSystemName: String!
+  installmentValue: Float!
+  installmentInterest: Float!
+  installmentNumber: Float!
+}

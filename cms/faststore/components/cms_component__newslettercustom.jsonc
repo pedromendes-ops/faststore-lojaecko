@@ -1,0 +1,73 @@
+{
+  "$extends": [
+    "#/$defs/base-component"
+  ],
+  "$componentKey": "NewsletterCustom",
+  "$componentTitle": "Newsletter Custom",
+  "title": "Newsletter Custom",
+  "description": "Seção de newsletter com Instagram, imagens, título, descrição e formulário de inscrição (e-mail + gênero).",
+  "type": "object",
+  "required": [
+    "images"
+  ],
+  "properties": {
+    "instagramHandle": {
+      "title": "Instagram (@)",
+      "description": "Usuário do Instagram, sem o @",
+      "type": "string",
+      "default": ""
+    },
+    "images": {
+      "title": "Imagens",
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 3,
+      "items": {
+        "title": "Imagem",
+        "type": "object",
+        "required": [
+          "image"
+        ],
+        "properties": {
+          "image": {
+            "title": "Imagem",
+            "type": "string",
+            "widget": {
+              "ui:widget": "media-gallery",
+              "restrictMediaTypes": {
+                "video": true,
+                "image": [
+                  "png",
+                  "jpg",
+                  "jpeg",
+                  "gif",
+                  "svg",
+                  "webp"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "title": {
+      "title": "Título",
+      "type": "string",
+      "default": "Assine nossa newsletter"
+    },
+    "description": {
+      "title": "Descrição",
+      "type": "string",
+      "default": ""
+    },
+    "submitButtonLabel": {
+      "title": "Texto do botão (Call to Action)",
+      "type": "string",
+      "default": "Junte-se a nós"
+    }
+  },
+  "readOnly": false,
+  "writeOnly": false,
+  "deprecated": false,
+  "$abstract": false
+}

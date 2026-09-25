@@ -1,0 +1,251 @@
+// Levi's 404 — clean / editorial (Apple-like whitespace), Levi's colors.
+// Wrapped in `@layer components` so theme tokens in `@layer theme` still win
+// without needing `!important`, matching the cascade of native sections.
+@layer components {
+  // Scoped box-sizing reset (FastStore base doesn't force border-box here).
+  .wrapper,
+  .wrapper *,
+  .wrapper *::before,
+  .wrapper *::after {
+    box-sizing: border-box;
+  }
+
+  .wrapper {
+    // -----------------------------------------------------------------
+    // Local brand palette (scoped to this page — not global tokens)
+    // -----------------------------------------------------------------
+    --levis-red: #bb0000;
+    --levis-red-dark: #8f0000;
+    --levis-ink: #14243b; // deep indigo, used as near-black for text
+    --levis-muted: #6b7280; // calm gray for support copy
+    --levis-stitch: #d9a441; // discreet golden thread
+    --levis-hairline: #e7e7ea;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 72vh;
+    margin-top: 3rem;
+    font-family: var(--fs-text-face-body, sans-serif);
+    background-color: #fff;
+  }
+
+  // Single centered column — lots of air, no panel, no texture.
+  .card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 34rem;
+    min-width: 0;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  // -------------------------------------------------------------------
+  // Discreet arcuate stitch — the only ornament
+  // -------------------------------------------------------------------
+  .stitch {
+    width: 88px;
+    height: auto;
+    margin-bottom: 1.75rem;
+
+    path {
+      fill: none;
+      stroke: var(--levis-stitch);
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-dasharray: 5 5; // dashed → reads as stitching
+    }
+  }
+
+  // -------------------------------------------------------------------
+  // Red eyebrow — the brand accent
+  // -------------------------------------------------------------------
+  .eyebrow {
+    margin: 0 0 1rem;
+    font-size: 0.8125rem;
+    font-weight: var(--fs-text-weight-bold, 700);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--levis-red);
+  }
+
+  .title {
+    margin: 0 0 1rem;
+    font-size: clamp(2rem, 6vw, 3.25rem);
+    font-weight: var(--fs-text-weight-black, 700);
+    line-height: 1.06;
+    letter-spacing: -0.01em;
+    color: var(--levis-ink);
+  }
+
+  .subtitle {
+    max-width: min(28rem, 100%);
+    margin: 0 auto 2.25rem;
+    font-size: clamp(1rem, 3.5vw, 1.125rem);
+    line-height: 1.55;
+    color: var(--levis-muted);
+  }
+
+  // -------------------------------------------------------------------
+  // Primary CTA — solid red, rounded (clean, high contrast)
+  // -------------------------------------------------------------------
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3rem;
+    padding: 0 2rem;
+    font-size: 1rem;
+    font-weight: var(--fs-text-weight-bold, 700);
+    text-decoration: none;
+    color: #fff;
+    background-color: var(--levis-red);
+    border-radius: 999px;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+
+    &:hover {
+      background-color: var(--levis-red-dark);
+    }
+
+    &:active {
+      transform: translateY(1px);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--levis-red);
+      outline-offset: 3px;
+    }
+  }
+
+  // -------------------------------------------------------------------
+  // Secondary — quiet text links, red on hover
+  // -------------------------------------------------------------------
+  .suggestions {
+    margin-top: 2.5rem;
+
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.5rem;
+      justify-content: center;
+      margin: 0.75rem 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    a {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: var(--levis-ink);
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: var(--levis-red);
+      }
+
+      &:focus-visible {
+        outline: 2px solid var(--levis-red);
+        outline-offset: 3px;
+        border-radius: 2px;
+      }
+    }
+  }
+
+  .suggestionsLabel {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--levis-muted);
+  }
+
+  // Technical detail (fromUrl) — hairline separated, barely there
+  .meta {
+    width: 100%;
+    max-width: min(28rem, 100%);
+    margin-top: 2.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--levis-hairline);
+    font-size: 0.75rem;
+    line-height: 1.5;
+    color: #9aa0a6;
+
+    h2 {
+      margin: 0 0 0.25rem;
+      font-size: 0.8125rem;
+      font-weight: var(--fs-text-weight-bold, 700);
+      color: var(--levis-muted);
+    }
+
+    p {
+      margin: 0;
+      overflow-wrap: anywhere; // long URLs can't force the layout wide
+    }
+  }
+
+  // -------------------------------------------------------------------
+  // Entrance — gentle fade + rise, transform/opacity only, staggered.
+  // -------------------------------------------------------------------
+  .stitch path {
+    stroke-dashoffset: 240;
+    animation: notfound-draw 1s ease-out 0.1s forwards;
+  }
+  .eyebrow {
+    animation: notfound-rise 0.5s ease-out 0.15s both;
+  }
+  .title {
+    animation: notfound-rise 0.5s ease-out 0.22s both;
+  }
+  .subtitle {
+    animation: notfound-rise 0.5s ease-out 0.3s both;
+  }
+  .cta {
+    animation: notfound-rise 0.5s ease-out 0.38s both;
+  }
+  .suggestions {
+    animation: notfound-rise 0.5s ease-out 0.46s both;
+  }
+
+  @keyframes notfound-rise {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes notfound-draw {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  // Accessibility: honor reduced-motion → final state, no animation.
+  @media (prefers-reduced-motion: reduce) {
+    .eyebrow,
+    .title,
+    .subtitle,
+    .cta,
+    .suggestions,
+    .stitch path {
+      animation: none;
+    }
+    .stitch path {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  // -------------------------------------------------------------------
+  // Responsive polish (mobile-first defaults above)
+  // -------------------------------------------------------------------
+  @media (min-width: 1024px) {
+    .card {
+      max-width: 36rem;
+    }
+  }
+}

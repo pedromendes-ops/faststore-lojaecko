@@ -1,0 +1,34 @@
+# Leitura genérica das Global Sections cadastradas no Content Platform da VTEX
+# (Admin → Content → Global Sections).
+#
+# As global sections são montadas pelo RenderSections como IRMÃS do `Children`,
+# então elas não envolvem a árvore da página e não têm como repassar os dados
+# por contexto React para dentro de um ProductCard. Este resolver existe para
+# fechar essa lacuna: qualquer seção usada como "configuração global da loja"
+# (PricePix, CollectionTag, ...) é lida aqui pelo BFF, no mesmo padrão de proxy
+# backend-only do shopTheLook/textSEO — o browser nunca chama a API do Content
+# Platform direto.
+#
+# É de propósito genérico: adicionar uma nova seção de configuração não exige
+# mexer no resolver nem no schema, só escrever um hook tipado por cima de
+# `useGlobalSections` (ver src/sdk/globalSections).
+
+type GlobalSection {
+  # `$componentKey` da seção — o mesmo nome registrado em src/components/index.tsx.
+  name: String!
+  # Props da seção exatamente como o lojista preencheu no CMS, sem os metadados
+  # `$componentKey` / `$componentTitle`. É `JSON` porque o formato varia por
+  # seção; quem dá tipo ao conteúdo é o hook tipado do lado do cliente.
+  data: JSON!
+}
+
+extend type Query {
+  # Todas as global sections cujo nome está em `names`, na ordem em que
+  # aparecem no CMS. Devolve lista (e não um item) porque a mesma seção pode ser
+  # cadastrada várias vezes — é assim que o CollectionTag registra uma tag por
+  # coleção.
+  #
+  # Lista vazia quando nada casa ou quando o Content Platform não pôde ser
+  # consultado: nesse estado o front deve cair nos seus próprios defaults.
+  globalSections(names: [String!]!): [GlobalSection!]!
+}

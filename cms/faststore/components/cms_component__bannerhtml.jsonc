@@ -1,0 +1,99 @@
+{
+  "$extends": [
+    "#/$defs/base-component"
+  ],
+  "$componentKey": "BannerHtml",
+  "$componentTitle": "Banner Html",
+  "title": "Banner Html",
+  "description": "Banner Html",
+  "type": "object",
+  "properties": {
+    "htmlBannerTextContent": {
+      "title": "Texto ou Html",
+      "type": "string",
+      "ui:placeholder": "<h2>Seu texto aqui</h2>"
+    },
+    "htmlBannerTextHasMore": {
+      "title": "Acrescentar link de veja mais",
+      "type": "boolean",
+      "default": true
+    },
+    "htmlBannerTextTypeMore": {
+      "title": "Tipo do link",
+      "type": "string",
+      "enum": [
+        "button",
+        "link"
+      ],
+      "enumNames": [
+        "button",
+        "link"
+      ],
+      "default": "link"
+    },
+    "htmlBannerTextUrl": {
+      "title": "Url do link",
+      "type": "string",
+      "default": "#"
+    },
+    "htmlBannerTextLink": {
+      "title": "Texto do link",
+      "type": "string",
+      "default": "Veja mais"
+    },
+    "htmlBannerTextPosition": {
+      "title": "Posição do conteúdo",
+      "type": "string",
+      "enum": [
+        "center",
+        "left",
+        "right",
+        "between"
+      ],
+      "enumNames": [
+        "center",
+        "left",
+        "right",
+        "between"
+      ],
+      "default": "between"
+    },
+    "htmlBannerTextBackground": {
+      "title": "Cor do fundo",
+      "type": "string",
+      "default": "#cccccc"
+    },
+    "htmlBannerTextColor": {
+      "title": "Cor dos textos",
+      "type": "string",
+      "default": "#110b0d"
+    },
+    "htmlBannerTextClass": {
+      "title": "Classe para CSS",
+      "type": "string",
+      "description": "Nome da classe do elemnto"
+    },
+    "htmlBannerTextDisplay": {
+      "title": "Grid Element",
+      "type": "string",
+      "enum": [
+        "container",
+        "full"
+      ],
+      "enumNames": [
+        "container",
+        "full"
+      ],
+      "default": "full"
+    },
+    "htmlBannerCenterMobile": {
+      "title": "Centralizar no mobile",
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "readOnly": false,
+  "writeOnly": false,
+  "deprecated": false,
+  "$abstract": false
+}

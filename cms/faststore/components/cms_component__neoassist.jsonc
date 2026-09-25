@@ -1,0 +1,15 @@
+{
+  "$extends": [
+    "#/$defs/base-component"
+  ],
+  "$componentKey": "NeoAssist",
+  "$componentTitle": "Neo Assist",
+  "title": "Neo Assist",
+  "type": "object",
+  "required": [],
+  "properties": {},
+  "readOnly": false,
+  "writeOnly": false,
+  "deprecated": false,
+  "$abstract": false
+}

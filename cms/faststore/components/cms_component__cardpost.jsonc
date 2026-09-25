@@ -1,0 +1,94 @@
+{
+  "$extends": [
+    "#/$defs/base-component"
+  ],
+  "$componentKey": "CardPost",
+  "$componentTitle": "Card Post",
+  "title": "Card Post",
+  "description": "Lista de cards com carrossel no mobile",
+  "type": "object",
+  "properties": {
+    "title": {
+      "title": "Título",
+      "type": "string",
+      "default": "DESCUBRA O MELHOR"
+    },
+    "items": {
+      "title": "Cards",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "title": "Card",
+        "type": "object",
+        "properties": {
+          "image": {
+            "title": "Imagem Desktop",
+            "type": "string",
+            "widget": {
+              "ui:widget": "media-gallery",
+              "restrictMediaTypes": {
+                "video": true,
+                "image": [
+                  "png",
+                  "jpg",
+                  "jpeg",
+                  "gif",
+                  "svg",
+                  "webp"
+                ]
+              }
+            }
+          },
+          "imageMobile": {
+            "title": "Imagem Mobile",
+            "type": "string",
+            "widget": {
+              "ui:widget": "media-gallery",
+              "restrictMediaTypes": {
+                "video": true,
+                "image": [
+                  "png",
+                  "jpg",
+                  "jpeg",
+                  "gif",
+                  "svg",
+                  "webp"
+                ]
+              }
+            }
+          },
+          "title": {
+            "title": "Título do card",
+            "type": "string"
+          },
+          "linkText": {
+            "title": "Texto do link",
+            "type": "string",
+            "default": "Shop Now"
+          },
+          "href": {
+            "title": "URL",
+            "type": "string"
+          },
+          "target": {
+            "title": "Abrir link",
+            "type": "string",
+            "enum": [
+              "_self",
+              "_blank"
+            ],
+            "enumNames": [
+              "Mesma aba",
+              "Nova aba"
+            ],
+            "default": "_self"
+          }
+        }
+      }
+    }
+  },
+  "readOnly": false,
+  "writeOnly": false,
+  "deprecated": false,
+  "$abstract": false
+}

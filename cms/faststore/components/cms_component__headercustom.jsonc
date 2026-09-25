@@ -1,0 +1,710 @@
+{
+  "$extends": [
+    "#/$defs/base-component"
+  ],
+  "$componentKey": "HeaderCustom",
+  "$componentTitle": "Header custom",
+  "title": "Header custom",
+  "description": "The header component of the site.",
+  "type": "object",
+  "required": [
+    "logo",
+    "menu"
+  ],
+  "properties": {
+    "skipLazyLoadingSection": {
+      "title": "Skip lazy loading",
+      "type": "boolean",
+      "default": false
+    },
+    "logo": {
+      "type": "string",
+      "title": "Logo",
+      "widget": {
+        "ui:widget": "media-gallery",
+        "restrictMediaTypes": {
+          "video": true,
+          "image": [
+            "png",
+            "jpg",
+            "jpeg",
+            "gif",
+            "svg",
+            "webp"
+          ]
+        }
+      }
+    },
+    "emptyCart": {
+      "type": "object",
+      "title": "Carrinho vazio",
+      "description": "Conteúdo exibido no mini-carrinho quando ele está vazio: mensagem, prateleira de produtos e botão para fechar.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "title": "Mensagem",
+          "default": "Seu carrinho está vazio"
+        },
+        "buttonLabel": {
+          "type": "string",
+          "title": "Texto do botão (fechar carrinho)",
+          "default": "Continuar comprando"
+        },
+        "shelf": {
+          "type": "object",
+          "title": "Prateleira de produtos",
+          "description": "Prateleira exibida dentro do carrinho vazio. Mesmos campos do Product Shelf.",
+          "properties": {
+            "title": {
+              "type": "string",
+              "title": "Título da prateleira"
+            },
+            "numberOfItems": {
+              "type": "integer",
+              "title": "Total de itens",
+              "default": 10,
+              "description": "Quantidade de produtos buscados. Pode ser menor se a busca retornar menos produtos."
+            },
+            "sort": {
+              "title": "Ordenação",
+              "description": "Ordem dos itens",
+              "default": "score_desc",
+              "enum": [
+                "discount_desc",
+                "name_asc",
+                "name_desc",
+                "orders_desc",
+                "price_asc",
+                "price_desc",
+                "release_desc",
+                "score_desc"
+              ],
+              "enumNames": [
+                "Desconto: maior para menor",
+                "Nome: A-Z",
+                "Nome: Z-A",
+                "Pedidos: maior para menor",
+                "Preço: menor para maior",
+                "Preço: maior para menor",
+                "Lançamento: mais novo para mais antigo",
+                "Relevância: maior para menor"
+              ]
+            },
+            "term": {
+              "type": "string",
+              "title": "Termo de busca"
+            },
+            "selectedFacets": {
+              "title": "Facets",
+              "type": "array",
+              "items": {
+                "title": "Facet",
+                "type": "object",
+                "required": [
+                  "key",
+                  "value"
+                ],
+                "properties": {
+                  "key": {
+                    "title": "Key",
+                    "description": "Para coleções use: productClusterIds",
+                    "type": "string",
+                    "default": "productClusterIds"
+                  },
+                  "value": {
+                    "title": "Value",
+                    "description": "Ex.: para a coleção 'Mais Desejados' use: 140. Consulte os ids na página de Coleções.",
+                    "type": "string",
+                    "default": "140"
+                  }
+                }
+              }
+            },
+            "productCardConfiguration": {
+              "title": "Configuração do card de produto",
+              "type": "object",
+              "properties": {
+                "showDiscountBadge": {
+                  "title": "Exibir selo de desconto?",
+                  "type": "boolean",
+                  "default": true
+                },
+                "bordered": {
+                  "title": "Cards com borda?",
+                  "type": "boolean",
+                  "default": false
+                },
+                "showPixDiscount": {
+                  "title": "Exibir desconto no Pix?",
+                  "type": "boolean",
+                  "default": true
+                },
+                "pixDiscount": {
+                  "title": "Percentual de desconto no Pix",
+                  "type": "integer",
+                  "default": 10,
+                  "description": "Percentual exibido abaixo das parcelas (ex.: 5 renderiza \"5% OFF no pix\")."
+                },
+                "pixDiscountLabel": {
+                  "title": "Rótulo do desconto no Pix",
+                  "type": "string",
+                  "default": "no pix",
+                  "description": "Texto após o percentual (ex.: \"no pix\")."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "rulerMinicart": {
+      "type": "object",
+      "title": "Régua do carrinho (frete grátis / brinde)",
+      "description": "Barra de progresso exibida no rodapé do mini-carrinho, acima do resumo, mostrando quanto falta para atingir o frete grátis ou o brinde.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "title": "Tipo de promoção",
+          "description": "Define o ícone do marcador e liga/desliga a régua.",
+          "default": "Frete",
+          "enum": [
+            "Frete",
+            "Brinde",
+            "Disable"
+          ],
+          "enumNames": [
+            "Frete grátis",
+            "Brinde",
+            "Desativado"
+          ]
+        },
+        "goal": {
+          "type": "number",
+          "title": "Valor da meta (R$)",
+          "description": "Valor total do carrinho para atingir a promoção. Use ponto para os centavos. Ex.: 699.90",
+          "default": 699.9
+        },
+        "progressMessage": {
+          "type": "string",
+          "title": "Mensagem de progresso",
+          "description": "Use {value} onde o valor restante deve aparecer (renderizado em negrito). Ex.: \"Faltam {value} para ganhar frete grátis\".",
+          "default": "Faltam {value} para ganhar frete grátis"
+        },
+        "successMessage": {
+          "type": "string",
+          "title": "Mensagem de sucesso",
+          "description": "Exibida quando a meta é atingida.",
+          "default": "Eba! Você ganhou frete grátis 🎉"
+        }
+      }
+    },
+    "promoDay": {
+      "title": "Ofertas do dia",
+      "description": "Drawer lateral com ofertas promocionais.",
+      "type": "object",
+      "properties": {
+        "active": {
+          "title": "Ativar ofertas do dia?",
+          "type": "boolean",
+          "default": true
+        },
+        "cards": {
+          "title": "Ofertas",
+          "description": "Cadastre os cards exibidos no drawer lateral.",
+          "type": "array",
+          "maxItems": 10,
+          "items": {
+            "title": "Oferta",
+            "type": "object",
+            "properties": {
+              "active": {
+                "title": "Ativar oferta?",
+                "type": "boolean",
+                "default": true
+              },
+              "showBanner": {
+                "title": "Exibir banner?",
+                "type": "boolean",
+                "default": true
+              },
+              "fileBanner": {
+                "title": "Imagem desktop",
+                "type": "string",
+                "widget": {
+                  "ui:widget": "media-gallery",
+                  "restrictMediaTypes": {
+                    "video": true,
+                    "image": [
+                      "png",
+                      "jpg",
+                      "jpeg",
+                      "gif",
+                      "svg",
+                      "webp"
+                    ]
+                  }
+                }
+              },
+              "fileBannerPhone": {
+                "title": "Imagem mobile",
+                "description": "Opcional. Se não for cadastrada, utiliza a imagem desktop.",
+                "type": "string",
+                "widget": {
+                  "ui:widget": "media-gallery",
+                  "restrictMediaTypes": {
+                    "video": true,
+                    "image": [
+                      "png",
+                      "jpg",
+                      "jpeg",
+                      "gif",
+                      "svg",
+                      "webp"
+                    ]
+                  }
+                }
+              },
+              "altBanner": {
+                "title": "Texto alternativo da imagem",
+                "description": "Descrição da imagem para acessibilidade.",
+                "type": "string"
+              },
+              "linkBanner": {
+                "title": "Link do banner",
+                "description": "Opcional. URL acessada ao clicar no banner.",
+                "type": "string"
+              },
+              "targetLinkBanner": {
+                "title": "Onde abrir o link do banner?",
+                "type": "string",
+                "enum": [
+                  "_self",
+                  "_blank"
+                ],
+                "enumNames": [
+                  "Mesma aba",
+                  "Nova aba"
+                ],
+                "default": "_self"
+              },
+              "text": {
+                "title": "Conteúdo",
+                "description": "Texto exibido abaixo da imagem.",
+                "type": "string",
+                "widget": {
+                  "ui:widget": "draftjs-rich-text"
+                }
+              },
+              "links": {
+                "title": "Links",
+                "description": "Adicione até 3 links por oferta.",
+                "type": "array",
+                "maxItems": 3,
+                "items": {
+                  "title": "Link",
+                  "type": "object",
+                  "properties": {
+                    "linkText": {
+                      "title": "Texto do link",
+                      "type": "string"
+                    },
+                    "urlLinkText": {
+                      "title": "URL",
+                      "type": "string"
+                    },
+                    "targetLinkText": {
+                      "title": "Onde abrir?",
+                      "type": "string",
+                      "enum": [
+                        "_self",
+                        "_blank"
+                      ],
+                      "enumNames": [
+                        "Mesma aba",
+                        "Nova aba"
+                      ],
+                      "default": "_self"
+                    }
+                  }
+                }
+              },
+              "showPolicy": {
+                "title": "Exibir política ou regulamento?",
+                "type": "boolean",
+                "default": false
+              },
+              "policyText": {
+                "title": "Texto da política",
+                "description": "Ex.: Consulte as condições da promoção.",
+                "type": "string"
+              },
+              "policyLink": {
+                "title": "Link da política",
+                "description": "Opcional. Se informado, exibe o link da política.",
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "menu": {
+      "type": "object",
+      "title": "Menu Configuration",
+      "properties": {
+        "desktopItems": {
+          "type": "array",
+          "title": "Itens do menu desktop",
+          "description": "Itens do menu exibidos no desktop com mega-menu dropdown",
+          "items": {
+            "type": "object",
+            "title": "Item do menu",
+            "properties": {
+              "title": {
+                "type": "string",
+                "title": "Título"
+              },
+              "href": {
+                "type": "string",
+                "title": "URL (se não tiver sub-itens)"
+              },
+              "columns": {
+                "type": "array",
+                "title": "Colunas do mega-menu",
+                "description": "Cada coluna pode ter um ou mais departamentos empilhados verticalmente",
+                "items": {
+                  "type": "object",
+                  "title": "Coluna",
+                  "properties": {
+                    "departments": {
+                      "type": "array",
+                      "title": "Departamentos (empilhados nesta coluna)",
+                      "items": {
+                        "type": "object",
+                        "title": "Departamento",
+                        "properties": {
+                          "title": {
+                            "type": "string",
+                            "title": "Título do departamento"
+                          },
+                          "subCategoria": {
+                            "type": "array",
+                            "title": "Sub-categorias",
+                            "items": {
+                              "type": "object",
+                              "title": "Sub-categoria",
+                              "properties": {
+                                "text": {
+                                  "type": "string",
+                                  "title": "Texto"
+                                },
+                                "link": {
+                                  "type": "string",
+                                  "title": "URL"
+                                },
+                                "openNewTab": {
+                                  "type": "boolean",
+                                  "title": "Abrir em nova aba",
+                                  "default": false
+                                },
+                                "destaque": {
+                                  "type": "boolean",
+                                  "title": "Destaque (negrito dourado)",
+                                  "default": false
+                                }
+                              },
+                              "required": [
+                                "text"
+                              ]
+                            }
+                          }
+                        },
+                        "required": [
+                          "title"
+                        ]
+                      }
+                    },
+                    "image": {
+                      "type": "object",
+                      "title": "Imagem editorial da coluna (opcional)",
+                      "properties": {
+                        "imageUrl": {
+                          "type": "string",
+                          "title": "Imagem",
+                          "widget": {
+                            "ui:widget": "media-gallery",
+                            "restrictMediaTypes": {
+                              "video": true,
+                              "image": [
+                                "png",
+                                "jpg",
+                                "jpeg",
+                                "gif",
+                                "svg",
+                                "webp"
+                              ]
+                            }
+                          }
+                        },
+                        "alt": {
+                          "type": "string",
+                          "title": "Texto alternativo"
+                        },
+                        "href": {
+                          "type": "string",
+                          "title": "Link da imagem"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "categorias": {
+                "type": "array",
+                "title": "Categorias com ícone (deste menu)",
+                "description": "Exibidas no drawer do mega-menu deste item, junto com as colunas. Opcional: se vazio, nada é renderizado.",
+                "items": {
+                  "type": "object",
+                  "title": "Categoria",
+                  "properties": {
+                    "icon": {
+                      "type": "string",
+                      "title": "Ícone / Imagem",
+                      "widget": {
+                        "ui:widget": "media-gallery",
+                        "restrictMediaTypes": {
+                          "video": true,
+                          "image": [
+                            "png",
+                            "jpg",
+                            "jpeg",
+                            "gif",
+                            "svg",
+                            "webp"
+                          ]
+                        }
+                      }
+                    },
+                    "text": {
+                      "type": "string",
+                      "title": "Texto"
+                    },
+                    "link": {
+                      "type": "string",
+                      "title": "URL"
+                    }
+                  },
+                  "required": [
+                    "text",
+                    "link"
+                  ]
+                }
+              },
+              "isRed": {
+                "type": "boolean",
+                "title": "É vermelho",
+                "default": false
+              },
+              "isBlue": {
+                "type": "boolean",
+                "title": "É azul",
+                "default": false
+              }
+            },
+            "required": [
+              "title"
+            ]
+          }
+        },
+        "mobileItems": {
+          "type": "array",
+          "title": "Itens do menu mobile",
+          "description": "Itens exibidos no drawer do mobile",
+          "items": {
+            "type": "object",
+            "title": "Item mobile",
+            "properties": {
+              "title": {
+                "type": "string",
+                "title": "Título"
+              },
+              "href": {
+                "type": "string",
+                "title": "URL (quando o item é só um link, sem sub-menu)"
+              },
+              "isRed": {
+                "type": "boolean",
+                "title": "É vermelho"
+              },
+              "isBlue": {
+                "type": "boolean",
+                "title": "É azul"
+              },
+              "items": {
+                "type": "array",
+                "title": "Links diretos",
+                "items": {
+                  "type": "object",
+                  "title": "Link direto",
+                  "properties": {
+                    "text": {
+                      "type": "string",
+                      "title": "Texto"
+                    },
+                    "link": {
+                      "type": "string",
+                      "title": "URL"
+                    },
+                    "newTab": {
+                      "type": "boolean",
+                      "title": "Abrir em nova aba",
+                      "default": false
+                    }
+                  },
+                  "required": [
+                    "text",
+                    "link"
+                  ]
+                }
+              },
+              "subMenus": {
+                "type": "array",
+                "title": "Sub-menus (segundo drawer)",
+                "description": "Pode adicionar quantos sub-menus quiser — cada um vira uma seção dentro do drawer",
+                "items": {
+                  "type": "object",
+                  "title": "Sub-menu",
+                  "properties": {
+                    "title": {
+                      "type": "string",
+                      "title": "Título da seção"
+                    },
+                    "items": {
+                      "type": "array",
+                      "title": "Itens do sub-menu",
+                      "items": {
+                        "type": "object",
+                        "title": "Item do sub-menu",
+                        "properties": {
+                          "hasTitle": {
+                            "type": "boolean",
+                            "title": "É título de seção",
+                            "default": false
+                          },
+                          "text": {
+                            "type": "string",
+                            "title": "Texto"
+                          },
+                          "link": {
+                            "type": "string",
+                            "title": "URL"
+                          }
+                        },
+                        "required": [
+                          "text"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "categorias": {
+                "type": "array",
+                "title": "Categorias com ícone (deste menu)",
+                "description": "Exibidas no topo do drawer deste item no mobile. Opcional: se vazio, nada é renderizado.",
+                "items": {
+                  "type": "object",
+                  "title": "Categoria",
+                  "properties": {
+                    "icon": {
+                      "type": "string",
+                      "title": "Ícone / Imagem",
+                      "widget": {
+                        "ui:widget": "media-gallery",
+                        "restrictMediaTypes": {
+                          "video": true,
+                          "image": [
+                            "png",
+                            "jpg",
+                            "jpeg",
+                            "gif",
+                            "svg",
+                            "webp"
+                          ]
+                        }
+                      }
+                    },
+                    "text": {
+                      "type": "string",
+                      "title": "Texto"
+                    },
+                    "link": {
+                      "type": "string",
+                      "title": "URL"
+                    }
+                  },
+                  "required": [
+                    "text",
+                    "link"
+                  ]
+                }
+              }
+            },
+            "required": [
+              "title"
+            ]
+          }
+        },
+        "mobileLinkFooter": {
+          "type": "array",
+          "title": "Links do rodapé mobile",
+          "description": "Links exibidos no rodapé do menu mobile",
+          "items": {
+            "type": "object",
+            "title": "Link",
+            "properties": {
+              "text": {
+                "type": "string",
+                "title": "Texto"
+              },
+              "link": {
+                "type": "string",
+                "title": "URL"
+              },
+              "iconUrl": {
+                "type": "string",
+                "title": "Ícone / Imagem",
+                "widget": {
+                  "ui:widget": "media-gallery",
+                  "restrictMediaTypes": {
+                    "video": true,
+                    "image": [
+                      "png",
+                      "jpg",
+                      "jpeg",
+                      "gif",
+                      "svg",
+                      "webp"
+                    ]
+                  }
+                }
+              },
+              "alt": {
+                "type": "string",
+                "title": "Texto alternativo da imagem"
+              }
+            },
+            "required": [
+              "text",
+              "link"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "readOnly": false,
+  "writeOnly": false,
+  "deprecated": false,
+  "$abstract": false
+}

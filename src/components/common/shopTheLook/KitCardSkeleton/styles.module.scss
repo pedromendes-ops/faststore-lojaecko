@@ -1,0 +1,58 @@
+// Loading placeholder for a KitCard. Mirrors its 2×2 image grid + button so the
+// section keeps its shape while the kits are fetched.
+
+@layer components {
+  .card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 1rem;
+    border: 1px solid var(--fs-border-color-light, #e5e5e5);
+    background: var(--fs-color-neutral-0, #fff);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .gridImage {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    border-radius: 4px;
+    background: linear-gradient(
+      90deg,
+      #eee 25%,
+      #f5f5f5 37%,
+      #eee 63%
+    );
+    background-size: 400% 100%;
+    animation: shop-the-look-shimmer 1.4s ease infinite;
+  }
+
+  .button {
+    margin-top: auto;
+    height: 2.75rem;
+    border-radius: 4px;
+    background: linear-gradient(
+      90deg,
+      #eee 25%,
+      #f5f5f5 37%,
+      #eee 63%
+    );
+    background-size: 400% 100%;
+    animation: shop-the-look-shimmer 1.4s ease infinite;
+  }
+}
+
+@keyframes shop-the-look-shimmer {
+  0% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0 50%;
+  }
+}

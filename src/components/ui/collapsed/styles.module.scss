@@ -1,0 +1,18 @@
+.collapsedButton{
+  background-color: transparent;
+  outline: none;
+  border: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.collapsedButton .icon{
+  transition: all .3 ease-in-out;
+  transform: rotate(0);
+
+}
+.collapsedButton[data-isExpanded="true"] .icon{
+  transform: rotate(180deg);
+}

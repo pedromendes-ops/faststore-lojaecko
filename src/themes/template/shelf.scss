@@ -1,0 +1,107 @@
+[data-fs-product-shelf] [data-fs-carousel]{
+  & > [data-fs-carousel-bullets]{
+    padding: 0 !important;
+  }
+}
+[data-fs-carousel] [data-fs-carousel-bullets] [data-fs-carousel-bullet] [data-fs-button-wrapper] {
+  background-color: var(--fs-carousel-bullet-bkg-color) !important;
+}
+[data-fs-carousel] [data-fs-carousel-bullets] [data-fs-carousel-bullet][aria-selected=true] [data-fs-button-wrapper] {
+  background-color: var(--fs-carousel-bullet-bkg-color-selected) !important;
+}
+
+#grid > div > [data-fs-carousel-track]:first-of-type {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  row-gap: 30px;
+
+  [data-fs-carousel-item] {
+    width: 100% !important;
+  }
+
+  @media(max-width:641px){
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+[aria-label*="jeans feito"] + .section h2.text__title-section {
+  display: none !important;
+}
+
+
+@media(min-width:1024px){
+  .section-product-shelf{
+    & > [data-fs-product-shelf] > [data-fs-carousel]{
+      & > [data-fs-carousel-controls]{
+        position: initial !important;
+        opacity: 1 !important;
+        [data-fs-button][aria-label="previous"]{
+          position: absolute;
+          left: -2.5rem;
+          top: 33%;
+        }
+        [data-fs-button][aria-label="next"]{
+          position: absolute;
+          right: -2.5rem;
+          top: 33%;
+        }
+      }
+    }
+  }
+}
+
+
+@media(max-width: 1024px){
+  [data-fs-product-card] {
+    row-gap: 0;
+    gap: 0;
+  }
+}
+
+[data-fs-product-card] {
+  border-radius: 0 !important;
+}
+
+.section-product-shelf {
+  [data-fs-carousel-track]{
+    padding-top: 0;
+  }
+  /*
+  [data-fs-carousel-item] {
+    @media(max-width: 1024px){
+      width: 50% !important;
+    }
+  }
+  */
+}
+
+@media(max-width: 1024px){
+  
+  [data-fs-carousel-item] [data-fs-product-card]{
+    width: 100%;
+  }
+  .section-product-shelf {    
+    [data-fs-carousel-track]{
+      padding: 0 !important;
+    }
+    
+    [data-fs-carousel-controls]{
+      opacity: 1 !important;
+      bottom: 70% !important;
+      padding-inline: 11px;
+      [data-fs-button]{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: auto !important;
+        width: auto !important;
+        [data-fs-button-wrapper]{
+          height: 24px !important;
+          width: 24px !important;
+          border-radius: 100px;
+          background-color: rgba(255, 255, 255, 0.50) !important;
+        }
+      }
+    }
+  }
+}

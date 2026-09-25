@@ -1,0 +1,149 @@
+@layer components {
+  :global(.full-banner-guia-de-medidas){
+    .banner{
+      margin-top: 32px;
+    }
+  }
+  .fullWidth{
+    width: 100%;
+    .banner{
+      width: 100%;
+      img{
+        width: 100%;
+      }
+    }
+  }
+  .bannerContainer {
+    position: relative;
+    display: flex;
+    flex-direction: var(--flexDirection, row);
+  }
+
+  .bannerContainer {
+    .TextBox{
+      position: var(--position, static);
+      left: var(--left, auto);
+      top: var(--top, auto);
+      right: var(--right, auto);
+      bottom: var(--bottom, auto);
+      padding: var(--padding, 0);
+      max-width: var(--max-width, 100%);
+      transform: translateY(var(--centerY, 0));
+
+      @media(max-width: 768px) {
+        max-width: 100% !important;
+      }
+    }
+  }
+
+  .textBox-small {
+    h1 span {
+      font-size: 24px;
+    }
+    p {
+      font-size: 14px;
+
+      strong {
+        font-size: 14px;
+      }
+    }
+  }
+
+  .textBox-medium {
+    h2 span {
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 700;
+      color: #110B0D;
+      text-transform: uppercase;
+    }
+    p {
+      font-size: 14px;
+      margin-top: 24px;
+      line-height: 24px;
+
+      strong {
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      a{
+        text-decoration: none;
+        display: inline-block;
+        height: 56px;
+        padding: 16px;
+        border-radius: 8px;
+        background: #FFF;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        span{
+          color: #C41230;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+        }
+        strong{
+          color: #C41230;
+          font-size: 16px;
+          font-weight: 700;
+        }
+      }
+
+    }
+    @media(max-width: 768px) {
+      h2 span {
+        font-size: 20px;
+      }
+      p {
+        font-size: 14px;
+
+        strong {
+          font-size: 14px;
+        }
+        a{
+          height: initial;
+          display: inline-block;
+        }
+      } 
+    }
+  }
+
+  .textBox-large {
+    h1 span {
+      color: #C41230;
+      font-size: 40px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+      text-transform: uppercase;
+    }
+    p{
+      margin-top: 24px;
+      color: #000;
+      font-style: normal;
+      font-weight: 400;
+
+      strong{
+        font-weight: 700;
+        color: #000;
+      }
+    }
+
+    @media(max-width: 768px) {
+      h1 span {
+        font-size: 32px;
+      }
+      p {
+        font-size: 14px;
+
+        strong {
+          font-size: 16px;
+        }
+      } 
+    }
+  }
+
+  
+}

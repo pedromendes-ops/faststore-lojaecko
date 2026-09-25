@@ -1,0 +1,81 @@
+{
+  "$extends": [
+    "#/$defs/base-component"
+  ],
+  "$componentKey": "TopBar",
+  "$componentTitle": "Top Bar",
+  "title": "Top Bar",
+  "description": "Barra superior com slider de mensagens e menu de links.",
+  "type": "object",
+  "required": [
+    "itensSlider",
+    "itensMenu"
+  ],
+  "properties": {
+    "itensSlider": {
+      "title": "Itens do Slider",
+      "type": "array",
+      "description": "Mensagens exibidas em carrossel na top bar",
+      "items": {
+        "title": "Item",
+        "type": "object",
+        "properties": {
+          "text": {
+            "title": "Texto",
+            "type": "string"
+          }
+        },
+        "required": [
+          "text"
+        ]
+      },
+      "minItems": 1
+    },
+    "itensMenu": {
+      "title": "Itens do Menu",
+      "type": "array",
+      "description": "Links exibidos no menu da top bar",
+      "items": {
+        "title": "Item de Menu",
+        "type": "object",
+        "properties": {
+          "text": {
+            "title": "Texto",
+            "type": "string"
+          },
+          "link": {
+            "title": "URL",
+            "type": "string",
+            "default": "#"
+          },
+          "image": {
+            "title": "Ícone / Imagem",
+            "type": "string",
+            "widget": {
+              "ui:widget": "media-gallery",
+              "restrictMediaTypes": {
+                "video": true,
+                "image": [
+                  "png",
+                  "jpg",
+                  "jpeg",
+                  "gif",
+                  "svg",
+                  "webp"
+                ]
+              }
+            }
+          }
+        },
+        "required": [
+          "text",
+          "link"
+        ]
+      }
+    }
+  },
+  "readOnly": false,
+  "writeOnly": false,
+  "deprecated": false,
+  "$abstract": false
+}

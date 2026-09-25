@@ -1,0 +1,167 @@
+// Carrossel Swiper que substitui o nativo na ProductShelf.
+//
+// O visual segue o que o tema já aplicava no carrossel do FastStore
+// (src/themes/template/shelf.scss): setas fora do trilho no desktop, pílulas
+// brancas translúcidas sobre a foto no mobile, dots discretos.
+//
+// @layer components: mantém a mesma ordem de cascata das sections nativas, para
+// os tokens de tema (@layer theme) vencerem sem !important.
+@layer components {
+  .carousel {
+    position: relative;
+    // espaço lateral para as setas que ficam fora do trilho no desktop
+    @media (min-width: 1024px) {
+      padding-inline: 2.5rem;
+    }
+
+    // o Swiper é configurado pelas próprias custom properties: o CSS dele vem
+    // de node_modules SEM @layer, e CSS sem layer vence qualquer regra dentro
+    // de um layer. Variáveis não têm esse problema.
+    --swiper-pagination-color: var(--fs-carousel-bullet-bkg-color-selected, #110b0d);
+    --swiper-pagination-bullet-inactive-color: var(--fs-carousel-bullet-bkg-color, #d8d8d8);
+    --swiper-pagination-bullet-inactive-opacity: 1;
+    --swiper-pagination-bullet-width: 8px;
+    --swiper-pagination-bullet-height: 8px;
+    --swiper-pagination-bullet-horizontal-gap: 4px;
+  }
+
+  .arrow {
+    position: absolute;
+    top: 25.5%;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    color: #110b0d;
+    background: transparent;
+    border: 0;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+
+    @media (min-width: 1024px) and (max-width: 1552px) {
+      top: 6.5vw;
+    }
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    &[data-direction="prev"] {
+      left: 0;
+    }
+
+    &[data-direction="next"] {
+      right: 0;
+    }
+
+    &:disabled {
+      opacity: 0.3;
+      cursor: default;
+    }
+
+    // no mobile as setas ficam sobre a foto, como pílulas translúcidas
+    @media (max-width: 1023.98px) {
+      top: 14vw;
+      width: 24px;
+      height: 24px;
+      background: rgba(255, 255, 255, 0.5);
+
+      &[data-direction="prev"] {
+        left: 11px;
+      }
+
+      &[data-direction="next"] {
+        right: 11px;
+      }
+
+      svg {
+        width: 16px;
+        height: 16px;
+      }
+    }
+    @media (max-width: 639px) {
+      top: 21vw;
+    }
+  }
+
+  // ----- visibilidade dos controles (mesma semântica do slider-layout) -----
+  // todos os itens cabem na tela: não há navegação, some com os controles
+  // (a parte dos dots vive fora do layer, mais abaixo)
+  .carousel[data-locked] {
+    .arrow {
+      display: none;
+    }
+
+    @media (min-width: 1024px) {
+      padding-inline: 0;
+    }
+  }
+
+  .carousel[data-arrows="never"] .arrow {
+    display: none;
+  }
+
+  .carousel[data-arrows="mobileOnly"] .arrow {
+    @media (min-width: 1024px) {
+      display: none;
+    }
+  }
+
+  .carousel[data-arrows="desktopOnly"] .arrow {
+    @media (max-width: 1023.98px) {
+      display: none;
+    }
+  }
+
+}
+
+// ----- regras que precisam vencer o CSS do Swiper -----
+//
+// Ficam FORA do @layer de propósito: o `swiper/css` é importado de
+// node_modules sem layer nenhum, e na cascata o CSS sem layer vence tudo que
+// está dentro de um. Continuam escopadas porque `.carousel` é uma classe de
+// CSS module (vira hash); só o que está em :global casa com o markup do Swiper.
+.carousel {
+  // o Swiper corta o que passa das bordas; as setas moram fora dele
+  :global(.swiper) {
+    overflow: hidden;
+  }
+
+  // altura uniforme para os cards da linha
+  :global(.swiper-slide) {
+    height: auto;
+
+    > * {
+      height: 100%;
+    }
+  }
+
+  // os dots do Swiper são absolutos sobre o trilho; aqui eles entram no fluxo,
+  // abaixo dos cards
+  :global(.swiper-pagination) {
+    position: static;
+    margin-top: 16px;
+  }
+}
+
+.carousel[data-locked] :global(.swiper-pagination),
+.carousel[data-dots="never"] :global(.swiper-pagination) {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .carousel[data-dots="mobileOnly"] :global(.swiper-pagination) {
+    display: none;
+  }
+}
+
+@media (max-width: 1023.98px) {
+  .carousel[data-dots="desktopOnly"] :global(.swiper-pagination) {
+    display: none;
+  }
+}

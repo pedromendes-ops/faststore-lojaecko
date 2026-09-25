@@ -1,0 +1,46 @@
+.bannerHtml {
+    padding: 42px var(--fs-grid-padding);
+
+    h3 {
+        font-size: 20px;
+        font-weight: 700;
+    }
+}
+.banner-html--container{
+    margin-top: 0 !important;
+}
+.link {
+    display: inline-block;        
+    text-decoration: underline;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+.button {
+    display: block;
+    padding: 6px 12px;
+}
+
+.between {
+    justify-content: space-between;
+}
+.center {
+    justify-content: center;
+}
+.left {
+    justify-content: flex-start;
+}
+.right {
+    justify-content: flex-end;
+}
+
+.phoneCenter {
+    @media(max-width: 1024px) {
+		text-align: center;
+        h2,
+        h3,
+        p {
+            margin-bottom: 10px;
+        }
+	}
+    
+}

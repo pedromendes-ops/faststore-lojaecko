@@ -1,0 +1,38 @@
+.section {
+  width: 100%;
+  // guards against the mobile full-width breakout below ever causing a
+  // page-level horizontal scrollbar (100vw can be a hair wider than the
+  // real viewport on some browsers/devices)
+  overflow-x: hidden;
+}
+
+.wrapper {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.videoBox {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+// breaks out of any container padding on mobile so the video reaches the
+// screen edges; height stays driven by the `aspect-ratio` inline style,
+// now computed from the full device width instead of the container's.
+.videoBoxFullScreenMobile {
+  @media (max-width: 641px) {
+    position: relative;
+    left: 50%;
+    width: 100vw;
+    margin-left: -50vw;
+  }
+}
+
+.video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  object-fit: cover;
+}

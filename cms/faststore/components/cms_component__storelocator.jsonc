@@ -1,0 +1,136 @@
+{
+  "$extends": [
+    "#/$defs/base-component"
+  ],
+  "$componentKey": "StoreLocator",
+  "$componentTitle": "Lista de lojas",
+  "title": "Lista de lojas",
+  "description": "Lista de lojas físicas com busca e mapa",
+  "type": "object",
+  "properties": {
+    "title": {
+      "title": "Título",
+      "type": "string",
+      "default": "Nossas Lojas"
+    },
+    "subtitle": {
+      "title": "Subtítulo",
+      "type": "string",
+      "default": "Encontre a loja mais perto de você"
+    },
+    "searchLabel": {
+      "title": "Texto acima da busca",
+      "type": "string",
+      "default": "Digite na busca o nome da loja, shopping, bairro, cidade, estado ou CEP:"
+    },
+    "searchPlaceholder": {
+      "title": "Placeholder da busca",
+      "type": "string",
+      "default": "Encontre uma loja..."
+    },
+    "mapButtonText": {
+      "title": "Texto do botão do mapa",
+      "type": "string",
+      "default": "Ver mapa"
+    },
+    "emptyText": {
+      "title": "Mensagem sem resultados",
+      "type": "string",
+      "default": "Nenhuma loja encontrada."
+    },
+    "areaSection": {
+      "title": "Área da seção",
+      "type": "string",
+      "enum": [
+        "container",
+        "full"
+      ],
+      "enumNames": [
+        "Container",
+        "Full"
+      ],
+      "default": "container"
+    },
+    "columnsDesktop": {
+      "title": "Colunas no desktop",
+      "type": "string",
+      "default": "4"
+    },
+    "columnsTablet": {
+      "title": "Colunas no tablet",
+      "type": "string",
+      "default": "2"
+    },
+    "columnsPhone": {
+      "title": "Colunas no celular",
+      "type": "string",
+      "default": "1"
+    },
+    "stores": {
+      "type": "array",
+      "title": "Lojas",
+      "description": "Cadastro das lojas físicas",
+      "items": {
+        "type": "object",
+        "title": "Loja",
+        "properties": {
+          "id": {
+            "title": "Identificador",
+            "type": "string",
+            "description": "Identificador único opcional"
+          },
+          "active": {
+            "title": "Loja ativa",
+            "type": "boolean",
+            "default": true
+          },
+          "name": {
+            "title": "Nome da loja",
+            "type": "string"
+          },
+          "address": {
+            "title": "Endereço",
+            "type": "string"
+          },
+          "number": {
+            "title": "Número",
+            "type": "string"
+          },
+          "complement": {
+            "title": "Complemento",
+            "type": "string"
+          },
+          "neighborhood": {
+            "title": "Bairro",
+            "type": "string"
+          },
+          "city": {
+            "title": "Cidade",
+            "type": "string"
+          },
+          "state": {
+            "title": "Estado",
+            "type": "string"
+          },
+          "postalCode": {
+            "title": "CEP",
+            "type": "string"
+          },
+          "phone": {
+            "title": "Telefone",
+            "type": "string"
+          },
+          "mapEmbedUrl": {
+            "title": "URL embed do Google Maps",
+            "type": "string",
+            "description": "Opcional. Caso fique vazio, o componente monta o mapa automaticamente pelo endereço."
+          }
+        }
+      }
+    }
+  },
+  "readOnly": false,
+  "writeOnly": false,
+  "deprecated": false,
+  "$abstract": false
+}

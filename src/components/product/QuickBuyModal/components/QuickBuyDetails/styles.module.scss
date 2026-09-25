@@ -1,0 +1,58 @@
+@layer components {
+  // Local tweaks on top of the reused `.productDetails` scope so the PDP buy box
+  // fits the modal viewport. Kept minimal — everything else comes from the
+  // ProductDetailsCustom stylesheet.
+  .quickBuy {
+    margin-top: 0 !important;
+
+    [data-fs-product-context] {
+      // A touch tighter than the full PDP grid so the gallery leaves room for
+      // the buy box inside the modal.
+      grid-template-columns: 1fr 1fr;
+      align-items: start;
+    }
+
+    [data-fs-product-details-gallery] {
+      position: sticky;
+      top: 0;
+    }
+
+    [data-fs-product-details-info]{
+      [data-fs-shipping-simulation]{
+        display: none;
+      }
+      [data-fs-buy-button]{
+        [data-fs-button-wrapper]{
+          height: 100% !important;
+        }
+      }
+      [data-fs-quantity-selector]{
+        height: 56px !important;
+      }
+    }
+    [data-fs-product-details-gallery] [data-fs-product-details-gallery]{
+      flex-direction: column-reverse;
+      [data-fs-product-details-thumbnails]{
+        flex-direction: row !important;
+        justify-content: center;
+        gap: 1rem;
+      }
+
+      
+    }
+
+    @media (max-width: 1024px) {
+      [data-fs-product-context] {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      [data-fs-product-details-gallery] {
+        position: static;
+      }
+    }
+  }
+
+
+}

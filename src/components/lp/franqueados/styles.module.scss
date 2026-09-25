@@ -1,0 +1,83 @@
+// Raiz da LP "Seja um franqueado" (port do VTEX Store Framework para FastStore).
+//
+// Aqui ficam SÓ os tokens locais e as regras que valem para a LP inteira. Tudo
+// que é de um bloco mora em `components/<Bloco>/styles.module.scss`, escopado
+// pela classe do próprio bloco (repetida — `.section.section` — para vencer
+// estas regras genéricas sem depender da ordem de import dos módulos).
+//
+// @layer components: garante que os tokens de tema (@layer theme) sobreponham
+// estas regras sem !important, igual às seções nativas.
+
+@layer components {
+  .franqueados {
+    // ----- tokens locais -----
+    --franq-red: #a4142b;
+    --franq-dark: #1b0307;
+    --franq-ribbon-fill: rgba(27, 3, 7, 0.82);
+    --franq-ribbon-border: #720d1e;
+    --franq-border: #d5d5d5;
+    --franq-max-width: 1280px;
+
+    // Altura do header sticky da loja ($header-height / $header-height-mobile
+    // em src/themes/variables.scss). Usada só no scroll de âncora, para o alvo
+    // não parar embaixo do header.
+    --franq-header-offset: 65px;
+
+    @media (max-width: 1024px) {
+      --franq-header-offset: 60px;
+    }
+
+    // Fonte da marca no Figma. ATENÇÃO: não há @font-face para Interstate no
+    // projeto (só DenimINK), então hoje isto cai no fallback Arial.
+    --franq-font-interstate: Interstate, Arial, Helvetica, sans-serif;
+
+    width: 100%;
+    color: var(--franq-dark);
+
+    :global {
+      // ===================================================================
+      // Container (mw9 center) — usado nos blocos 02..06
+      // ===================================================================
+      .vtex-store-components-3-x-container {
+        width: 100%;
+        max-width: var(--franq-max-width);
+        margin-inline: auto;
+        padding-inline: 24px;
+      }
+
+      // ===================================================================
+      // Rich text compartilhado (título vermelho + parágrafo)
+      // ===================================================================
+      .vtex-rich-text-0-x-heading--franqueado--title-red {
+        color: #c41230;
+        font-size: 2rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 110%;
+        text-transform: uppercase;
+        padding: 1.5rem 0;
+      }
+
+      .vtex-rich-text-0-x-paragraph--franqueado--text {
+        margin: 0 0 16px;
+        font-size: 16px;
+        line-height: 1.65;
+        color: var(--franq-dark);
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .vtex-store-components-3-x-container {
+          padding-inline: 16px;
+        }
+
+        .vtex-rich-text-0-x-heading--franqueado--title-red {
+          font-size: 24px;
+        }
+      }
+    }
+  }
+}

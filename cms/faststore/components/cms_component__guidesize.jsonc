@@ -1,0 +1,89 @@
+{
+  "$extends": [
+    "#/$defs/base-component"
+  ],
+  "$componentKey": "GuideSize",
+  "$componentTitle": "Guia de Tamanhos",
+  "title": "Guia de Tamanhos",
+  "description": "Seção com galeria de imagens e texto, para exibir guias de tamanho.",
+  "type": "object",
+  "required": [
+    "images",
+    "text"
+  ],
+  "properties": {
+    "marginTopSection": {
+      "title": "Margem superior",
+      "type": "string",
+      "description": "Valor CSS de margin-top, ex: 20px"
+    },
+    "height": {
+      "title": "Altura da imagem",
+      "type": "string",
+      "description": "Valor CSS de altura da imagem principal, ex: 400px ou auto"
+    },
+    "positionImage": {
+      "title": "Posição da imagem",
+      "type": "string",
+      "enum": [
+        "left",
+        "right"
+      ],
+      "enumNames": [
+        "Esquerda",
+        "Direita"
+      ],
+      "default": "left",
+      "description": "Posição da galeria de imagens em relação ao texto (aplicado apenas no desktop)"
+    },
+    "images": {
+      "title": "Imagens",
+      "type": "array",
+      "description": "Imagens exibidas na galeria com miniaturas",
+      "items": {
+        "title": "Imagem",
+        "type": "object",
+        "properties": {
+          "srcImage": {
+            "title": "Imagem",
+            "type": "string",
+            "widget": {
+              "ui:widget": "media-gallery",
+              "restrictMediaTypes": {
+                "video": true,
+                "image": [
+                  "png",
+                  "jpg",
+                  "jpeg",
+                  "gif",
+                  "svg",
+                  "webp"
+                ]
+              }
+            }
+          },
+          "altImage": {
+            "title": "Texto alternativo",
+            "type": "string"
+          }
+        },
+        "required": [
+          "srcImage",
+          "altImage"
+        ]
+      },
+      "minItems": 1
+    },
+    "text": {
+      "title": "Texto",
+      "type": "string",
+      "widget": {
+        "ui:widget": "draftjs-rich-text"
+      }
+    }
+  },
+  "readOnly": false,
+  "writeOnly": false,
+  "deprecated": false,
+  "$abstract": false
+}

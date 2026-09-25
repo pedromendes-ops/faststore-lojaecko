@@ -1,0 +1,15 @@
+{
+  "$extends": [
+    "#/$defs/base-component"
+  ],
+  "$componentKey": "SizeBay",
+  "$componentTitle": "Size Bay",
+  "title": "Size Bay",
+  "type": "object",
+  "required": [],
+  "properties": {},
+  "readOnly": false,
+  "writeOnly": false,
+  "deprecated": false,
+  "$abstract": false
+}

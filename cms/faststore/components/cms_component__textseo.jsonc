@@ -1,0 +1,33 @@
+{
+  "$extends": [
+    "#/$defs/base-component"
+  ],
+  "$componentKey": "TextSEO",
+  "$componentTitle": "Texto SEO da Categoria",
+  "title": "Texto SEO da Categoria",
+  "description": "Renderiza um bloco de texto (aboutCategory ou textSEO) vindo da API de SEO da categoria. Use um por posição na PLP.",
+  "type": "object",
+  "required": [
+    "type"
+  ],
+  "properties": {
+    "type": {
+      "title": "Bloco",
+      "type": "string",
+      "enum": [
+        "textSEO",
+        "aboutSEO"
+      ],
+      "default": "textSEO"
+    },
+    "title": {
+      "title": "Título (opcional)",
+      "type": "string",
+      "description": "Se vazio, usa o título padrão."
+    }
+  },
+  "readOnly": false,
+  "writeOnly": false,
+  "deprecated": false,
+  "$abstract": false
+}

@@ -1,0 +1,5649 @@
+{
+  "$base": "vtex.faststore@4",
+  "components": {
+    "BannerCustom": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "BannerCustom",
+      "$componentTitle": "Banner Custom",
+      "title": "Banner Custom",
+      "description": "Banner com imagem única ou banner duplo (duas imagens lado a lado), com imagem separada para mobile.",
+      "type": "object",
+      "required": [
+        "banners",
+        "height"
+      ],
+      "properties": {
+        "isDoubleBanner": {
+          "title": "Banner duplo?",
+          "description": "Quando ativado, exibe duas imagens lado a lado",
+          "type": "boolean",
+          "default": false
+        },
+        "display": {
+          "title": "Exibição",
+          "description": "Tela cheia (full) ou dentro do container do site",
+          "type": "string",
+          "enum": [
+            "full",
+            "container"
+          ],
+          "enumNames": [
+            "Tela cheia",
+            "Container"
+          ],
+          "default": "full"
+        },
+        "height": {
+          "title": "Altura (px)",
+          "type": "number",
+          "minimum": 50,
+          "default": 700
+        },
+        "loading": {
+          "title": "Carregamento",
+          "type": "string",
+          "enum": [
+            "eager",
+            "lazy"
+          ],
+          "enumNames": [
+            "Eager",
+            "Lazy"
+          ],
+          "default": "lazy"
+        },
+        "maxWidthSection": {
+          "title": "Largura máxima",
+          "type": "string",
+          "description": "Somente números, sem px ou %"
+        },
+        "marginTopSection": {
+          "title": "Margem superior",
+          "type": "string",
+          "default": "0",
+          "description": "Somente números, sem px ou %"
+        },
+        "marginTopSectionPhone": {
+          "title": "Margem superior no mobile",
+          "type": "string",
+          "default": "0",
+          "description": "Somente números, sem px ou %"
+        },
+        "sectionLabel": {
+          "title": "Descrição acessível da sessão",
+          "type": "string"
+        },
+        "banners": {
+          "title": "Banners",
+          "description": "Se 'Banner duplo' estiver desativado, apenas o primeiro banner é exibido",
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 2,
+          "items": {
+            "title": "Banner",
+            "type": "object",
+            "required": [
+              "image"
+            ],
+            "properties": {
+              "image": {
+                "title": "Imagem Desktop",
+                "type": "string",
+                "widget": {
+                  "ui:widget": "media-gallery",
+                  "restrictMediaTypes": {
+                    "video": true,
+                    "image": [
+                      "png",
+                      "jpg",
+                      "jpeg",
+                      "gif",
+                      "svg",
+                      "webp"
+                    ]
+                  }
+                }
+              },
+              "useSameImageMobile": {
+                "title": "Usar mesma imagem no mobile?",
+                "description": "Ative para não precisar subir uma imagem específica para mobile",
+                "type": "boolean",
+                "default": true
+              },
+              "imageMobile": {
+                "title": "Imagem Mobile",
+                "description": "Usada apenas quando 'Usar mesma imagem no mobile' estiver desativado",
+                "type": "string",
+                "widget": {
+                  "ui:widget": "media-gallery",
+                  "restrictMediaTypes": {
+                    "video": true,
+                    "image": [
+                      "png",
+                      "jpg",
+                      "jpeg",
+                      "gif",
+                      "svg",
+                      "webp"
+                    ]
+                  }
+                }
+              },
+              "href": {
+                "title": "Link",
+                "type": "string",
+                "default": "#"
+              },
+              "target": {
+                "title": "Abrir link",
+                "type": "string",
+                "enum": [
+                  "_self",
+                  "_blank"
+                ],
+                "enumNames": [
+                  "Mesma aba",
+                  "Nova aba"
+                ],
+                "default": "_self"
+              }
+            }
+          }
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    },
+    "BannerHtml": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "BannerHtml",
+      "$componentTitle": "Banner Html",
+      "title": "Banner Html",
+      "description": "Banner Html",
+      "type": "object",
+      "properties": {
+        "htmlBannerTextContent": {
+          "title": "Texto ou Html",
+          "type": "string",
+          "ui:placeholder": "<h2>Seu texto aqui</h2>"
+        },
+        "htmlBannerTextHasMore": {
+          "title": "Acrescentar link de veja mais",
+          "type": "boolean",
+          "default": true
+        },
+        "htmlBannerTextTypeMore": {
+          "title": "Tipo do link",
+          "type": "string",
+          "enum": [
+            "button",
+            "link"
+          ],
+          "enumNames": [
+            "button",
+            "link"
+          ],
+          "default": "link"
+        },
+        "htmlBannerTextUrl": {
+          "title": "Url do link",
+          "type": "string",
+          "default": "#"
+        },
+        "htmlBannerTextLink": {
+          "title": "Texto do link",
+          "type": "string",
+          "default": "Veja mais"
+        },
+        "htmlBannerTextPosition": {
+          "title": "Posição do conteúdo",
+          "type": "string",
+          "enum": [
+            "center",
+            "left",
+            "right",
+            "between"
+          ],
+          "enumNames": [
+            "center",
+            "left",
+            "right",
+            "between"
+          ],
+          "default": "between"
+        },
+        "htmlBannerTextBackground": {
+          "title": "Cor do fundo",
+          "type": "string",
+          "default": "#cccccc"
+        },
+        "htmlBannerTextColor": {
+          "title": "Cor dos textos",
+          "type": "string",
+          "default": "#110b0d"
+        },
+        "htmlBannerTextClass": {
+          "title": "Classe para CSS",
+          "type": "string",
+          "description": "Nome da classe do elemnto"
+        },
+        "htmlBannerTextDisplay": {
+          "title": "Grid Element",
+          "type": "string",
+          "enum": [
+            "container",
+            "full"
+          ],
+          "enumNames": [
+            "container",
+            "full"
+          ],
+          "default": "full"
+        },
+        "htmlBannerCenterMobile": {
+          "title": "Centralizar no mobile",
+          "type": "boolean",
+          "default": true
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    },
+    "BannerWithText": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "BannerWithText",
+      "$componentTitle": "Banner com Texto",
+      "title": "Banner com Texto",
+      "description": "Banner com imagem e texto, com posicionamento configurável para desktop e mobile.",
+      "type": "object",
+      "properties": {
+        "classNameContainer": {
+          "title": "Classe CSS do contêiner",
+          "type": "string",
+          "description": "Classe CSS adicional para o contêiner do banner"
+        },
+        "href": {
+          "title": "Link do banner",
+          "type": "string",
+          "description": "URL para onde o banner deve redirecionar ao ser clicado (opcional)"
+        },
+        "text": {
+          "title": "Texto",
+          "type": "string",
+          "widget": {
+            "ui:widget": "draftjs-rich-text"
+          }
+        },
+        "isFullWidth": {
+          "title": "Largura total",
+          "type": "boolean",
+          "default": true
+        },
+        "className": {
+          "title": "Tamanho do texto",
+          "type": "string",
+          "description": "Controla o tamanho do texto (parágrafo, títulos e negrito) para desktop e mobile. small: parágrafo 14px, títulos 24px, negrito 14px. medium: parágrafo 16px, títulos 28px, negrito 16px. large: parágrafo 20px, títulos 40px, negrito 20px.",
+          "enum": [
+            "small",
+            "medium",
+            "large"
+          ],
+          "enumNames": [
+            "Pequeno",
+            "Médio",
+            "Grande"
+          ],
+          "default": "large"
+        },
+        "desktop": {
+          "title": "Configuração desktop",
+          "type": "object",
+          "properties": {
+            "srcImage": {
+              "title": "Imagem",
+              "type": "string",
+              "description": "Imagem do banner para desktop",
+              "widget": {
+                "ui:widget": "media-gallery",
+                "restrictMediaTypes": {
+                  "video": true,
+                  "image": [
+                    "png",
+                    "jpg",
+                    "jpeg",
+                    "gif",
+                    "svg",
+                    "webp"
+                  ]
+                }
+              }
+            },
+            "height": {
+              "title": "Altura da imagem",
+              "type": "number",
+              "description": "Altura da imagem em pixel"
+            },
+            "width": {
+              "title": "Largura da imagem",
+              "type": "number",
+              "description": "Largura da imagem em pixel (usada para otimização, padrão: 1920)"
+            },
+            "isPositionAbsolute": {
+              "title": "Posição absoluta",
+              "type": "boolean",
+              "default": false
+            },
+            "centerY": {
+              "title": "Centralizar verticalmente",
+              "type": "boolean",
+              "description": "Centraliza o elemento verticalmente (sobrepõe o valor de 'top')",
+              "default": false
+            },
+            "left": {
+              "title": "Distância da esquerda",
+              "type": "string",
+              "description": "Aceita px ou %, ex: 50px ou 50%"
+            },
+            "top": {
+              "title": "Distância do topo",
+              "type": "string",
+              "description": "Aceita px ou %, ex: 50px ou 50%"
+            },
+            "right": {
+              "title": "Distância da direita",
+              "type": "string",
+              "description": "Aceita px ou %, ex: 50px ou 50%"
+            },
+            "bottom": {
+              "title": "Distância de baixo",
+              "type": "string",
+              "description": "Aceita px ou %, ex: 50px ou 50%"
+            },
+            "padding": {
+              "title": "Espaçamento interno",
+              "type": "string",
+              "description": "Valor CSS de padding, ex: 10px 20px"
+            },
+            "maxWidth": {
+              "title": "Largura máxima",
+              "type": "number",
+              "description": "Largura máxima da imagem em pixel"
+            }
+          }
+        },
+        "mobile": {
+          "title": "Configuração mobile",
+          "type": "object",
+          "properties": {
+            "srcImage": {
+              "title": "Imagem",
+              "type": "string",
+              "description": "Imagem do banner para mobile",
+              "widget": {
+                "ui:widget": "media-gallery",
+                "restrictMediaTypes": {
+                  "video": true,
+                  "image": [
+                    "png",
+                    "jpg",
+                    "jpeg",
+                    "gif",
+                    "svg",
+                    "webp"
+                  ]
+                }
+              }
+            },
+            "height": {
+              "title": "Altura da imagem",
+              "type": "number",
+              "description": "Altura da imagem em pixel"
+            },
+            "isPositionAbsolute": {
+              "title": "Posição absoluta",
+              "type": "boolean",
+              "default": false
+            },
+            "centerY": {
+              "title": "Centralizar verticalmente",
+              "type": "boolean",
+              "description": "Centraliza o elemento verticalmente (sobrepõe o valor de 'top')",
+              "default": false
+            },
+            "left": {
+              "title": "Distância da esquerda",
+              "type": "string",
+              "description": "Aceita px ou %, ex: 50px ou 50%"
+            },
+            "top": {
+              "title": "Distância do topo",
+              "type": "string",
+              "description": "Aceita px ou %, ex: 50px ou 50%"
+            },
+            "right": {
+              "title": "Distância da direita",
+              "type": "string",
+              "description": "Aceita px ou %, ex: 50px ou 50%"
+            },
+            "bottom": {
+              "title": "Distância de baixo",
+              "type": "string",
+              "description": "Aceita px ou %, ex: 50px ou 50%"
+            },
+            "flexDirection": {
+              "title": "Direção do flex",
+              "type": "string",
+              "enum": [
+                "row",
+                "column",
+                "row-reverse",
+                "column-reverse"
+              ],
+              "enumNames": [
+                "Linha",
+                "Coluna",
+                "Linha invertida",
+                "Coluna invertida"
+              ],
+              "default": "row"
+            },
+            "padding": {
+              "title": "Espaçamento interno",
+              "type": "string",
+              "description": "Valor CSS de padding, ex: 10px 20px"
+            },
+            "maxWidth": {
+              "title": "Largura máxima",
+              "type": "number",
+              "description": "Largura máxima da imagem em pixel"
+            }
+          }
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    },
+    "CardPost": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "CardPost",
+      "$componentTitle": "Card Post",
+      "title": "Card Post",
+      "description": "Lista de cards com carrossel no mobile",
+      "type": "object",
+      "properties": {
+        "title": {
+          "title": "Título",
+          "type": "string",
+          "default": "DESCUBRA O MELHOR"
+        },
+        "items": {
+          "title": "Cards",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "title": "Card",
+            "type": "object",
+            "properties": {
+              "image": {
+                "title": "Imagem Desktop",
+                "type": "string",
+                "widget": {
+                  "ui:widget": "media-gallery",
+                  "restrictMediaTypes": {
+                    "video": true,
+                    "image": [
+                      "png",
+                      "jpg",
+                      "jpeg",
+                      "gif",
+                      "svg",
+                      "webp"
+                    ]
+                  }
+                }
+              },
+              "imageMobile": {
+                "title": "Imagem Mobile",
+                "type": "string",
+                "widget": {
+                  "ui:widget": "media-gallery",
+                  "restrictMediaTypes": {
+                    "video": true,
+                    "image": [
+                      "png",
+                      "jpg",
+                      "jpeg",
+                      "gif",
+                      "svg",
+                      "webp"
+                    ]
+                  }
+                }
+              },
+              "title": {
+                "title": "Título do card",
+                "type": "string"
+              },
+              "linkText": {
+                "title": "Texto do link",
+                "type": "string",
+                "default": "Shop Now"
+              },
+              "href": {
+                "title": "URL",
+                "type": "string"
+              },
+              "target": {
+                "title": "Abrir link",
+                "type": "string",
+                "enum": [
+                  "_self",
+                  "_blank"
+                ],
+                "enumNames": [
+                  "Mesma aba",
+                  "Nova aba"
+                ],
+                "default": "_self"
+              }
+            }
+          }
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    },
+    "CardVideo": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "CardVideo",
+      "$componentTitle": "Card Video",
+      "title": "Card Video",
+      "description": "Embed de vídeos YouTube, Vimeo ou MP4",
+      "type": "object",
+      "properties": {
+        "areaSection": {
+          "title": "Área da sessão",
+          "type": "string",
+          "enum": [
+            "container",
+            "full"
+          ],
+          "enumNames": [
+            "Container",
+            "Full"
+          ],
+          "default": "full"
+        },
+        "maxWidthSection": {
+          "title": "Largura máxima",
+          "type": "string",
+          "description": "Somente números, sem px ou %"
+        },
+        "marginTopSection": {
+          "title": "Margem superior",
+          "type": "string",
+          "default": "0"
+        },
+        "customClassSection": {
+          "title": "Classe CSS",
+          "type": "string"
+        },
+        "sectionLabel": {
+          "title": "Descrição acessível da sessão",
+          "type": "string"
+        },
+        "videoType": {
+          "title": "Tipo do vídeo",
+          "type": "string",
+          "enum": [
+            "youtube",
+            "vimeo",
+            "mp4"
+          ],
+          "enumNames": [
+            "YouTube",
+            "Vimeo",
+            "MP4"
+          ],
+          "default": "youtube"
+        },
+        "videoUrl": {
+          "title": "URL do vídeo",
+          "type": "string"
+        },
+        "videoUrlPhone": {
+          "title": "URL do vídeo no Mobile",
+          "type": "string"
+        },
+        "videoMp4": {
+          "title": "Upload de vídeo",
+          "type": "string",
+          "widget": {
+            "ui:widget": "media-gallery",
+            "restrictMediaTypes": {
+              "video": true,
+              "image": [
+                "png",
+                "jpg",
+                "jpeg",
+                "gif",
+                "svg",
+                "webp"
+              ]
+            }
+          }
+        },
+        "videoTitle": {
+          "title": "Título do vídeo",
+          "type": "string",
+          "default": "Vídeo"
+        },
+        "aspectRatio": {
+          "title": "Proporção do vídeo",
+          "type": "string",
+          "enum": [
+            "16/9",
+            "4/3",
+            "1/1",
+            "9/16"
+          ],
+          "enumNames": [
+            "16:9",
+            "4:3",
+            "1:1",
+            "9:16"
+          ],
+          "default": "16/9"
+        },
+        "fullScreenMobile": {
+          "title": "Tela cheia no mobile",
+          "description": "Quando ativado, o vídeo ocupa a tela inteira no mobile, ignorando a proporção configurada",
+          "type": "boolean",
+          "default": false
+        },
+        "autoplay": {
+          "title": "Autoplay",
+          "type": "boolean",
+          "default": false
+        },
+        "muted": {
+          "title": "Mudo",
+          "type": "boolean",
+          "default": false
+        },
+        "loop": {
+          "title": "Loop",
+          "type": "boolean",
+          "default": false
+        },
+        "controls": {
+          "title": "Controles",
+          "type": "boolean",
+          "default": true
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    },
+    "CollectionGalleryCustom": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "CollectionGalleryCustom",
+      "$componentTitle": "Collection Gallery Custom",
+      "title": "Collection Gallery Custom",
+      "description": "Renders a VTEX collection as a full PLP-style gallery (grid, filters, sort and pagination) on any page.",
+      "type": "object",
+      "required": [
+        "collectionId",
+        "filter"
+      ],
+      "properties": {
+        "collectionId": {
+          "title": "Collection ID",
+          "description": "VTEX collection (product cluster) id. E.g. for the 'Most Wanted' collection, use: 140. Find your collection ids under Catalog > Collections in the Admin.",
+          "type": "string",
+          "default": "140"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string",
+          "default": ""
+        },
+        "totalCountLabel": {
+          "title": "Total count label",
+          "type": "string",
+          "default": "Results"
+        },
+        "itemsPerPage": {
+          "title": "Items per page",
+          "description": "Number of products fetched per page.",
+          "type": "integer",
+          "default": 12
+        },
+        "itemsPerRow": {
+          "title": "Items per row",
+          "description": "Number of product cards displayed per row in the gallery grid",
+          "type": "integer",
+          "enum": [
+            2,
+            3
+          ],
+          "enumNames": [
+            "2 items",
+            "3 items"
+          ],
+          "default": 2
+        },
+        "showUnavailableProducts": {
+          "title": "Show unavailable products?",
+          "description": "When enabled, out-of-stock products are also shown. Otherwise only available products appear (store default).",
+          "type": "boolean",
+          "default": false
+        },
+        "stateFilter": {
+          "title": "Filtro fechado no desktop?",
+          "type": "boolean",
+          "default": false
+        },
+        "contentCards": {
+          "title": "Cards entre produtos",
+          "description": "Adiciona banners e/ou blocos de texto entre os produtos da primeira página da galeria.",
+          "type": "array",
+          "items": {
+            "title": "Card editorial",
+            "type": "object",
+            "required": [
+              "position"
+            ],
+            "properties": {
+              "active": {
+                "title": "Ativo?",
+                "type": "boolean",
+                "default": true
+              },
+              "position": {
+                "title": "Posição no grid",
+                "description": "Posição que o card ocupará no grid. Ex.: 4 coloca o card depois dos três primeiros elementos.",
+                "type": "integer",
+                "minimum": 1,
+                "default": 4
+              },
+              "images": {
+                "title": "Imagens",
+                "description": "Cadastre uma ou mais imagens. Com mais de uma imagem, o card será exibido como carrossel.",
+                "type": "array",
+                "items": {
+                  "title": "Imagem",
+                  "type": "object",
+                  "properties": {
+                    "image": {
+                      "title": "Imagem desktop",
+                      "type": "string",
+                      "widget": {
+                        "ui:widget": "media-gallery",
+                        "restrictMediaTypes": {
+                          "video": true,
+                          "image": [
+                            "png",
+                            "jpg",
+                            "jpeg",
+                            "gif",
+                            "svg",
+                            "webp"
+                          ]
+                        }
+                      }
+                    },
+                    "imageMobile": {
+                      "title": "Imagem mobile",
+                      "description": "Opcional. Se não for cadastrada, utiliza a imagem desktop.",
+                      "type": "string",
+                      "widget": {
+                        "ui:widget": "media-gallery",
+                        "restrictMediaTypes": {
+                          "video": true,
+                          "image": [
+                            "png",
+                            "jpg",
+                            "jpeg",
+                            "gif",
+                            "svg",
+                            "webp"
+                          ]
+                        }
+                      }
+                    },
+                    "imageAlt": {
+                      "title": "Texto alternativo da imagem",
+                      "description": "Descrição da imagem para acessibilidade.",
+                      "type": "string",
+                      "default": ""
+                    },
+                    "link": {
+                      "title": "Link",
+                      "type": "string",
+                      "default": ""
+                    },
+                    "linkLabel": {
+                      "title": "Texto do link",
+                      "type": "string",
+                      "default": ""
+                    },
+                    "target": {
+                      "title": "Abrir link em",
+                      "type": "string",
+                      "enum": [
+                        "_self",
+                        "_blank"
+                      ],
+                      "enumNames": [
+                        "Mesma página",
+                        "Nova aba"
+                      ],
+                      "default": "_self"
+                    }
+                  }
+                }
+              },
+              "title": {
+                "title": "Título",
+                "type": "string",
+                "default": ""
+              },
+              "text": {
+                "title": "Texto",
+                "type": "string",
+                "default": ""
+              },
+              "columnsDesktop": {
+                "title": "Colunas no desktop",
+                "description": "Quantidade de colunas do grid ocupadas pelo card.",
+                "type": "integer",
+                "enum": [
+                  1,
+                  2,
+                  3
+                ],
+                "enumNames": [
+                  "1 coluna",
+                  "2 colunas",
+                  "3 colunas"
+                ],
+                "default": 1
+              },
+              "columnsTablet": {
+                "title": "Colunas no tablet",
+                "type": "integer",
+                "enum": [
+                  1,
+                  2,
+                  3
+                ],
+                "enumNames": [
+                  "1 coluna",
+                  "2 colunas",
+                  "3 colunas"
+                ],
+                "default": 1
+              },
+              "columnsMobile": {
+                "title": "Colunas no mobile",
+                "type": "integer",
+                "enum": [
+                  1,
+                  2
+                ],
+                "enumNames": [
+                  "1 coluna",
+                  "2 colunas"
+                ],
+                "default": 2
+              },
+              "textPosition": {
+                "title": "Posição do texto",
+                "type": "string",
+                "enum": [
+                  "below",
+                  "overlay-bottom",
+                  "overlay-center"
+                ],
+                "enumNames": [
+                  "Abaixo da imagem",
+                  "Sobre a imagem - inferior",
+                  "Sobre a imagem - centralizado"
+                ],
+                "default": "below"
+              },
+              "textAlign": {
+                "title": "Alinhamento do texto",
+                "type": "string",
+                "enum": [
+                  "left",
+                  "center",
+                  "right"
+                ],
+                "enumNames": [
+                  "Esquerda",
+                  "Centralizado",
+                  "Direita"
+                ],
+                "default": "left"
+              }
+            }
+          }
+        },
+        "filter": {
+          "title": "Filter",
+          "type": "object",
+          "required": [
+            "title",
+            "mobileOnly"
+          ],
+          "properties": {
+            "title": {
+              "title": "Filter title",
+              "type": "string",
+              "default": "Filters"
+            },
+            "ordering": {
+              "title": "Filters ordering",
+              "type": "object",
+              "description": "Controls the order of the filter groups and of the values inside each group.",
+              "properties": {
+                "groups": {
+                  "title": "Order of filter groups",
+                  "type": "string",
+                  "enum": [
+                    "default",
+                    "asc",
+                    "desc"
+                  ],
+                  "enumNames": [
+                    "Original (from search)",
+                    "Alphabetical A-Z",
+                    "Alphabetical Z-A"
+                  ],
+                  "default": "default"
+                },
+                "values": {
+                  "title": "Order of values inside each filter",
+                  "type": "string",
+                  "enum": [
+                    "default",
+                    "asc",
+                    "desc"
+                  ],
+                  "enumNames": [
+                    "Original (from search)",
+                    "Alphabetical A-Z",
+                    "Alphabetical Z-A"
+                  ],
+                  "default": "default"
+                },
+                "lastKeys": {
+                  "title": "Filters always shown last",
+                  "description": "Filtros sempre exibidos por último (separados por vírgula). Digite a label — ex.: Preço. Ignora maiúsculas/acentos; a chave do facet também funciona.",
+                  "type": "string",
+                  "default": "price"
+                },
+                "pinned": {
+                  "title": "Posições fixas de filtros",
+                  "description": "Fixa filtros específicos em posições exatas (1 = primeiro, 2 = segundo…). Os demais filtros preenchem os espaços restantes na ordem definida acima. Sobrepõe 'sempre por último' para os filtros listados.",
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "title": "Filtro fixo",
+                    "required": [
+                      "label",
+                      "position"
+                    ],
+                    "properties": {
+                      "label": {
+                        "title": "Nome do filtro (label)",
+                        "description": "Digite a label do filtro exatamente como aparece na loja (ex.: Departamento, Preço, Cor, Tamanhos). Ignora maiúsculas e acentos; a chave do facet também funciona.",
+                        "type": "string"
+                      },
+                      "position": {
+                        "title": "Posição (1 = primeiro)",
+                        "type": "integer",
+                        "default": 1,
+                        "minimum": 1
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "hiddenFilter": {
+              "title": "Filtros ocultos",
+              "description": "Filtros que não devem aparecer na lista. Digite a label do filtro exatamente como aparece na loja (ex.: Fit, productClusterNames). Ignora maiúsculas e acentos; a chave do facet também funciona.",
+              "type": "array",
+              "items": {
+                "type": "object",
+                "title": "Filtro oculto",
+                "required": [
+                  "label"
+                ],
+                "properties": {
+                  "label": {
+                    "title": "Nome do filtro (label)",
+                    "description": "Label do filtro a esconder (ex.: Fit).",
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "mobileOnly": {
+              "title": "Mobile Only",
+              "type": "object",
+              "required": [
+                "filterButton",
+                "clearButtonLabel",
+                "applyButtonLabel"
+              ],
+              "properties": {
+                "filterButton": {
+                  "title": "Show filter button",
+                  "type": "object",
+                  "required": [
+                    "label",
+                    "icon"
+                  ],
+                  "properties": {
+                    "label": {
+                      "title": "Label",
+                      "type": "string",
+                      "default": "Filters"
+                    },
+                    "icon": {
+                      "title": "Icon",
+                      "type": "object",
+                      "required": [
+                        "icon",
+                        "alt"
+                      ],
+                      "properties": {
+                        "icon": {
+                          "title": "Icon",
+                          "type": "string",
+                          "enumNames": [
+                            "FadersHorizontal"
+                          ],
+                          "enum": [
+                            "FadersHorizontal"
+                          ],
+                          "default": "FadersHorizontal"
+                        },
+                        "alt": {
+                          "title": "Alternative label",
+                          "type": "string",
+                          "default": "Open Filters"
+                        }
+                      }
+                    }
+                  }
+                },
+                "clearButtonLabel": {
+                  "title": "Clear button label",
+                  "type": "string",
+                  "default": "Clear All"
+                },
+                "applyButtonLabel": {
+                  "title": "Apply button label",
+                  "type": "string",
+                  "default": "Apply"
+                }
+              }
+            }
+          }
+        },
+        "productCard": {
+          "title": "Product Card Configuration",
+          "type": "object",
+          "properties": {
+            "showDiscountBadge": {
+              "title": "Show discount badge?",
+              "type": "boolean",
+              "default": true
+            },
+            "bordered": {
+              "title": "Cards should be bordered?",
+              "type": "boolean",
+              "default": true
+            },
+            "taxesConfiguration": {
+              "title": "Taxes Configuration",
+              "type": "object",
+              "properties": {
+                "usePriceWithTaxes": {
+                  "title": "Should use taxes to calculate the price?",
+                  "type": "boolean",
+                  "default": false
+                },
+                "taxesLabel": {
+                  "title": "Tax label to be displayed",
+                  "type": "string",
+                  "default": "Tax included"
+                }
+              }
+            },
+            "sponsoredLabel": {
+              "title": "Sponsored Label",
+              "type": "string",
+              "default": "Sponsored"
+            },
+            "showProductClusters": {
+              "title": "Show product cluster tags?",
+              "type": "boolean",
+              "default": true,
+              "description": "Tags exibidas sobre a imagem do produto (ex.: Lançamento, Exclusivo). Quais tags aparecem é cadastro único em Global Sections → CollectionTag, uma seção por coleção."
+            }
+          }
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    },
+    "CollectionTag": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "CollectionTag",
+      "$componentTitle": "CollectionTag",
+      "title": "CollectionTag",
+      "description": "flag de coleção",
+      "type": "object",
+      "required": [
+        "collectionId",
+        "label",
+        "color"
+      ],
+      "properties": {
+        "collectionId": {
+          "title": "collection id",
+          "type": "string",
+          "description": "id da colecao"
+        },
+        "label": {
+          "title": "label",
+          "type": "string",
+          "description": "texto que vai mostra no site: ex: New Arrivals"
+        },
+        "color": {
+          "title": "color",
+          "type": "string",
+          "description": "color em hex ex: #000"
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    },
+    "CompleteCard": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "CompleteCard",
+      "$componentTitle": "Card Complete",
+      "title": "Card Complete",
+      "description": "Card general",
+      "type": "object",
+      "properties": {
+        "active": {
+          "title": "Ativo",
+          "type": "boolean",
+          "default": true
+        },
+        "sectionLabel": {
+          "title": "Descrição acessível da sessão",
+          "type": "string"
+        },
+        "marginTopSection": {
+          "title": "Margem superior da sessão",
+          "type": "string",
+          "default": "40"
+        },
+        "marginTopSectionPhone": {
+          "title": "Margem superior da sessão no mobile",
+          "type": "string",
+          "default": "25"
+        },
+        "hasTitle": {
+          "title": "Exibir título?",
+          "type": "boolean",
+          "default": true
+        },
+        "sizeTitle": {
+          "title": "Aparencia do Título",
+          "type": "string",
+          "enum": [
+            "large",
+            "medium",
+            "small"
+          ],
+          "enumNames": [
+            "grande",
+            "medio",
+            "pequeno"
+          ],
+          "default": "medium"
+        },
+        "textTitle": {
+          "title": "Conteúdo título",
+          "type": "string",
+          "widget": {
+            "ui:widget": "draftjs-rich-text"
+          }
+        },
+        "layoutDesktop": {
+          "title": "Layout no desktop",
+          "type": "string",
+          "enum": [
+            "slider",
+            "grid"
+          ],
+          "enumNames": [
+            "slider",
+            "grid"
+          ],
+          "default": "grid"
+        },
+        "columnsDesktop": {
+          "title": "Colunas no desktop",
+          "type": "string",
+          "default": "1",
+          "description": "Somente números, sem px ou %"
+        },
+        "layoutTablet": {
+          "title": "Layout no tablet",
+          "type": "string",
+          "enum": [
+            "slider",
+            "grid"
+          ],
+          "enumNames": [
+            "slider",
+            "grid"
+          ],
+          "default": "grid"
+        },
+        "columnsTablet": {
+          "title": "Colunas no tablet",
+          "type": "string",
+          "default": "1",
+          "description": "Somente números, sem px ou %"
+        },
+        "layoutPhone": {
+          "title": "Layout no phone",
+          "type": "string",
+          "enum": [
+            "slider",
+            "grid"
+          ],
+          "enumNames": [
+            "slider",
+            "grid"
+          ],
+          "default": "grid"
+        },
+        "columnsPhone": {
+          "title": "Colunas no phone",
+          "type": "string",
+          "default": "1",
+          "description": "Somente números, sem px ou %"
+        },
+        "paddingPx": {
+          "title": "Espaçamento entre as colunas",
+          "type": "string",
+          "default": "10",
+          "description": "Somente números, sem px ou %"
+        },
+        "paddingPxPhone": {
+          "title": "Espaçamento entre as colunas no mobile",
+          "type": "string",
+          "default": "10",
+          "description": "Somente números, sem px ou %"
+        },
+        "customClassSection": {
+          "title": "Classe para CSS",
+          "type": "string",
+          "description": "mediumText, largeText, smallText, strongLink, fontBanner, fontCutPhone"
+        },
+        "areaSection": {
+          "title": "Área da sessão",
+          "type": "string",
+          "enum": [
+            "container",
+            "full"
+          ],
+          "enumNames": [
+            "container",
+            "full"
+          ],
+          "default": "full"
+        },
+        "borderContainer": {
+          "title": "Colocar borda no container",
+          "type": "string",
+          "enum": [
+            "none",
+            "dashed",
+            "dotted"
+          ],
+          "enumNames": [
+            "none",
+            "traços",
+            "pontos"
+          ],
+          "default": "none"
+        },
+        "borderWidth": {
+          "title": "Espessura da borda",
+          "type": "string",
+          "enum": [
+            "1px",
+            "2px",
+            "3px",
+            "4px"
+          ],
+          "enumNames": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "default": "1px"
+        },
+        "paddingBorder": {
+          "title": "Espaçamento entre borda e conteúdo",
+          "type": "string",
+          "description": "Número e unidade de medida"
+        },
+        "maxWidthSection": {
+          "title": "Largura máxima do container sessão",
+          "type": "string",
+          "description": "Somente números, sem px ou %"
+        },
+        "cards": {
+          "type": "array",
+          "title": "Cards Items",
+          "description": "Lista dos cards",
+          "items": {
+            "type": "object",
+            "title": "Banner Item",
+            "properties": {
+              "showBanner": {
+                "title": "Exibir imagem",
+                "type": "boolean",
+                "default": true
+              },
+              "fileBanner": {
+                "type": "string",
+                "title": "Image",
+                "description": "Imagem do banner",
+                "widget": {
+                  "ui:widget": "media-gallery",
+                  "restrictMediaTypes": {
+                    "video": true,
+                    "image": [
+                      "png",
+                      "jpg",
+                      "jpeg",
+                      "gif",
+                      "svg",
+                      "webp"
+                    ]
+                  }
+                }
+              },
+              "heightBanner": {
+                "title": "Altura da imagem",
+                "type": "string",
+                "description": "Não preencher se quiser a imagem altura auto"
+              },
+              "widthBanner": {
+                "title": "Largura da imagem",
+                "type": "string",
+                "description": "Não preencher se quiser a imagem largura auto"
+              },
+              "fileBannerPhone": {
+                "type": "string",
+                "title": "Image",
+                "description": "Imagem do banner mobile",
+                "widget": {
+                  "ui:widget": "media-gallery",
+                  "restrictMediaTypes": {
+                    "video": true,
+                    "image": [
+                      "png",
+                      "jpg",
+                      "jpeg",
+                      "gif",
+                      "svg",
+                      "webp"
+                    ]
+                  }
+                }
+              },
+              "heightBannerPhone": {
+                "title": "Altura da imagem mobile",
+                "type": "string",
+                "description": "Não preencher se quiser a imagem altura auto"
+              },
+              "widthBannerPhone": {
+                "title": "Largura da imagem mobile",
+                "type": "string",
+                "description": "Não preencher se quiser a imagem largura auto"
+              },
+              "altBanner": {
+                "title": "Texto alternativo da imagem",
+                "type": "string"
+              },
+              "linkBanner": {
+                "title": "Link da imagem",
+                "type": "string"
+              },
+              "targetLinkBanner": {
+                "title": "Janela do link",
+                "type": "string",
+                "enum": [
+                  "_self",
+                  "_blank"
+                ],
+                "enumNames": [
+                  "Mesma",
+                  "Nova"
+                ],
+                "default": "_self"
+              },
+              "hoverZoom": {
+                "title": "Aplicar zoom no hover",
+                "type": "boolean",
+                "default": false
+              },
+              "showText": {
+                "title": "Exibir texto",
+                "type": "boolean",
+                "default": true
+              },
+              "styleText": {
+                "title": "Estilo do texto",
+                "type": "string",
+                "enum": [
+                  "absolute",
+                  "relative"
+                ],
+                "enumNames": [
+                  "Dentro do banner",
+                  "Fora do banner"
+                ],
+                "default": "absolute"
+              },
+              "paddingRightText": {
+                "title": "Espaçamento interno direito",
+                "type": "string",
+                "description": "Somente números, sem px ou %",
+                "default": "10"
+              },
+              "paddingLeftText": {
+                "title": "Espaçamento interno esquerdo",
+                "type": "string",
+                "description": "Somente números, sem px ou %",
+                "default": "10"
+              },
+              "paddingTopText": {
+                "title": "Espaçamento interno superior",
+                "type": "string",
+                "description": "Somente números, sem px ou %",
+                "default": "10"
+              },
+              "paddingBottomText": {
+                "title": "Espaçamento interno inferior",
+                "type": "string",
+                "description": "Somente números, sem px ou %",
+                "default": "10"
+              },
+              "maxWidthText": {
+                "title": "Largura máxima da caixa de texto",
+                "type": "string",
+                "description": "Preencher com número + medida",
+                "default": ""
+              },
+              "backgroundBoxText": {
+                "title": "Cor do fundo do box do texto",
+                "type": "string",
+                "default": "#ffffff",
+                "description": "Use (transparent) para deixar sem fundo"
+              },
+              "orderText": {
+                "title": "Ordem dos elementos",
+                "type": "string",
+                "enum": [
+                  "left",
+                  "top",
+                  "bottom",
+                  "right"
+                ],
+                "enumNames": [
+                  "A esquerda da imagem",
+                  "Acima da imagem",
+                  "Abaixo da imagem",
+                  "A direita da imagem"
+                ],
+                "default": "left"
+              },
+              "orderTextPhone": {
+                "title": "Comportamento da ordem no mobile",
+                "type": "string",
+                "enum": [
+                  "left",
+                  "top",
+                  "bottom",
+                  "right"
+                ],
+                "enumNames": [
+                  "A esquerda da imagem",
+                  "Acima da imagem",
+                  "Abaixo da imagem",
+                  "A direita da imagem"
+                ],
+                "default": "left"
+              },
+              "positionText": {
+                "title": "Posição do texto",
+                "type": "string",
+                "enum": [
+                  "left-bottom",
+                  "right-bottom",
+                  "center-bottom",
+                  "top-left",
+                  "top-right",
+                  "top-center",
+                  "center-left",
+                  "center-right",
+                  "center-center"
+                ],
+                "enumNames": [
+                  "Esquerda embaixo",
+                  "Direita embaixo",
+                  "Centro embaixo",
+                  "Topo esquerdo",
+                  "Topo direito",
+                  "Topo centro",
+                  "Centro esquerdo",
+                  "Centro direito",
+                  "Centro centro"
+                ],
+                "default": "left-bottom"
+              },
+              "alignText": {
+                "title": "Alinhamento do texto",
+                "type": "string",
+                "enum": [
+                  "left",
+                  "right",
+                  "center",
+                  "justify"
+                ],
+                "enumNames": [
+                  "Esquerda",
+                  "Direita",
+                  "Centralizado",
+                  "Justificado"
+                ],
+                "default": "left"
+              },
+              "alignTextPhone": {
+                "title": "Centralizar o texto no mobile",
+                "type": "boolean",
+                "default": false
+              },
+              "texts": {
+                "type": "array",
+                "title": "Textos do card",
+                "description": "Lista de textos",
+                "items": {
+                  "type": "object",
+                  "title": "Informações do texto",
+                  "properties": {
+                    "magingBottomText": {
+                      "title": "Matgin inferior do texto",
+                      "type": "string",
+                      "default": "0"
+                    },
+                    "coloText": {
+                      "title": "Cor do texto",
+                      "type": "string",
+                      "default": "#110b0d"
+                    },
+                    "fontSizeText": {
+                      "title": "Tamanho da fonte do texto",
+                      "type": "string",
+                      "default": "16px"
+                    },
+                    "fontSizeTextPhone": {
+                      "title": "Tamanho da fonte do texto no mobile",
+                      "type": "string",
+                      "default": "14px"
+                    },
+                    "strongText": {
+                      "title": "Força do texto",
+                      "type": "string",
+                      "enum": [
+                        "default",
+                        "300",
+                        "400",
+                        "500",
+                        "600",
+                        "700"
+                      ],
+                      "enumNames": [
+                        "normal",
+                        "300",
+                        "400",
+                        "500",
+                        "600",
+                        "700"
+                      ],
+                      "default": "default"
+                    },
+                    "rowGapText": {
+                      "title": "Espaçamento entre os elementos do texto",
+                      "type": "string",
+                      "default": "16px",
+                      "description": "row-gap css"
+                    },
+                    "contentText": {
+                      "title": "Conteúdo textual",
+                      "type": "string",
+                      "widget": {
+                        "ui:widget": "draftjs-rich-text"
+                      }
+                    }
+                  }
+                }
+              },
+              "links": {
+                "type": "array",
+                "title": "Links junto ao texto",
+                "description": "Lista de links veja mais...",
+                "items": {
+                  "type": "object",
+                  "title": "Informações do link",
+                  "properties": {
+                    "linkText": {
+                      "title": "Texto do link",
+                      "type": "string"
+                    },
+                    "urlLinkText": {
+                      "title": "Links de veja mais",
+                      "type": "string"
+                    },
+                    "styleLinkText": {
+                      "title": "Estilo do link",
+                      "type": "string",
+                      "enum": [
+                        "button",
+                        "link"
+                      ],
+                      "enumNames": [
+                        "Botão",
+                        "Link"
+                      ],
+                      "default": "button"
+                    },
+                    "targetLinkText": {
+                      "title": "Janela do link",
+                      "type": "string",
+                      "enum": [
+                        "_self",
+                        "_blank"
+                      ],
+                      "enumNames": [
+                        "Mesma",
+                        "Nova"
+                      ],
+                      "default": "_self"
+                    },
+                    "fontSizeLink": {
+                      "title": "Tamanho da fonte do texto no desktop",
+                      "type": "string",
+                      "default": "13px"
+                    },
+                    "fontSizeLinkPhone": {
+                      "title": "Tamanho da fonte do texto no mobile",
+                      "type": "string",
+                      "default": "13px"
+                    },
+                    "colorLinkText": {
+                      "title": "Cor do texto",
+                      "type": "string",
+                      "default": "#110b0d"
+                    },
+                    "backgroundLinkText": {
+                      "title": "Cor do fundo",
+                      "type": "string",
+                      "default": "#ffffff"
+                    },
+                    "borderLinkText": {
+                      "title": "Incluir borda no botão",
+                      "type": "boolean",
+                      "default": true
+                    },
+                    "borderWidth": {
+                      "title": "Espessura da borda",
+                      "type": "string",
+                      "enum": [
+                        "1px",
+                        "2px",
+                        "3px"
+                      ],
+                      "enumNames": [
+                        "1",
+                        "2",
+                        "3"
+                      ],
+                      "default": "1px"
+                    },
+                    "borderColorLinkText": {
+                      "title": "Cor da borda",
+                      "type": "string",
+                      "default": "#110b0d"
+                    },
+                    "radiusButton": {
+                      "title": "Arredondamento da borda",
+                      "type": "string",
+                      "default": "0"
+                    },
+                    "strongLink": {
+                      "title": "Texto do link com destaque",
+                      "type": "boolean",
+                      "default": false
+                    }
+                  }
+                }
+              },
+              "directionLinks": {
+                "title": "Direçao dos links",
+                "type": "string",
+                "enum": [
+                  "row",
+                  "columns"
+                ],
+                "enumNames": [
+                  "Alinhados na mesma linha",
+                  "Um embaixo do outro"
+                ],
+                "default": "row"
+              },
+              "positionLink": {
+                "title": "Posição dos links com relação ao texto",
+                "type": "string",
+                "enum": [
+                  "bottom",
+                  "right"
+                ],
+                "enumNames": [
+                  "Embaixo",
+                  "À Direita"
+                ],
+                "default": "bottom"
+              }
+            }
+          }
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    },
+    "ContentTabs": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "ContentTabs",
+      "$componentTitle": "Abas de conteúdo",
+      "title": "Abas de conteúdo",
+      "description": "Componente de conteúdo organizado em abas",
+      "type": "object",
+      "properties": {
+        "className": {
+          "title": "Classe CSS",
+          "type": "string"
+        },
+        "sectionLabel": {
+          "title": "Descrição acessível da seção",
+          "type": "string"
+        },
+        "marginTopSection": {
+          "title": "Margem superior",
+          "type": "string",
+          "description": "Somente números, sem px ou %",
+          "default": "40"
+        },
+        "hasTitle": {
+          "title": "Exibir título?",
+          "type": "boolean",
+          "default": true
+        },
+        "sizeTitle": {
+          "title": "Aparencia do Título",
+          "type": "string",
+          "enum": [
+            "large",
+            "medium",
+            "small"
+          ],
+          "enumNames": [
+            "grande",
+            "medio",
+            "pequeno"
+          ],
+          "default": "medium"
+        },
+        "textTitle": {
+          "title": "Conteúdo título",
+          "type": "string",
+          "widget": {
+            "ui:widget": "draftjs-rich-text"
+          }
+        },
+        "ariaLabel": {
+          "title": "Descrição acessível das abas",
+          "type": "string",
+          "default": "Abas de conteúdo"
+        },
+        "defaultActiveId": {
+          "title": "ID da aba inicial",
+          "type": "string",
+          "description": "Use o mesmo ID cadastrado na aba"
+        },
+        "areaSection": {
+          "title": "Área da seção",
+          "type": "string",
+          "enum": [
+            "container",
+            "full"
+          ],
+          "enumNames": [
+            "Container",
+            "Full"
+          ],
+          "default": "container"
+        },
+        "maxWidthSection": {
+          "title": "Largura máxima",
+          "type": "string",
+          "description": "Somente números, sem px ou %",
+          "default": "1200"
+        },
+        "desktop": {
+          "title": "Estilo das abas (desktop)",
+          "type": "object",
+          "properties": {
+            "titleFontSize": {
+              "title": "Tamanho da fonte do título da aba",
+              "type": "number",
+              "description": "Em pixel"
+            },
+            "titleMarginTop": {
+              "title": "Margem superior do título da aba",
+              "type": "number",
+              "description": "Espaço entre o conteúdo acima e as abas, em pixel"
+            },
+            "contentMarginTop": {
+              "title": "Margem superior do conteúdo da aba",
+              "type": "number",
+              "description": "Espaço entre as abas e o conteúdo exibido, em pixel"
+            }
+          }
+        },
+        "mobile": {
+          "title": "Estilo das abas (mobile)",
+          "type": "object",
+          "properties": {
+            "titleFontSize": {
+              "title": "Tamanho da fonte do título da aba",
+              "type": "number",
+              "description": "Em pixel"
+            },
+            "titleMarginTop": {
+              "title": "Margem superior do título da aba",
+              "type": "number",
+              "description": "Espaço entre o conteúdo acima e as abas, em pixel"
+            },
+            "contentMarginTop": {
+              "title": "Margem superior do conteúdo da aba",
+              "type": "number",
+              "description": "Espaço entre as abas e o conteúdo exibido, em pixel"
+            }
+          }
+        },
+        "tabs": {
+          "type": "array",
+          "title": "Abas",
+          "items": {
+            "type": "object",
+            "title": "Aba",
+            "properties": {
+              "active": {
+                "title": "Ativar aba",
+                "type": "boolean",
+                "default": true
+              },
+              "id": {
+                "title": "Identificador da aba",
+                "type": "string",
+                "description": "Exemplo: descricao, medidas, cuidados"
+              },
+              "label": {
+                "title": "Título da aba",
+                "type": "string"
+              },
+              "content": {
+                "title": "Conteúdo",
+                "type": "string",
+                "widget": {
+                  "ui:widget": "draftjs-rich-text"
+                }
+              },
+              "isContentImage": {
+                "title": "Conteúdo é somente imagem?",
+                "type": "boolean",
+                "description": "Se marcado, exibe só a imagem da aba e ignora o texto do campo 'Conteúdo'",
+                "default": false
+              },
+              "desktop": {
+                "title": "Imagem (desktop)",
+                "type": "object",
+                "properties": {
+                  "srcImage": {
+                    "title": "Imagem",
+                    "type": "string",
+                    "description": "Imagem exibida no conteúdo da aba para desktop",
+                    "widget": {
+                      "ui:widget": "media-gallery",
+                      "restrictMediaTypes": {
+                        "video": true,
+                        "image": [
+                          "png",
+                          "jpg",
+                          "jpeg",
+                          "gif",
+                          "svg",
+                          "webp"
+                        ]
+                      }
+                    }
+                  },
+                  "width": {
+                    "title": "Largura da imagem",
+                    "type": "number",
+                    "description": "Em pixel. Se deixar em branco (nos dois campos), a imagem preenche 100% do espaço disponível"
+                  },
+                  "height": {
+                    "title": "Altura da imagem",
+                    "type": "number",
+                    "description": "Em pixel. Se deixar em branco (nos dois campos), a imagem preenche 100% do espaço disponível"
+                  }
+                }
+              },
+              "mobile": {
+                "title": "Imagem (mobile)",
+                "type": "object",
+                "properties": {
+                  "srcImage": {
+                    "title": "Imagem",
+                    "type": "string",
+                    "description": "Imagem exibida no conteúdo da aba para mobile",
+                    "widget": {
+                      "ui:widget": "media-gallery",
+                      "restrictMediaTypes": {
+                        "video": true,
+                        "image": [
+                          "png",
+                          "jpg",
+                          "jpeg",
+                          "gif",
+                          "svg",
+                          "webp"
+                        ]
+                      }
+                    }
+                  },
+                  "width": {
+                    "title": "Largura da imagem",
+                    "type": "number",
+                    "description": "Em pixel. Se deixar em branco (nos dois campos), a imagem preenche 100% do espaço disponível"
+                  },
+                  "height": {
+                    "title": "Altura da imagem",
+                    "type": "number",
+                    "description": "Em pixel. Se deixar em branco (nos dois campos), a imagem preenche 100% do espaço disponível"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    },
+    "CustomFooter": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "CustomFooter",
+      "$componentTitle": "Custom Footer",
+      "title": "Custom Footer",
+      "description": "Footer customizado da loja",
+      "type": "object",
+      "properties": {
+        "instagramTitle": {
+          "title": "Título Instagram",
+          "type": "string",
+          "default": "@levisbrasil"
+        },
+        "instagramImages": {
+          "title": "Imagens Instagram",
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 3,
+          "items": {
+            "title": "Instagram Image",
+            "type": "object",
+            "properties": {
+              "image": {
+                "title": "Imagem",
+                "type": "string",
+                "widget": {
+                  "ui:widget": "media-gallery",
+                  "restrictMediaTypes": {
+                    "video": true,
+                    "image": [
+                      "png",
+                      "jpg",
+                      "jpeg",
+                      "gif",
+                      "svg",
+                      "webp"
+                    ]
+                  }
+                }
+              },
+              "link": {
+                "title": "Link",
+                "type": "string"
+              },
+              "alt": {
+                "title": "Texto alternativo",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "aboutTitle": {
+          "title": "Título Sobre",
+          "type": "string",
+          "default": "SOBRE A LEVI'S®"
+        },
+        "aboutText": {
+          "title": "Texto Sobre",
+          "type": "string",
+          "default": "Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos..."
+        },
+        "paragraphCopyright": {
+          "title": "Copyright",
+          "type": "string",
+          "default": "© 2023 LEVI STRAUSS & CO"
+        },
+        "footerNav": {
+          "title": "Navegação",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "title": "Grupo de links",
+            "type": "object",
+            "properties": {
+              "titleGroup": {
+                "title": "Título do grupo",
+                "type": "string"
+              },
+              "footerLinks": {
+                "title": "Links",
+                "type": "array",
+                "items": {
+                  "title": "Link",
+                  "type": "object",
+                  "properties": {
+                    "text": {
+                      "title": "Texto do link",
+                      "type": "string"
+                    },
+                    "url": {
+                      "title": "URL do link",
+                      "type": "string",
+                      "default": ""
+                    },
+                    "target": {
+                      "title": "Abrir link",
+                      "type": "string",
+                      "enum": [
+                        "_self",
+                        "_blank"
+                      ],
+                      "enumNames": [
+                        "Mesma aba",
+                        "Nova aba"
+                      ],
+                      "default": "_self"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    },
+    "DescriptionProduct": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "DescriptionProduct",
+      "$componentTitle": "Description Product",
+      "title": "Description Product",
+      "description": "Standalone PDP section with the product short description (specs) and the description accordion",
+      "type": "object",
+      "properties": {
+        "productDescription": {
+          "title": "Product Description",
+          "type": "object",
+          "properties": {
+            "initiallyExpanded": {
+              "title": "Initially Expanded?",
+              "type": "string",
+              "enumNames": [
+                "First",
+                "All",
+                "None"
+              ],
+              "enum": [
+                "first",
+                "all",
+                "none"
+              ],
+              "default": "first"
+            },
+            "displayDescription": {
+              "title": "Should display description?",
+              "type": "boolean",
+              "default": true
+            },
+            "title": {
+              "title": "Description section title",
+              "type": "string",
+              "default": "Description"
+            },
+            "accordionAriaLabel": {
+              "title": "Product description accordion aria label",
+              "type": "string",
+              "default": "Product Description Content"
+            }
+          }
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    },
+    "Faq": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "Faq",
+      "$componentTitle": "FAQ",
+      "title": "FAQ",
+      "description": "Lista de perguntas e respostas em formato de acordeon.",
+      "type": "object",
+      "required": [
+        "items"
+      ],
+      "properties": {
+        "title": {
+          "title": "Título",
+          "type": "string",
+          "description": "Título opcional exibido acima da lista de perguntas"
+        },
+        "items": {
+          "title": "Perguntas e respostas",
+          "type": "array",
+          "items": {
+            "title": "Item",
+            "type": "object",
+            "properties": {
+              "question": {
+                "title": "Pergunta",
+                "type": "string"
+              },
+              "answer": {
+                "title": "Resposta",
+                "type": "string",
+                "widget": {
+                  "ui:widget": "draftjs-rich-text"
+                }
+              }
+            },
+            "required": [
+              "question",
+              "answer"
+            ]
+          },
+          "minItems": 1
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    },
+    "FirstModal": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "FirstModal",
+      "$componentTitle": "First Modal",
+      "title": "First Modal",
+      "description": "Modal inicial com imagem, texto e formulário dinâmico",
+      "type": "object",
+      "properties": {
+        "active": {
+          "title": "Ativar modal",
+          "type": "boolean",
+          "default": true
+        },
+        "storageKey": {
+          "title": "Chave do storage",
+          "type": "string",
+          "default": "first-modal-closed"
+        },
+        "storageType": {
+          "title": "Tipo de armazenamento",
+          "type": "string",
+          "enum": [
+            "localStorage",
+            "sessionStorage"
+          ],
+          "enumNames": [
+            "LocalStorage",
+            "SessionStorage"
+          ],
+          "default": "localStorage"
+        },
+        "delaySeconds": {
+          "title": "Tempo para abrir o modal",
+          "type": "string",
+          "default": "0",
+          "description": "Tempo em segundos"
+        },
+        "maxWidthModal": {
+          "title": "Largura máxima do modal",
+          "type": "string",
+          "default": "960"
+        },
+        "heightModal": {
+          "title": "Altura mínima do modal",
+          "type": "string",
+          "default": "540"
+        },
+        "image": {
+          "title": "Imagem desktop",
+          "type": "string",
+          "widget": {
+            "ui:widget": "media-gallery",
+            "restrictMediaTypes": {
+              "video": true,
+              "image": [
+                "png",
+                "jpg",
+                "jpeg",
+                "gif",
+                "svg",
+                "webp"
+              ]
+            }
+          }
+        },
+        "imageMobile": {
+          "title": "Imagem mobile",
+          "type": "string",
+          "widget": {
+            "ui:widget": "media-gallery",
+            "restrictMediaTypes": {
+              "video": true,
+              "image": [
+                "png",
+                "jpg",
+                "jpeg",
+                "gif",
+                "svg",
+                "webp"
+              ]
+            }
+          }
+        },
+        "imageAlt": {
+          "title": "Texto alternativo da imagem",
+          "type": "string"
+        },
+        "title": {
+          "title": "Título",
+          "type": "string",
+          "default": "Modal"
+        },
+        "text": {
+          "title": "Texto",
+          "type": "string"
+        },
+        "backgroundText": {
+          "title": "Cor de fundo do texto",
+          "type": "string",
+          "default": "#ffffff"
+        },
+        "colorText": {
+          "title": "Cor do texto",
+          "type": "string",
+          "default": "#110b0d"
+        },
+        "closeLabel": {
+          "title": "Texto acessível do fechar",
+          "type": "string",
+          "default": "Fechar modal"
+        },
+        "showForm": {
+          "title": "Exibir formulário",
+          "type": "boolean",
+          "default": false
+        },
+        "successMessage": {
+          "title": "Mensagem de sucesso",
+          "type": "string",
+          "default": "Enviado com sucesso!"
+        },
+        "formFields": {
+          "type": "array",
+          "title": "Campos do formulário",
+          "items": {
+            "type": "object",
+            "title": "Campo",
+            "properties": {
+              "type": {
+                "title": "Tipo do campo",
+                "type": "string",
+                "enum": [
+                  "text",
+                  "email",
+                  "tel",
+                  "checkbox",
+                  "radio",
+                  "select",
+                  "submit"
+                ],
+                "enumNames": [
+                  "Texto",
+                  "E-mail",
+                  "Telefone",
+                  "Checkbox",
+                  "Radio",
+                  "Select",
+                  "Button"
+                ],
+                "default": "text"
+              },
+              "name": {
+                "title": "Nome técnico do campo",
+                "type": "string"
+              },
+              "label": {
+                "title": "Label",
+                "type": "string"
+              },
+              "placeholder": {
+                "title": "Placeholder",
+                "type": "string"
+              },
+              "required": {
+                "title": "Obrigatório",
+                "type": "boolean",
+                "default": false
+              },
+              "options": {
+                "type": "array",
+                "title": "Opções",
+                "items": {
+                  "type": "object",
+                  "title": "Opção",
+                  "properties": {
+                    "label": {
+                      "title": "Texto",
+                      "type": "string"
+                    },
+                    "value": {
+                      "title": "Valor",
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    },
+    "FooterCustom": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "FooterCustom",
+      "$componentTitle": "Footer Custom",
+      "title": "Footer Custom",
+      "description": "Footer com colunas configuráveis (links ou imagens) e barra de copyright com logos e redes sociais.",
+      "type": "object",
+      "properties": {
+        "about": {
+          "title": "Sobre",
+          "description": "Texto da seção 'Sobre' exibido no topo do footer. Aceita formatação (negrito, itálico, listas, links).",
+          "type": "string",
+          "widget": {
+            "ui:widget": "draftjs-rich-text"
+          }
+        },
+        "items": {
+          "title": "Colunas",
+          "description": "Cada coluna pode exibir uma lista de links ou uma lista de imagens.",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "title": "Coluna",
+            "type": "object",
+            "properties": {
+              "groups": {
+                "title": "Grupos",
+                "description": "Uma coluna pode ter mais de um grupo, cada um com seu título. Cada grupo pode ser de menu (links/texto) ou de imagens.",
+                "type": "array",
+                "items": {
+                  "title": "Grupo",
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "title": "Título",
+                      "type": "string",
+                      "default": ""
+                    },
+                    "isImage": {
+                      "title": "Grupo de imagens?",
+                      "description": "Quando ativado, o grupo exibe imagens em vez de itens de menu.",
+                      "type": "boolean",
+                      "default": false
+                    },
+                    "menu": {
+                      "title": "Itens",
+                      "description": "Usado quando 'Grupo de imagens' está desativado.",
+                      "type": "array",
+                      "items": {
+                        "title": "Item",
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "title": "Tipo",
+                            "description": "Link: vira um link clicável (sem URL é apenas um label). Texto: aceita **negrito** e \\n para quebra de linha.",
+                            "type": "string",
+                            "enum": [
+                              "link",
+                              "text"
+                            ],
+                            "enumNames": [
+                              "Link",
+                              "Texto"
+                            ],
+                            "default": "link"
+                          },
+                          "text": {
+                            "title": "Texto",
+                            "description": "No tipo Texto aceita **negrito** e \\n para quebra de linha.",
+                            "type": "string",
+                            "default": ""
+                          },
+                          "link": {
+                            "title": "URL",
+                            "description": "Usado apenas no tipo Link.",
+                            "type": "string",
+                            "default": ""
+                          },
+                          "newAba": {
+                            "title": "Abrir em nova aba?",
+                            "type": "boolean",
+                            "default": false
+                          },
+                          "bold": {
+                            "title": "Negrito?",
+                            "type": "boolean",
+                            "default": false
+                          }
+                        }
+                      }
+                    },
+                    "images": {
+                      "title": "Imagens",
+                      "description": "Usado quando 'Grupo de imagens' está ativado.",
+                      "type": "array",
+                      "items": {
+                        "title": "Imagem",
+                        "type": "object",
+                        "properties": {
+                          "imageUrl": {
+                            "title": "Imagem",
+                            "type": "string",
+                            "widget": {
+                              "ui:widget": "media-gallery",
+                              "restrictMediaTypes": {
+                                "video": true,
+                                "image": [
+                                  "png",
+                                  "jpg",
+                                  "jpeg",
+                                  "gif",
+                                  "svg",
+                                  "webp"
+                                ]
+                              }
+                            }
+                          },
+                          "alt": {
+                            "title": "Texto alternativo",
+                            "type": "string",
+                            "default": ""
+                          },
+                          "link": {
+                            "title": "URL",
+                            "type": "string",
+                            "default": ""
+                          },
+                          "newAba": {
+                            "title": "Abrir em nova aba?",
+                            "type": "boolean",
+                            "default": false
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "copywrite": {
+          "title": "Copyright",
+          "type": "object",
+          "properties": {
+            "text": {
+              "title": "Texto",
+              "type": "string",
+              "default": ""
+            },
+            "imagesLogo": {
+              "title": "Logos",
+              "type": "array",
+              "items": {
+                "title": "Logo",
+                "type": "object",
+                "properties": {
+                  "imageUrl": {
+                    "title": "Imagem",
+                    "type": "string",
+                    "widget": {
+                      "ui:widget": "media-gallery",
+                      "restrictMediaTypes": {
+                        "video": true,
+                        "image": [
+                          "png",
+                          "jpg",
+                          "jpeg",
+                          "gif",
+                          "svg",
+                          "webp"
+                        ]
+                      }
+                    }
+                  },
+                  "alt": {
+                    "title": "Texto alternativo",
+                    "type": "string",
+                    "default": ""
+                  },
+                  "link": {
+                    "title": "URL",
+                    "type": "string",
+                    "default": ""
+                  },
+                  "newAba": {
+                    "title": "Abrir em nova aba?",
+                    "type": "boolean",
+                    "default": false
+                  }
+                }
+              }
+            },
+            "imagesSocialMedia": {
+              "title": "Redes sociais",
+              "type": "array",
+              "items": {
+                "title": "Rede social",
+                "type": "object",
+                "properties": {
+                  "imageUrl": {
+                    "title": "Imagem",
+                    "type": "string",
+                    "widget": {
+                      "ui:widget": "media-gallery",
+                      "restrictMediaTypes": {
+                        "video": true,
+                        "image": [
+                          "png",
+                          "jpg",
+                          "jpeg",
+                          "gif",
+                          "svg",
+                          "webp"
+                        ]
+                      }
+                    }
+                  },
+                  "alt": {
+                    "title": "Texto alternativo",
+                    "type": "string",
+                    "default": ""
+                  },
+                  "link": {
+                    "title": "URL",
+                    "type": "string",
+                    "default": ""
+                  },
+                  "newAba": {
+                    "title": "Abrir em nova aba?",
+                    "type": "boolean",
+                    "default": false
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    },
+    "Franqueados": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "Franqueados",
+      "$componentTitle": "Franqueados",
+      "title": "Franqueados",
+      "description": "pagina Franqueados",
+      "type": "object",
+      "properties": {},
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    },
+    "FullBannerSlider": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "FullBannerSlider",
+      "$componentTitle": "Full Banner Slider",
+      "title": "Full Banner Slider",
+      "description": "A full-width banner.",
+      "type": "object",
+      "required": [
+        "items",
+        "height"
+      ],
+      "properties": {
+        "items": {
+          "type": "array",
+          "title": "Banner Items",
+          "description": "List of banner items to display in the carousel",
+          "items": {
+            "type": "object",
+            "title": "Banner Item",
+            "properties": {
+              "image": {
+                "type": "string",
+                "title": "Image",
+                "description": "URL or path to the banner image for desktop",
+                "widget": {
+                  "ui:widget": "media-gallery",
+                  "restrictMediaTypes": {
+                    "video": true,
+                    "image": [
+                      "png",
+                      "jpg",
+                      "jpeg",
+                      "gif",
+                      "svg",
+                      "webp"
+                    ]
+                  }
+                }
+              },
+              "imageMobile": {
+                "type": "string",
+                "title": "Mobile Image",
+                "description": "URL or path to the banner image for mobile devices",
+                "widget": {
+                  "ui:widget": "media-gallery",
+                  "restrictMediaTypes": {
+                    "video": true,
+                    "image": [
+                      "png",
+                      "jpg",
+                      "jpeg",
+                      "gif",
+                      "svg",
+                      "webp"
+                    ]
+                  }
+                }
+              },
+              "href": {
+                "type": "string",
+                "title": "Link URL",
+                "description": "URL where the banner should redirect when clicked (optional)"
+              },
+              "target": {
+                "type": "string",
+                "title": "Link Target",
+                "description": "How the link should open",
+                "enum": [
+                  "_blank",
+                  "_self"
+                ],
+                "enumNames": [
+                  "New Tab",
+                  "Same Tab"
+                ],
+                "default": "_self"
+              }
+            }
+          },
+          "minItems": 1
+        },
+        "height": {
+          "type": "number",
+          "title": "Height",
+          "description": "Height of the banner in pixels",
+          "minimum": 100,
+          "default": 700
+        },
+        "loading": {
+          "type": "string",
+          "title": "Loading Strategy",
+          "description": "Loading strategy for the images",
+          "enum": [
+            "eager",
+            "lazy"
+          ],
+          "enumNames": [
+            "Eager",
+            "Lazy"
+          ],
+          "default": "lazy"
+        },
+        "autoPlay": {
+          "type": "boolean",
+          "title": "Autoplay",
+          "description": "Automatically advance the slides",
+          "default": false
+        },
+        "autoPlayInterval": {
+          "type": "number",
+          "title": "Autoplay Interval (ms)",
+          "description": "Time in milliseconds between automatic slide changes",
+          "minimum": 1000,
+          "default": 5000
+        },
+        "infiniteMode": {
+          "type": "boolean",
+          "title": "Infinite Loop",
+          "description": "When enabled, the carousel loops back to the first slide after the last one",
+          "default": true
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    },
+    "GuideSize": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "GuideSize",
+      "$componentTitle": "Guia de Tamanhos",
+      "title": "Guia de Tamanhos",
+      "description": "Seção com galeria de imagens e texto, para exibir guias de tamanho.",
+      "type": "object",
+      "required": [
+        "images",
+        "text"
+      ],
+      "properties": {
+        "marginTopSection": {
+          "title": "Margem superior",
+          "type": "string",
+          "description": "Valor CSS de margin-top, ex: 20px"
+        },
+        "height": {
+          "title": "Altura da imagem",
+          "type": "string",
+          "description": "Valor CSS de altura da imagem principal, ex: 400px ou auto"
+        },
+        "positionImage": {
+          "title": "Posição da imagem",
+          "type": "string",
+          "enum": [
+            "left",
+            "right"
+          ],
+          "enumNames": [
+            "Esquerda",
+            "Direita"
+          ],
+          "default": "left",
+          "description": "Posição da galeria de imagens em relação ao texto (aplicado apenas no desktop)"
+        },
+        "images": {
+          "title": "Imagens",
+          "type": "array",
+          "description": "Imagens exibidas na galeria com miniaturas",
+          "items": {
+            "title": "Imagem",
+            "type": "object",
+            "properties": {
+              "srcImage": {
+                "title": "Imagem",
+                "type": "string",
+                "widget": {
+                  "ui:widget": "media-gallery",
+                  "restrictMediaTypes": {
+                    "video": true,
+                    "image": [
+                      "png",
+                      "jpg",
+                      "jpeg",
+                      "gif",
+                      "svg",
+                      "webp"
+                    ]
+                  }
+                }
+              },
+              "altImage": {
+                "title": "Texto alternativo",
+                "type": "string"
+              }
+            },
+            "required": [
+              "srcImage",
+              "altImage"
+            ]
+          },
+          "minItems": 1
+        },
+        "text": {
+          "title": "Texto",
+          "type": "string",
+          "widget": {
+            "ui:widget": "draftjs-rich-text"
+          }
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    },
+    "HeaderCustom": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "HeaderCustom",
+      "$componentTitle": "Header custom",
+      "title": "Header custom",
+      "description": "The header component of the site.",
+      "type": "object",
+      "required": [
+        "logo",
+        "menu"
+      ],
+      "properties": {
+        "skipLazyLoadingSection": {
+          "title": "Skip lazy loading",
+          "type": "boolean",
+          "default": false
+        },
+        "logo": {
+          "type": "string",
+          "title": "Logo",
+          "widget": {
+            "ui:widget": "media-gallery",
+            "restrictMediaTypes": {
+              "video": true,
+              "image": [
+                "png",
+                "jpg",
+                "jpeg",
+                "gif",
+                "svg",
+                "webp"
+              ]
+            }
+          }
+        },
+        "emptyCart": {
+          "type": "object",
+          "title": "Carrinho vazio",
+          "description": "Conteúdo exibido no mini-carrinho quando ele está vazio: mensagem, prateleira de produtos e botão para fechar.",
+          "properties": {
+            "title": {
+              "type": "string",
+              "title": "Mensagem",
+              "default": "Seu carrinho está vazio"
+            },
+            "buttonLabel": {
+              "type": "string",
+              "title": "Texto do botão (fechar carrinho)",
+              "default": "Continuar comprando"
+            },
+            "shelf": {
+              "type": "object",
+              "title": "Prateleira de produtos",
+              "description": "Prateleira exibida dentro do carrinho vazio. Mesmos campos do Product Shelf.",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "title": "Título da prateleira"
+                },
+                "numberOfItems": {
+                  "type": "integer",
+                  "title": "Total de itens",
+                  "default": 10,
+                  "description": "Quantidade de produtos buscados. Pode ser menor se a busca retornar menos produtos."
+                },
+                "sort": {
+                  "title": "Ordenação",
+                  "description": "Ordem dos itens",
+                  "default": "score_desc",
+                  "enum": [
+                    "discount_desc",
+                    "name_asc",
+                    "name_desc",
+                    "orders_desc",
+                    "price_asc",
+                    "price_desc",
+                    "release_desc",
+                    "score_desc"
+                  ],
+                  "enumNames": [
+                    "Desconto: maior para menor",
+                    "Nome: A-Z",
+                    "Nome: Z-A",
+                    "Pedidos: maior para menor",
+                    "Preço: menor para maior",
+                    "Preço: maior para menor",
+                    "Lançamento: mais novo para mais antigo",
+                    "Relevância: maior para menor"
+                  ]
+                },
+                "term": {
+                  "type": "string",
+                  "title": "Termo de busca"
+                },
+                "selectedFacets": {
+                  "title": "Facets",
+                  "type": "array",
+                  "items": {
+                    "title": "Facet",
+                    "type": "object",
+                    "required": [
+                      "key",
+                      "value"
+                    ],
+                    "properties": {
+                      "key": {
+                        "title": "Key",
+                        "description": "Para coleções use: productClusterIds",
+                        "type": "string",
+                        "default": "productClusterIds"
+                      },
+                      "value": {
+                        "title": "Value",
+                        "description": "Ex.: para a coleção 'Mais Desejados' use: 140. Consulte os ids na página de Coleções.",
+                        "type": "string",
+                        "default": "140"
+                      }
+                    }
+                  }
+                },
+                "productCardConfiguration": {
+                  "title": "Configuração do card de produto",
+                  "type": "object",
+                  "properties": {
+                    "showDiscountBadge": {
+                      "title": "Exibir selo de desconto?",
+                      "type": "boolean",
+                      "default": true
+                    },
+                    "bordered": {
+                      "title": "Cards com borda?",
+                      "type": "boolean",
+                      "default": false
+                    },
+                    "showPixDiscount": {
+                      "title": "Exibir desconto no Pix?",
+                      "type": "boolean",
+                      "default": true
+                    },
+                    "pixDiscount": {
+                      "title": "Percentual de desconto no Pix",
+                      "type": "integer",
+                      "default": 10,
+                      "description": "Percentual exibido abaixo das parcelas (ex.: 5 renderiza \"5% OFF no pix\")."
+                    },
+                    "pixDiscountLabel": {
+                      "title": "Rótulo do desconto no Pix",
+                      "type": "string",
+                      "default": "no pix",
+                      "description": "Texto após o percentual (ex.: \"no pix\")."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "rulerMinicart": {
+          "type": "object",
+          "title": "Régua do carrinho (frete grátis / brinde)",
+          "description": "Barra de progresso exibida no rodapé do mini-carrinho, acima do resumo, mostrando quanto falta para atingir o frete grátis ou o brinde.",
+          "properties": {
+            "type": {
+              "type": "string",
+              "title": "Tipo de promoção",
+              "description": "Define o ícone do marcador e liga/desliga a régua.",
+              "default": "Frete",
+              "enum": [
+                "Frete",
+                "Brinde",
+                "Disable"
+              ],
+              "enumNames": [
+                "Frete grátis",
+                "Brinde",
+                "Desativado"
+              ]
+            },
+            "goal": {
+              "type": "number",
+              "title": "Valor da meta (R$)",
+              "description": "Valor total do carrinho para atingir a promoção. Use ponto para os centavos. Ex.: 699.90",
+              "default": 699.9
+            },
+            "progressMessage": {
+              "type": "string",
+              "title": "Mensagem de progresso",
+              "description": "Use {value} onde o valor restante deve aparecer (renderizado em negrito). Ex.: \"Faltam {value} para ganhar frete grátis\".",
+              "default": "Faltam {value} para ganhar frete grátis"
+            },
+            "successMessage": {
+              "type": "string",
+              "title": "Mensagem de sucesso",
+              "description": "Exibida quando a meta é atingida.",
+              "default": "Eba! Você ganhou frete grátis 🎉"
+            }
+          }
+        },
+        "promoDay": {
+          "title": "Ofertas do dia",
+          "description": "Drawer lateral com ofertas promocionais.",
+          "type": "object",
+          "properties": {
+            "active": {
+              "title": "Ativar ofertas do dia?",
+              "type": "boolean",
+              "default": true
+            },
+            "cards": {
+              "title": "Ofertas",
+              "description": "Cadastre os cards exibidos no drawer lateral.",
+              "type": "array",
+              "maxItems": 10,
+              "items": {
+                "title": "Oferta",
+                "type": "object",
+                "properties": {
+                  "active": {
+                    "title": "Ativar oferta?",
+                    "type": "boolean",
+                    "default": true
+                  },
+                  "showBanner": {
+                    "title": "Exibir banner?",
+                    "type": "boolean",
+                    "default": true
+                  },
+                  "fileBanner": {
+                    "title": "Imagem desktop",
+                    "type": "string",
+                    "widget": {
+                      "ui:widget": "media-gallery",
+                      "restrictMediaTypes": {
+                        "video": true,
+                        "image": [
+                          "png",
+                          "jpg",
+                          "jpeg",
+                          "gif",
+                          "svg",
+                          "webp"
+                        ]
+                      }
+                    }
+                  },
+                  "fileBannerPhone": {
+                    "title": "Imagem mobile",
+                    "description": "Opcional. Se não for cadastrada, utiliza a imagem desktop.",
+                    "type": "string",
+                    "widget": {
+                      "ui:widget": "media-gallery",
+                      "restrictMediaTypes": {
+                        "video": true,
+                        "image": [
+                          "png",
+                          "jpg",
+                          "jpeg",
+                          "gif",
+                          "svg",
+                          "webp"
+                        ]
+                      }
+                    }
+                  },
+                  "altBanner": {
+                    "title": "Texto alternativo da imagem",
+                    "description": "Descrição da imagem para acessibilidade.",
+                    "type": "string"
+                  },
+                  "linkBanner": {
+                    "title": "Link do banner",
+                    "description": "Opcional. URL acessada ao clicar no banner.",
+                    "type": "string"
+                  },
+                  "targetLinkBanner": {
+                    "title": "Onde abrir o link do banner?",
+                    "type": "string",
+                    "enum": [
+                      "_self",
+                      "_blank"
+                    ],
+                    "enumNames": [
+                      "Mesma aba",
+                      "Nova aba"
+                    ],
+                    "default": "_self"
+                  },
+                  "text": {
+                    "title": "Conteúdo",
+                    "description": "Texto exibido abaixo da imagem.",
+                    "type": "string",
+                    "widget": {
+                      "ui:widget": "draftjs-rich-text"
+                    }
+                  },
+                  "links": {
+                    "title": "Links",
+                    "description": "Adicione até 3 links por oferta.",
+                    "type": "array",
+                    "maxItems": 3,
+                    "items": {
+                      "title": "Link",
+                      "type": "object",
+                      "properties": {
+                        "linkText": {
+                          "title": "Texto do link",
+                          "type": "string"
+                        },
+                        "urlLinkText": {
+                          "title": "URL",
+                          "type": "string"
+                        },
+                        "targetLinkText": {
+                          "title": "Onde abrir?",
+                          "type": "string",
+                          "enum": [
+                            "_self",
+                            "_blank"
+                          ],
+                          "enumNames": [
+                            "Mesma aba",
+                            "Nova aba"
+                          ],
+                          "default": "_self"
+                        }
+                      }
+                    }
+                  },
+                  "showPolicy": {
+                    "title": "Exibir política ou regulamento?",
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "policyText": {
+                    "title": "Texto da política",
+                    "description": "Ex.: Consulte as condições da promoção.",
+                    "type": "string"
+                  },
+                  "policyLink": {
+                    "title": "Link da política",
+                    "description": "Opcional. Se informado, exibe o link da política.",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "menu": {
+          "type": "object",
+          "title": "Menu Configuration",
+          "properties": {
+            "desktopItems": {
+              "type": "array",
+              "title": "Itens do menu desktop",
+              "description": "Itens do menu exibidos no desktop com mega-menu dropdown",
+              "items": {
+                "type": "object",
+                "title": "Item do menu",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "title": "Título"
+                  },
+                  "href": {
+                    "type": "string",
+                    "title": "URL (se não tiver sub-itens)"
+                  },
+                  "columns": {
+                    "type": "array",
+                    "title": "Colunas do mega-menu",
+                    "description": "Cada coluna pode ter um ou mais departamentos empilhados verticalmente",
+                    "items": {
+                      "type": "object",
+                      "title": "Coluna",
+                      "properties": {
+                        "departments": {
+                          "type": "array",
+                          "title": "Departamentos (empilhados nesta coluna)",
+                          "items": {
+                            "type": "object",
+                            "title": "Departamento",
+                            "properties": {
+                              "title": {
+                                "type": "string",
+                                "title": "Título do departamento"
+                              },
+                              "subCategoria": {
+                                "type": "array",
+                                "title": "Sub-categorias",
+                                "items": {
+                                  "type": "object",
+                                  "title": "Sub-categoria",
+                                  "properties": {
+                                    "text": {
+                                      "type": "string",
+                                      "title": "Texto"
+                                    },
+                                    "link": {
+                                      "type": "string",
+                                      "title": "URL"
+                                    },
+                                    "openNewTab": {
+                                      "type": "boolean",
+                                      "title": "Abrir em nova aba",
+                                      "default": false
+                                    },
+                                    "destaque": {
+                                      "type": "boolean",
+                                      "title": "Destaque (negrito dourado)",
+                                      "default": false
+                                    }
+                                  },
+                                  "required": [
+                                    "text"
+                                  ]
+                                }
+                              }
+                            },
+                            "required": [
+                              "title"
+                            ]
+                          }
+                        },
+                        "image": {
+                          "type": "object",
+                          "title": "Imagem editorial da coluna (opcional)",
+                          "properties": {
+                            "imageUrl": {
+                              "type": "string",
+                              "title": "Imagem",
+                              "widget": {
+                                "ui:widget": "media-gallery",
+                                "restrictMediaTypes": {
+                                  "video": true,
+                                  "image": [
+                                    "png",
+                                    "jpg",
+                                    "jpeg",
+                                    "gif",
+                                    "svg",
+                                    "webp"
+                                  ]
+                                }
+                              }
+                            },
+                            "alt": {
+                              "type": "string",
+                              "title": "Texto alternativo"
+                            },
+                            "href": {
+                              "type": "string",
+                              "title": "Link da imagem"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "categorias": {
+                    "type": "array",
+                    "title": "Categorias com ícone (deste menu)",
+                    "description": "Exibidas no drawer do mega-menu deste item, junto com as colunas. Opcional: se vazio, nada é renderizado.",
+                    "items": {
+                      "type": "object",
+                      "title": "Categoria",
+                      "properties": {
+                        "icon": {
+                          "type": "string",
+                          "title": "Ícone / Imagem",
+                          "widget": {
+                            "ui:widget": "media-gallery",
+                            "restrictMediaTypes": {
+                              "video": true,
+                              "image": [
+                                "png",
+                                "jpg",
+                                "jpeg",
+                                "gif",
+                                "svg",
+                                "webp"
+                              ]
+                            }
+                          }
+                        },
+                        "text": {
+                          "type": "string",
+                          "title": "Texto"
+                        },
+                        "link": {
+                          "type": "string",
+                          "title": "URL"
+                        }
+                      },
+                      "required": [
+                        "text",
+                        "link"
+                      ]
+                    }
+                  },
+                  "isRed": {
+                    "type": "boolean",
+                    "title": "É vermelho",
+                    "default": false
+                  },
+                  "isBlue": {
+                    "type": "boolean",
+                    "title": "É azul",
+                    "default": false
+                  }
+                },
+                "required": [
+                  "title"
+                ]
+              }
+            },
+            "mobileItems": {
+              "type": "array",
+              "title": "Itens do menu mobile",
+              "description": "Itens exibidos no drawer do mobile",
+              "items": {
+                "type": "object",
+                "title": "Item mobile",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "title": "Título"
+                  },
+                  "href": {
+                    "type": "string",
+                    "title": "URL (quando o item é só um link, sem sub-menu)"
+                  },
+                  "isRed": {
+                    "type": "boolean",
+                    "title": "É vermelho"
+                  },
+                  "isBlue": {
+                    "type": "boolean",
+                    "title": "É azul"
+                  },
+                  "items": {
+                    "type": "array",
+                    "title": "Links diretos",
+                    "items": {
+                      "type": "object",
+                      "title": "Link direto",
+                      "properties": {
+                        "text": {
+                          "type": "string",
+                          "title": "Texto"
+                        },
+                        "link": {
+                          "type": "string",
+                          "title": "URL"
+                        },
+                        "newTab": {
+                          "type": "boolean",
+                          "title": "Abrir em nova aba",
+                          "default": false
+                        }
+                      },
+                      "required": [
+                        "text",
+                        "link"
+                      ]
+                    }
+                  },
+                  "subMenus": {
+                    "type": "array",
+                    "title": "Sub-menus (segundo drawer)",
+                    "description": "Pode adicionar quantos sub-menus quiser — cada um vira uma seção dentro do drawer",
+                    "items": {
+                      "type": "object",
+                      "title": "Sub-menu",
+                      "properties": {
+                        "title": {
+                          "type": "string",
+                          "title": "Título da seção"
+                        },
+                        "items": {
+                          "type": "array",
+                          "title": "Itens do sub-menu",
+                          "items": {
+                            "type": "object",
+                            "title": "Item do sub-menu",
+                            "properties": {
+                              "hasTitle": {
+                                "type": "boolean",
+                                "title": "É título de seção",
+                                "default": false
+                              },
+                              "text": {
+                                "type": "string",
+                                "title": "Texto"
+                              },
+                              "link": {
+                                "type": "string",
+                                "title": "URL"
+                              }
+                            },
+                            "required": [
+                              "text"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "categorias": {
+                    "type": "array",
+                    "title": "Categorias com ícone (deste menu)",
+                    "description": "Exibidas no topo do drawer deste item no mobile. Opcional: se vazio, nada é renderizado.",
+                    "items": {
+                      "type": "object",
+                      "title": "Categoria",
+                      "properties": {
+                        "icon": {
+                          "type": "string",
+                          "title": "Ícone / Imagem",
+                          "widget": {
+                            "ui:widget": "media-gallery",
+                            "restrictMediaTypes": {
+                              "video": true,
+                              "image": [
+                                "png",
+                                "jpg",
+                                "jpeg",
+                                "gif",
+                                "svg",
+                                "webp"
+                              ]
+                            }
+                          }
+                        },
+                        "text": {
+                          "type": "string",
+                          "title": "Texto"
+                        },
+                        "link": {
+                          "type": "string",
+                          "title": "URL"
+                        }
+                      },
+                      "required": [
+                        "text",
+                        "link"
+                      ]
+                    }
+                  }
+                },
+                "required": [
+                  "title"
+                ]
+              }
+            },
+            "mobileLinkFooter": {
+              "type": "array",
+              "title": "Links do rodapé mobile",
+              "description": "Links exibidos no rodapé do menu mobile",
+              "items": {
+                "type": "object",
+                "title": "Link",
+                "properties": {
+                  "text": {
+                    "type": "string",
+                    "title": "Texto"
+                  },
+                  "link": {
+                    "type": "string",
+                    "title": "URL"
+                  },
+                  "iconUrl": {
+                    "type": "string",
+                    "title": "Ícone / Imagem",
+                    "widget": {
+                      "ui:widget": "media-gallery",
+                      "restrictMediaTypes": {
+                        "video": true,
+                        "image": [
+                          "png",
+                          "jpg",
+                          "jpeg",
+                          "gif",
+                          "svg",
+                          "webp"
+                        ]
+                      }
+                    }
+                  },
+                  "alt": {
+                    "type": "string",
+                    "title": "Texto alternativo da imagem"
+                  }
+                },
+                "required": [
+                  "text",
+                  "link"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    },
+    "NeoAssist": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "NeoAssist",
+      "$componentTitle": "Neo Assist",
+      "title": "Neo Assist",
+      "type": "object",
+      "required": [],
+      "properties": {},
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    },
+    "NewsletterCustom": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "NewsletterCustom",
+      "$componentTitle": "Newsletter Custom",
+      "title": "Newsletter Custom",
+      "description": "Seção de newsletter com Instagram, imagens, título, descrição e formulário de inscrição (e-mail + gênero).",
+      "type": "object",
+      "required": [
+        "images"
+      ],
+      "properties": {
+        "instagramHandle": {
+          "title": "Instagram (@)",
+          "description": "Usuário do Instagram, sem o @",
+          "type": "string",
+          "default": ""
+        },
+        "images": {
+          "title": "Imagens",
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 3,
+          "items": {
+            "title": "Imagem",
+            "type": "object",
+            "required": [
+              "image"
+            ],
+            "properties": {
+              "image": {
+                "title": "Imagem",
+                "type": "string",
+                "widget": {
+                  "ui:widget": "media-gallery",
+                  "restrictMediaTypes": {
+                    "video": true,
+                    "image": [
+                      "png",
+                      "jpg",
+                      "jpeg",
+                      "gif",
+                      "svg",
+                      "webp"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "title": {
+          "title": "Título",
+          "type": "string",
+          "default": "Assine nossa newsletter"
+        },
+        "description": {
+          "title": "Descrição",
+          "type": "string",
+          "default": ""
+        },
+        "submitButtonLabel": {
+          "title": "Texto do botão (Call to Action)",
+          "type": "string",
+          "default": "Junte-se a nós"
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    },
+    "PricePix": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "PricePix",
+      "$componentTitle": "Disconto no pix",
+      "title": "Disconto no pix",
+      "description": "disconto no pix ex: 10",
+      "type": "object",
+      "required": [
+        "disconter",
+        "text"
+      ],
+      "properties": {
+        "disconter": {
+          "title": "valor",
+          "type": "number",
+          "description": "valor do desconto"
+        },
+        "text": {
+          "title": "texto",
+          "type": "string",
+          "description": "texto ex: OFF no Pix"
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    },
+    "ProductDetailsCustom": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "ProductDetailsCustom",
+      "$componentTitle": "Product Details Custom",
+      "title": "Product Details Custom",
+      "description": "Fully custom Product Details section (title, gallery and buy box)",
+      "type": "object",
+      "properties": {
+        "productTitle": {
+          "title": "Product Title",
+          "type": "object",
+          "properties": {
+            "discountBadge": {
+              "title": "Discount Badge",
+              "type": "object",
+              "properties": {
+                "showDiscountBadge": {
+                  "title": "Show Discount Badge?",
+                  "type": "boolean",
+                  "default": false
+                },
+                "size": {
+                  "title": "Size",
+                  "type": "string",
+                  "enumNames": [
+                    "Big",
+                    "Small"
+                  ],
+                  "enum": [
+                    "big",
+                    "small"
+                  ],
+                  "default": "big"
+                }
+              }
+            },
+            "refNumber": {
+              "title": "Show Reference Number?",
+              "type": "boolean",
+              "default": false
+            }
+          }
+        },
+        "loadingLabel": {
+          "title": "Loading Label",
+          "type": "string",
+          "default": "Loading..."
+        },
+        "buyButton": {
+          "title": "Buy Button",
+          "type": "object",
+          "properties": {
+            "title": {
+              "title": "Title",
+              "type": "string",
+              "default": "Add to cart"
+            },
+            "icon": {
+              "title": "Icon",
+              "type": "object",
+              "properties": {
+                "icon": {
+                  "title": "Icon",
+                  "type": "string",
+                  "enumNames": [
+                    "Shopping Cart"
+                  ],
+                  "enum": [
+                    "ShoppingCart"
+                  ],
+                  "default": "ShoppingCart"
+                },
+                "alt": {
+                  "title": "Alternative Label",
+                  "type": "string",
+                  "default": "Shopping cart"
+                }
+              }
+            }
+          }
+        },
+        "notAvailableButton": {
+          "title": "Not Available Button",
+          "description": "Shown when a SKU is not available",
+          "type": "object",
+          "properties": {
+            "title": {
+              "title": "Title",
+              "type": "string",
+              "default": "Unavailable"
+            }
+          }
+        },
+        "quantitySelector": {
+          "title": "Quantity Selector",
+          "type": "object",
+          "properties": {
+            "useUnitMultiplier": {
+              "title": "Should use unit multiplier?",
+              "type": "boolean",
+              "default": false
+            },
+            "invalidQuantityToastLabels": {
+              "title": "Invalid quantity toast",
+              "description": "This toast will be displayed when the quantity is out of the range of the min and max values.",
+              "type": "object",
+              "properties": {
+                "title": {
+                  "title": "Title",
+                  "type": "string",
+                  "default": "Invalid quantity!"
+                },
+                "message": {
+                  "title": "Message",
+                  "description": "If the message has %{min}, %{max} and %{quantity} placeholders, they will be replaced by the min, max and quantity values.",
+                  "type": "string",
+                  "default": "The quantity you entered is outside the range of '%{min}' to '%{max}'. The quantity was set to '%{quantity}'."
+                }
+              }
+            }
+          }
+        },
+        "taxesConfiguration": {
+          "title": "Taxes Configuration",
+          "type": "object",
+          "properties": {
+            "usePriceWithTaxes": {
+              "title": "Should use taxes to calculate the price?",
+              "type": "boolean",
+              "default": false
+            },
+            "taxesLabel": {
+              "title": "Tax label to be displayed",
+              "type": "string",
+              "default": "Tax included"
+            }
+          }
+        },
+        "productIncentives": {
+          "title": "Selos / Avisos",
+          "description": "Selos exibidos abaixo do botão de compra. Mínimo 1, máximo 3.",
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 3,
+          "items": {
+            "type": "object",
+            "required": [
+              "text",
+              "imageUrl"
+            ],
+            "properties": {
+              "imageUrl": {
+                "title": "Ícone / Imagem",
+                "type": "string",
+                "widget": {
+                  "ui:widget": "media-gallery",
+                  "restrictMediaTypes": {
+                    "video": true,
+                    "image": [
+                      "png",
+                      "jpg",
+                      "jpeg",
+                      "gif",
+                      "svg",
+                      "webp"
+                    ]
+                  }
+                }
+              },
+              "alt": {
+                "title": "Texto alternativo do ícone",
+                "type": "string",
+                "default": ""
+              },
+              "text": {
+                "title": "Texto",
+                "type": "string",
+                "default": "Frete grátis acima de R$699"
+              }
+            }
+          }
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    },
+    "ProductGalleryCustom": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "ProductGalleryCustom",
+      "$componentTitle": "Product Gallery Custom",
+      "title": "Product Gallery Custom",
+      "description": "Product Gallery configuration",
+      "type": "object",
+      "required": [
+        "filter"
+      ],
+      "properties": {
+        "searchTermLabel": {
+          "title": "Search page term label",
+          "type": "string",
+          "default": "Showing results for:"
+        },
+        "totalCountLabel": {
+          "title": "Total count label",
+          "type": "string",
+          "default": "Resultados"
+        },
+        "previousPageButton": {
+          "title": "Previous page button",
+          "type": "object",
+          "required": [
+            "icon",
+            "label"
+          ],
+          "properties": {
+            "icon": {
+              "title": "Icon",
+              "type": "object",
+              "properties": {
+                "icon": {
+                  "title": "Icon",
+                  "type": "string",
+                  "enumNames": [
+                    "ArrowLeft"
+                  ],
+                  "enum": [
+                    "ArrowLeft"
+                  ],
+                  "default": "ArrowLeft"
+                },
+                "alt": {
+                  "title": "Alternative label",
+                  "type": "string",
+                  "default": "Arrow Left icon"
+                }
+              }
+            },
+            "label": {
+              "title": "Previous page button",
+              "type": "string",
+              "default": "Previous Page"
+            }
+          }
+        },
+        "loadMorePageButton": {
+          "title": "Load more products Button",
+          "type": "object",
+          "required": [
+            "label"
+          ],
+          "properties": {
+            "label": {
+              "title": "Load more products label",
+              "type": "string",
+              "default": "Load more products"
+            }
+          }
+        },
+        "filter": {
+          "title": "Filter",
+          "type": "object",
+          "required": [
+            "title",
+            "mobileOnly"
+          ],
+          "properties": {
+            "title": {
+              "title": "Filter title",
+              "type": "string",
+              "default": "Filters"
+            },
+            "ordering": {
+              "title": "Filters ordering",
+              "type": "object",
+              "description": "Controls the order of the filter groups and of the values inside each group.",
+              "properties": {
+                "groups": {
+                  "title": "Order of filter groups",
+                  "type": "string",
+                  "enum": [
+                    "default",
+                    "asc",
+                    "desc"
+                  ],
+                  "enumNames": [
+                    "Original (from search)",
+                    "Alphabetical A-Z",
+                    "Alphabetical Z-A"
+                  ],
+                  "default": "default"
+                },
+                "values": {
+                  "title": "Order of values inside each filter",
+                  "type": "string",
+                  "enum": [
+                    "default",
+                    "asc",
+                    "desc"
+                  ],
+                  "enumNames": [
+                    "Original (from search)",
+                    "Alphabetical A-Z",
+                    "Alphabetical Z-A"
+                  ],
+                  "default": "default"
+                },
+                "lastKeys": {
+                  "title": "Filters always shown last",
+                  "description": "Filtros sempre exibidos por último (separados por vírgula). Digite a label — ex.: Preço. Ignora maiúsculas/acentos; a chave do facet também funciona.",
+                  "type": "string",
+                  "default": "price"
+                },
+                "pinned": {
+                  "title": "Posições fixas de filtros",
+                  "description": "Fixa filtros específicos em posições exatas (1 = primeiro, 2 = segundo…). Os demais filtros preenchem os espaços restantes na ordem definida acima. Sobrepõe 'sempre por último' para os filtros listados.",
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "title": "Filtro fixo",
+                    "required": [
+                      "label",
+                      "position"
+                    ],
+                    "properties": {
+                      "label": {
+                        "title": "Nome do filtro (label)",
+                        "description": "Digite a label do filtro exatamente como aparece na loja (ex.: Departamento, Preço, Cor, Tamanhos). Ignora maiúsculas e acentos; a chave do facet também funciona.",
+                        "type": "string"
+                      },
+                      "position": {
+                        "title": "Posição (1 = primeiro)",
+                        "type": "integer",
+                        "default": 1,
+                        "minimum": 1
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "hiddenFilter": {
+              "title": "Filtros ocultos",
+              "description": "Filtros que não devem aparecer na lista. Digite a label do filtro exatamente como aparece na loja (ex.: Fit, productClusterNames). Ignora maiúsculas e acentos; a chave do facet também funciona.",
+              "type": "array",
+              "items": {
+                "type": "object",
+                "title": "Filtro oculto",
+                "required": [
+                  "label"
+                ],
+                "properties": {
+                  "label": {
+                    "title": "Nome do filtro (label)",
+                    "description": "Label do filtro a esconder (ex.: Fit).",
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "mobileOnly": {
+              "title": "Mobile Only",
+              "type": "object",
+              "required": [
+                "filterButton",
+                "clearButtonLabel",
+                "applyButtonLabel"
+              ],
+              "properties": {
+                "filterButton": {
+                  "title": "Show filter button",
+                  "type": "object",
+                  "required": [
+                    "label",
+                    "icon"
+                  ],
+                  "properties": {
+                    "label": {
+                      "title": "Label",
+                      "type": "string",
+                      "default": "Filters"
+                    },
+                    "icon": {
+                      "title": "Icon",
+                      "type": "object",
+                      "required": [
+                        "icon",
+                        "alt"
+                      ],
+                      "properties": {
+                        "icon": {
+                          "title": "Icon",
+                          "type": "string",
+                          "enumNames": [
+                            "FadersHorizontal"
+                          ],
+                          "enum": [
+                            "FadersHorizontal"
+                          ],
+                          "default": "FadersHorizontal"
+                        },
+                        "alt": {
+                          "title": "Alternative label",
+                          "type": "string",
+                          "default": "Open Filters"
+                        }
+                      }
+                    }
+                  }
+                },
+                "clearButtonLabel": {
+                  "title": "Clear button label",
+                  "type": "string",
+                  "default": "Clear All"
+                },
+                "applyButtonLabel": {
+                  "title": "Apply button label",
+                  "type": "string",
+                  "default": "Apply"
+                }
+              }
+            }
+          }
+        },
+        "itemsPerRow": {
+          "title": "Items per row",
+          "description": "Number of product cards displayed per row in the gallery grid",
+          "type": "integer",
+          "enum": [
+            2,
+            3
+          ],
+          "enumNames": [
+            "2 items",
+            "3 items"
+          ],
+          "default": 2
+        },
+        "stateFilter": {
+          "title": "Filtro fechado no desktop?",
+          "type": "boolean",
+          "default": false
+        },
+        "contentCards": {
+          "title": "Cards entre produtos",
+          "description": "Adiciona banners e/ou blocos de texto entre os produtos da primeira página da galeria.",
+          "type": "array",
+          "items": {
+            "title": "Card editorial",
+            "type": "object",
+            "required": [
+              "position"
+            ],
+            "properties": {
+              "active": {
+                "title": "Ativo?",
+                "type": "boolean",
+                "default": true
+              },
+              "position": {
+                "title": "Posição no grid",
+                "description": "Posição que o card ocupará no grid. Ex.: 4 coloca o card depois dos três primeiros elementos.",
+                "type": "integer",
+                "minimum": 1,
+                "default": 4
+              },
+              "images": {
+                "title": "Imagens",
+                "description": "Cadastre uma ou mais imagens. Com mais de uma imagem, o card será exibido como carrossel.",
+                "type": "array",
+                "items": {
+                  "title": "Imagem",
+                  "type": "object",
+                  "properties": {
+                    "image": {
+                      "title": "Imagem desktop",
+                      "type": "string",
+                      "widget": {
+                        "ui:widget": "media-gallery",
+                        "restrictMediaTypes": {
+                          "video": true,
+                          "image": [
+                            "png",
+                            "jpg",
+                            "jpeg",
+                            "gif",
+                            "svg",
+                            "webp"
+                          ]
+                        }
+                      }
+                    },
+                    "imageMobile": {
+                      "title": "Imagem mobile",
+                      "description": "Opcional. Se não for cadastrada, utiliza a imagem desktop.",
+                      "type": "string",
+                      "widget": {
+                        "ui:widget": "media-gallery",
+                        "restrictMediaTypes": {
+                          "video": true,
+                          "image": [
+                            "png",
+                            "jpg",
+                            "jpeg",
+                            "gif",
+                            "svg",
+                            "webp"
+                          ]
+                        }
+                      }
+                    },
+                    "imageAlt": {
+                      "title": "Texto alternativo da imagem",
+                      "description": "Descrição da imagem para acessibilidade.",
+                      "type": "string",
+                      "default": ""
+                    },
+                    "link": {
+                      "title": "Link",
+                      "type": "string",
+                      "default": ""
+                    },
+                    "linkLabel": {
+                      "title": "Texto do link",
+                      "type": "string",
+                      "default": ""
+                    },
+                    "target": {
+                      "title": "Abrir link em",
+                      "type": "string",
+                      "enum": [
+                        "_self",
+                        "_blank"
+                      ],
+                      "enumNames": [
+                        "Mesma página",
+                        "Nova aba"
+                      ],
+                      "default": "_self"
+                    }
+                  }
+                }
+              },
+              "title": {
+                "title": "Título",
+                "type": "string",
+                "default": ""
+              },
+              "text": {
+                "title": "Texto",
+                "type": "string",
+                "default": ""
+              },
+              "columnsDesktop": {
+                "title": "Colunas no desktop",
+                "description": "Quantidade de colunas do grid ocupadas pelo card.",
+                "type": "integer",
+                "enum": [
+                  1,
+                  2,
+                  3
+                ],
+                "enumNames": [
+                  "1 coluna",
+                  "2 colunas",
+                  "3 colunas"
+                ],
+                "default": 1
+              },
+              "columnsTablet": {
+                "title": "Colunas no tablet",
+                "type": "integer",
+                "enum": [
+                  1,
+                  2,
+                  3
+                ],
+                "enumNames": [
+                  "1 coluna",
+                  "2 colunas",
+                  "3 colunas"
+                ],
+                "default": 1
+              },
+              "columnsMobile": {
+                "title": "Colunas no mobile",
+                "type": "integer",
+                "enum": [
+                  1,
+                  2
+                ],
+                "enumNames": [
+                  "1 coluna",
+                  "2 colunas"
+                ],
+                "default": 2
+              },
+              "textPosition": {
+                "title": "Posição do texto",
+                "type": "string",
+                "enum": [
+                  "below",
+                  "overlay-bottom",
+                  "overlay-center"
+                ],
+                "enumNames": [
+                  "Abaixo da imagem",
+                  "Sobre a imagem - inferior",
+                  "Sobre a imagem - centralizado"
+                ],
+                "default": "below"
+              },
+              "textAlign": {
+                "title": "Alinhamento do texto",
+                "type": "string",
+                "enum": [
+                  "left",
+                  "center",
+                  "right"
+                ],
+                "enumNames": [
+                  "Esquerda",
+                  "Centralizado",
+                  "Direita"
+                ],
+                "default": "left"
+              }
+            }
+          }
+        },
+        "productCard": {
+          "title": "Product Card Configuration",
+          "type": "object",
+          "properties": {
+            "showDiscountBadge": {
+              "title": "Show discount badge?",
+              "type": "boolean",
+              "default": true
+            },
+            "bordered": {
+              "title": "Cards should be bordered?",
+              "type": "boolean",
+              "default": true
+            },
+            "taxesConfiguration": {
+              "title": "Taxes Configuration",
+              "type": "object",
+              "properties": {
+                "usePriceWithTaxes": {
+                  "title": "Should use taxes to calculate the price?",
+                  "type": "boolean",
+                  "default": false
+                },
+                "taxesLabel": {
+                  "title": "Tax label to be displayed",
+                  "type": "string",
+                  "default": "Tax included"
+                }
+              }
+            },
+            "sponsoredLabel": {
+              "title": "Sponsored Label",
+              "type": "string",
+              "default": "Sponsored"
+            },
+            "showProductClusters": {
+              "title": "Show product cluster tags?",
+              "type": "boolean",
+              "default": true,
+              "description": "Tags exibidas sobre a imagem do produto (ex.: Lançamento, Exclusivo). Quais tags aparecem é cadastro único em Global Sections → CollectionTag, uma seção por coleção."
+            }
+          }
+        },
+        "emptyGallery": {
+          "title": "Empty Gallery",
+          "type": "object",
+          "properties": {
+            "title": {
+              "title": "Title",
+              "type": "string",
+              "default": "Nothing matches with your search"
+            },
+            "firstButton": {
+              "title": "First Button",
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string",
+                  "title": "Label",
+                  "default": "Browse Offers"
+                },
+                "url": {
+                  "type": "string",
+                  "title": "URL",
+                  "default": "/office"
+                },
+                "icon": {
+                  "title": "Icon",
+                  "type": "string",
+                  "default": "CircleWavyWarning"
+                }
+              }
+            },
+            "secondButton": {
+              "title": "Second Button",
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string",
+                  "title": "Label",
+                  "default": "Just Arrived"
+                },
+                "url": {
+                  "type": "string",
+                  "title": "URL",
+                  "default": "/technology"
+                },
+                "icon": {
+                  "title": "Icon",
+                  "type": "string",
+                  "default": "RocketLaunch"
+                }
+              }
+            }
+          }
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    },
+    "ProductHighlights": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "ProductHighlights",
+      "$componentTitle": "Product Highlights",
+      "title": "Product Highlights",
+      "description": "Destaques de produtos/categorias com imagem, título, descrição e link.",
+      "type": "object",
+      "required": [
+        "title",
+        "items"
+      ],
+      "properties": {
+        "show": {
+          "title": "Show component",
+          "type": "boolean",
+          "default": false
+        },
+        "title": {
+          "title": "Título da seção",
+          "type": "string",
+          "default": "Destaques"
+        },
+        "items": {
+          "title": "Itens",
+          "description": "Lista de destaques exibidos",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "title": "Destaque",
+            "type": "object",
+            "required": [
+              "link",
+              "imagemUrl",
+              "title"
+            ],
+            "properties": {
+              "imagemUrl": {
+                "title": "Imagem",
+                "type": "string",
+                "widget": {
+                  "ui:widget": "media-gallery",
+                  "restrictMediaTypes": {
+                    "video": true,
+                    "image": [
+                      "png",
+                      "jpg",
+                      "jpeg",
+                      "gif",
+                      "svg",
+                      "webp"
+                    ]
+                  }
+                }
+              },
+              "link": {
+                "title": "URL",
+                "type": "string",
+                "default": "#"
+              },
+              "title": {
+                "title": "Título",
+                "type": "string"
+              },
+              "description": {
+                "title": "Descrição",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "widthDesk": {
+          "title": "Largura da imagem (Desktop)",
+          "type": "number",
+          "default": 300
+        },
+        "heightDesk": {
+          "title": "Altura da imagem (Desktop)",
+          "type": "number",
+          "default": 300
+        },
+        "widthMobile": {
+          "title": "Largura da imagem (Mobile)",
+          "type": "number",
+          "default": 150
+        },
+        "heightMobile": {
+          "title": "Altura da imagem (Mobile)",
+          "type": "number",
+          "default": 150
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    },
+    "ProductShelf": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "ProductShelf",
+      "$componentTitle": "Product Shelf",
+      "title": "Product Shelf",
+      "description": "Add custom shelves to your store",
+      "type": "object",
+      "required": [
+        "title",
+        "numberOfItems",
+        "after",
+        "sort"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "title": "Title"
+        },
+        "numberOfItems": {
+          "type": "integer",
+          "title": "Total number of items",
+          "default": 5,
+          "description": "Total number of items. The quantity may be smaller if the query returns fewer products."
+        },
+        "itemsPerPage": {
+          "type": "integer",
+          "title": "Number of items per page",
+          "default": 5,
+          "description": "Number of items to display per page in carousel"
+        },
+        "after": {
+          "type": "string",
+          "title": "After",
+          "default": "0",
+          "description": "Initial pagination item"
+        },
+        "sort": {
+          "title": "Sort",
+          "description": "Items order",
+          "default": "score_desc",
+          "enum": [
+            "discount_desc",
+            "name_asc",
+            "name_desc",
+            "orders_desc",
+            "price_asc",
+            "price_desc",
+            "release_desc",
+            "score_desc"
+          ],
+          "enumNames": [
+            "Discount: higher to lower",
+            "Name: A-Z",
+            "Name: Z-A",
+            "Orders: higher to lower",
+            "Price: lower to higher",
+            "Price: higher to lower",
+            "Release date: newer to older",
+            "Relevance: higher to lower"
+          ]
+        },
+        "term": {
+          "type": "string",
+          "title": "Search term"
+        },
+        "selectedFacets": {
+          "title": "Facets",
+          "type": "array",
+          "items": {
+            "title": "Facet",
+            "type": "object",
+            "required": [
+              "key",
+              "value"
+            ],
+            "properties": {
+              "key": {
+                "title": "Key",
+                "description": "For collections use: productClusterIds",
+                "type": "string",
+                "default": "productClusterIds"
+              },
+              "value": {
+                "title": "Value",
+                "description": "E.g. For 'Most Wanted' collection, use: 140. To consult your collection ids go to Collections page",
+                "type": "string",
+                "default": "140"
+              }
+            }
+          }
+        },
+        "taxesConfiguration": {
+          "title": "Taxes Configuration",
+          "type": "object",
+          "properties": {
+            "usePriceWithTaxes": {
+              "title": "Should use taxes to calculate the price?",
+              "type": "boolean",
+              "default": false
+            },
+            "taxesLabel": {
+              "title": "Tax label to be displayed",
+              "type": "string",
+              "default": "Tax included"
+            }
+          }
+        },
+        "carouselConfiguration": {
+          "title": "Carousel Configuration",
+          "description": "Swiper carousel — items per breakpoint, arrows and dots",
+          "type": "object",
+          "properties": {
+            "itemsPerPageDesktop": {
+              "title": "Items per page — desktop (≥ 1024px)",
+              "type": "number",
+              "default": 5,
+              "description": "Falls back to 'Number of items per page' when empty."
+            },
+            "itemsPerPageTablet": {
+              "title": "Items per page — tablet (640px to 1023px)",
+              "type": "number",
+              "default": 3
+            },
+            "itemsPerPageMobile": {
+              "title": "Items per page — mobile (< 640px)",
+              "type": "number",
+              "default": 2
+            },
+            "showNavigationArrows": {
+              "title": "Show navigation arrows",
+              "type": "string",
+              "default": "always",
+              "enum": [
+                "always",
+                "mobileOnly",
+                "desktopOnly",
+                "never"
+              ],
+              "enumNames": [
+                "Always",
+                "Mobile only",
+                "Desktop only",
+                "Never"
+              ]
+            },
+            "showPaginationDots": {
+              "title": "Show pagination dots",
+              "type": "string",
+              "default": "mobileOnly",
+              "enum": [
+                "always",
+                "mobileOnly",
+                "desktopOnly",
+                "never"
+              ],
+              "enumNames": [
+                "Always",
+                "Mobile only",
+                "Desktop only",
+                "Never"
+              ]
+            },
+            "infinite": {
+              "title": "Infinite loop?",
+              "type": "boolean",
+              "default": false
+            },
+            "autoplay": {
+              "title": "Autoplay?",
+              "type": "boolean",
+              "default": false
+            },
+            "autoplayTimeout": {
+              "title": "Autoplay interval (ms)",
+              "type": "integer",
+              "default": 5000
+            },
+            "gap": {
+              "title": "Gap between items (px)",
+              "type": "integer",
+              "default": 16
+            },
+            "navigationStep": {
+              "title": "Navigation step",
+              "type": "string",
+              "default": "overlap",
+              "enum": [
+                "overlap",
+                "page",
+                "item"
+              ],
+              "enumNames": [
+                "One less than visible (5 visible = advances 4)",
+                "Full page (5 visible = advances 5)",
+                "One item at a time"
+              ],
+              "description": "How far the arrows advance the carousel."
+            }
+          }
+        },
+        "productCardConfiguration": {
+          "title": "Product Card Configuration",
+          "type": "object",
+          "properties": {
+            "showDiscountBadge": {
+              "title": "Show discount badge?",
+              "type": "boolean",
+              "default": true
+            },
+            "bordered": {
+              "title": "Cards should be bordered?",
+              "type": "boolean",
+              "default": true
+            },
+            "showPixDiscount": {
+              "title": "Show Pix discount?",
+              "type": "boolean",
+              "default": true
+            },
+            "pixDiscount": {
+              "title": "Pix discount percentage",
+              "type": "integer",
+              "default": 5,
+              "description": "Percentage shown below the installments (e.g. 5 renders \"5% off no pix\")."
+            },
+            "pixDiscountLabel": {
+              "title": "Pix discount label",
+              "type": "string",
+              "default": "no pix",
+              "description": "Text shown after the percentage (e.g. \"no pix\")."
+            },
+            "showProductClusters": {
+              "title": "Show product cluster tags?",
+              "type": "boolean",
+              "default": true,
+              "description": "Tags exibidas sobre a imagem do produto (ex.: Lançamento, Exclusivo). Quais tags aparecem é cadastro único em Global Sections → CollectionTag, uma seção por coleção."
+            }
+          }
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    },
+    "PromoDay": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "PromoDay",
+      "$componentTitle": "Ofertas do dia",
+      "title": "Ofertas do dia",
+      "description": "Drawer lateral com ofertas promocionais.",
+      "type": "object",
+      "properties": {
+        "active": {
+          "title": "Ativar seção?",
+          "type": "boolean",
+          "default": true
+        },
+        "activeButton": {
+          "title": "Exibir botão de abertura?",
+          "description": "Exibe ou oculta o botão que abre o drawer de ofertas.",
+          "type": "boolean",
+          "default": true
+        },
+        "cards": {
+          "title": "Ofertas",
+          "description": "Cadastre os cards exibidos no drawer lateral.",
+          "type": "array",
+          "maxItems": 10,
+          "items": {
+            "title": "Oferta",
+            "type": "object",
+            "properties": {
+              "active": {
+                "title": "Ativar oferta?",
+                "type": "boolean",
+                "default": true
+              },
+              "showBanner": {
+                "title": "Exibir banner?",
+                "type": "boolean",
+                "default": true
+              },
+              "fileBanner": {
+                "title": "Imagem desktop",
+                "type": "string",
+                "widget": {
+                  "ui:widget": "media-gallery",
+                  "restrictMediaTypes": {
+                    "video": true,
+                    "image": [
+                      "png",
+                      "jpg",
+                      "jpeg",
+                      "gif",
+                      "svg",
+                      "webp"
+                    ]
+                  }
+                }
+              },
+              "fileBannerPhone": {
+                "title": "Imagem mobile",
+                "description": "Opcional. Se não for cadastrada, utiliza a imagem desktop.",
+                "type": "string",
+                "widget": {
+                  "ui:widget": "media-gallery",
+                  "restrictMediaTypes": {
+                    "video": true,
+                    "image": [
+                      "png",
+                      "jpg",
+                      "jpeg",
+                      "gif",
+                      "svg",
+                      "webp"
+                    ]
+                  }
+                }
+              },
+              "altBanner": {
+                "title": "Texto alternativo da imagem",
+                "description": "Descrição da imagem para acessibilidade.",
+                "type": "string"
+              },
+              "linkBanner": {
+                "title": "Link do banner",
+                "description": "Opcional. URL acessada ao clicar no banner.",
+                "type": "string"
+              },
+              "targetLinkBanner": {
+                "title": "Onde abrir o link do banner?",
+                "type": "string",
+                "enum": [
+                  "_self",
+                  "_blank"
+                ],
+                "enumNames": [
+                  "Mesma aba",
+                  "Nova aba"
+                ],
+                "default": "_self"
+              },
+              "text": {
+                "title": "Conteúdo",
+                "description": "Texto exibido abaixo da imagem.",
+                "type": "string",
+                "widget": {
+                  "ui:widget": "rich-text"
+                }
+              },
+              "links": {
+                "title": "Links",
+                "description": "Adicione até 3 links por oferta.",
+                "type": "array",
+                "maxItems": 3,
+                "items": {
+                  "title": "Link",
+                  "type": "object",
+                  "properties": {
+                    "linkText": {
+                      "title": "Texto do link",
+                      "type": "string"
+                    },
+                    "urlLinkText": {
+                      "title": "URL",
+                      "type": "string"
+                    },
+                    "targetLinkText": {
+                      "title": "Onde abrir?",
+                      "type": "string",
+                      "enum": [
+                        "_self",
+                        "_blank"
+                      ],
+                      "enumNames": [
+                        "Mesma aba",
+                        "Nova aba"
+                      ],
+                      "default": "_self"
+                    }
+                  }
+                }
+              },
+              "showPolicy": {
+                "title": "Exibir política ou regulamento?",
+                "type": "boolean",
+                "default": false
+              },
+              "policyText": {
+                "title": "Texto da política",
+                "description": "Ex.: Consulte as condições da promoção.",
+                "type": "string"
+              },
+              "policyLink": {
+                "title": "Link da política",
+                "description": "Opcional. Se informado, o texto da política será exibido como link.",
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    },
+    "ShopTheLook": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "ShopTheLook",
+      "$componentTitle": "Shop The Look",
+      "title": "Shop The Look",
+      "description": "Looks curados exibidos em cards, com modal para adicionar ao carrinho",
+      "type": "object",
+      "properties": {
+        "active": {
+          "title": "Ativo",
+          "type": "boolean",
+          "description": "Ativa o bloco",
+          "default": true
+        },
+        "title": {
+          "title": "Título (opcional)",
+          "type": "string",
+          "description": "Sobrescreve o título retornado pela API"
+        },
+        "shopButtonLabel": {
+          "title": "Texto do botão do card",
+          "type": "string",
+          "default": "Shop the look"
+        },
+        "addToCartLabel": {
+          "title": "Texto do botão de adicionar ao carrinho",
+          "type": "string",
+          "default": "Adicionar ao carrinho"
+        },
+        "seeMoreLabel": {
+          "title": "Texto do link \"Ver mais\"",
+          "type": "string",
+          "default": "Ver mais"
+        },
+        "marginTopSection": {
+          "title": "Margem superior",
+          "type": "string",
+          "default": "0"
+        },
+        "sectionLabel": {
+          "title": "Descrição acessível da sessão",
+          "type": "string"
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    },
+    "SimpleBanner": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "SimpleBanner",
+      "$componentTitle": "Simple Banner",
+      "title": "Simple Banner",
+      "description": "A simple banner.",
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "title": "Banner Item",
+          "description": "List images of banner",
+          "items": {
+            "type": "object",
+            "title": "Banner info",
+            "properties": {
+              "image": {
+                "type": "string",
+                "title": "Image",
+                "description": "URL or path to the banner image for desktop",
+                "widget": {
+                  "ui:widget": "media-gallery",
+                  "restrictMediaTypes": {
+                    "video": true,
+                    "image": [
+                      "png",
+                      "jpg",
+                      "jpeg",
+                      "gif",
+                      "svg",
+                      "webp"
+                    ]
+                  }
+                }
+              },
+              "imageMobile": {
+                "type": "string",
+                "title": "Mobile Image",
+                "description": "URL or path to the banner image for mobile devices",
+                "widget": {
+                  "ui:widget": "media-gallery",
+                  "restrictMediaTypes": {
+                    "video": true,
+                    "image": [
+                      "png",
+                      "jpg",
+                      "jpeg",
+                      "gif",
+                      "svg",
+                      "webp"
+                    ]
+                  }
+                }
+              },
+              "href": {
+                "type": "string",
+                "title": "Link URL",
+                "description": "URL where the banner should redirect when clicked (optional)"
+              },
+              "target": {
+                "type": "string",
+                "title": "Link Target",
+                "description": "How the link should open",
+                "enum": [
+                  "_blank",
+                  "_self"
+                ],
+                "enumNames": [
+                  "New Tab",
+                  "Same Tab"
+                ],
+                "default": "_self"
+              },
+              "hastext": {
+                "type": "boolean",
+                "title": "Show Text",
+                "default": true
+              },
+              "aligntextvertical": {
+                "type": "string",
+                "title": "Align Text Vertical",
+                "description": "Alinamento do texto horizontal",
+                "enum": [
+                  "top",
+                  "center",
+                  "bottom"
+                ],
+                "enumNames": [
+                  "top",
+                  "center",
+                  "bottom"
+                ],
+                "default": "center"
+              },
+              "aligntexthorizontal": {
+                "type": "string",
+                "title": "Align Text Hotizontal",
+                "description": "Alinamento do texto na horizontal",
+                "enum": [
+                  "left",
+                  "center",
+                  "right"
+                ],
+                "enumNames": [
+                  "left",
+                  "center",
+                  "right"
+                ],
+                "default": "center"
+              },
+              "textbanner": {
+                "type": "string",
+                "title": "Text of banner",
+                "description": "Texto livre em html",
+                "default": ""
+              },
+              "textcolor": {
+                "type": "string",
+                "title": "Color of text",
+                "description": "Cor hexadecimal do banner",
+                "default": ""
+              }
+            }
+          },
+          "minItems": 1
+        },
+        "height": {
+          "type": "number",
+          "title": "Height Image",
+          "description": "Algura da imagem em pixel",
+          "minimum": 100,
+          "default": 700
+        },
+        "loading": {
+          "type": "string",
+          "title": "Loading Banner",
+          "description": "Tipo do carregamento",
+          "enum": [
+            "eager",
+            "lazy"
+          ],
+          "enumNames": [
+            "Eager",
+            "Lazy"
+          ],
+          "default": "lazy"
+        },
+        "columnDesktop": {
+          "type": "number",
+          "title": "Colunas no desktop",
+          "description": "Quantidade de colunas no desktop",
+          "default": 1
+        },
+        "columnMobile": {
+          "type": "number",
+          "title": "Colunas para o mobile",
+          "description": "Quantidade de colunas no mobile",
+          "default": 1
+        },
+        "paddingbanner": {
+          "type": "number",
+          "title": "Padding banner",
+          "description": "Espaçamento entro as colunas em pixel",
+          "default": 1
+        },
+        "bannerposition": {
+          "type": "string",
+          "title": "Position Banner",
+          "description": "Enquadramento do banner",
+          "enum": [
+            "container",
+            "full"
+          ],
+          "enumNames": [
+            "container",
+            "full"
+          ],
+          "default": "full"
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    },
+    "Simpletext": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "Simpletext",
+      "$componentTitle": "Simple Text",
+      "title": "Simple Text",
+      "description": "Demo Simple Text",
+      "type": "object",
+      "properties": {
+        "className": {
+          "title": "Classe CSS",
+          "type": "string",
+          "description": "Nome da classe CSS para estilização"
+        },
+        "maxWidthSection": {
+          "title": "Largura máxima",
+          "type": "string",
+          "description": "Somente números, sem px ou %"
+        },
+        "marginTopSection": {
+          "title": "Margem superior",
+          "type": "string",
+          "default": "0",
+          "description": "Somente números, sem px ou %"
+        },
+        "areaSection": {
+          "title": "Área da sessão",
+          "type": "string",
+          "enum": [
+            "container",
+            "full"
+          ],
+          "enumNames": [
+            "container",
+            "full"
+          ],
+          "default": "container"
+        },
+        "sectionLabel": {
+          "title": "Descrição acessível da sessão",
+          "type": "string"
+        },
+        "showTitle": {
+          "title": "Exibir o título?",
+          "type": "boolean"
+        },
+        "titleText": {
+          "title": "Título",
+          "type": "string"
+        },
+        "tagTitle": {
+          "title": "Marcação do Título",
+          "enum": [
+            "h1",
+            "h2",
+            "h3"
+          ],
+          "enumNames": [
+            "Título 1",
+            "Título 2",
+            "Título 3"
+          ],
+          "default": "h1"
+        },
+        "alignTitle": {
+          "title": "Alinhamento do Título",
+          "enum": [
+            "center",
+            "left"
+          ],
+          "enumNames": [
+            "Centralizado",
+            "À esquerda"
+          ],
+          "default": "center"
+        },
+        "storesText": {
+          "title": "Texto Lojas",
+          "type": "string",
+          "widget": {
+            "ui:widget": "draftjs-rich-text"
+          }
+        },
+        "active": {
+          "title": "Ativo",
+          "type": "boolean"
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    },
+    "SizeBay": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "SizeBay",
+      "$componentTitle": "Size Bay",
+      "title": "Size Bay",
+      "type": "object",
+      "required": [],
+      "properties": {},
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    },
+    "StoreLocator": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "StoreLocator",
+      "$componentTitle": "Lista de lojas",
+      "title": "Lista de lojas",
+      "description": "Lista de lojas físicas com busca e mapa",
+      "type": "object",
+      "properties": {
+        "title": {
+          "title": "Título",
+          "type": "string",
+          "default": "Nossas Lojas"
+        },
+        "subtitle": {
+          "title": "Subtítulo",
+          "type": "string",
+          "default": "Encontre a loja mais perto de você"
+        },
+        "searchLabel": {
+          "title": "Texto acima da busca",
+          "type": "string",
+          "default": "Digite na busca o nome da loja, shopping, bairro, cidade, estado ou CEP:"
+        },
+        "searchPlaceholder": {
+          "title": "Placeholder da busca",
+          "type": "string",
+          "default": "Encontre uma loja..."
+        },
+        "mapButtonText": {
+          "title": "Texto do botão do mapa",
+          "type": "string",
+          "default": "Ver mapa"
+        },
+        "emptyText": {
+          "title": "Mensagem sem resultados",
+          "type": "string",
+          "default": "Nenhuma loja encontrada."
+        },
+        "areaSection": {
+          "title": "Área da seção",
+          "type": "string",
+          "enum": [
+            "container",
+            "full"
+          ],
+          "enumNames": [
+            "Container",
+            "Full"
+          ],
+          "default": "container"
+        },
+        "columnsDesktop": {
+          "title": "Colunas no desktop",
+          "type": "string",
+          "default": "4"
+        },
+        "columnsTablet": {
+          "title": "Colunas no tablet",
+          "type": "string",
+          "default": "2"
+        },
+        "columnsPhone": {
+          "title": "Colunas no celular",
+          "type": "string",
+          "default": "1"
+        },
+        "stores": {
+          "type": "array",
+          "title": "Lojas",
+          "description": "Cadastro das lojas físicas",
+          "items": {
+            "type": "object",
+            "title": "Loja",
+            "properties": {
+              "id": {
+                "title": "Identificador",
+                "type": "string",
+                "description": "Identificador único opcional"
+              },
+              "active": {
+                "title": "Loja ativa",
+                "type": "boolean",
+                "default": true
+              },
+              "name": {
+                "title": "Nome da loja",
+                "type": "string"
+              },
+              "address": {
+                "title": "Endereço",
+                "type": "string"
+              },
+              "number": {
+                "title": "Número",
+                "type": "string"
+              },
+              "complement": {
+                "title": "Complemento",
+                "type": "string"
+              },
+              "neighborhood": {
+                "title": "Bairro",
+                "type": "string"
+              },
+              "city": {
+                "title": "Cidade",
+                "type": "string"
+              },
+              "state": {
+                "title": "Estado",
+                "type": "string"
+              },
+              "postalCode": {
+                "title": "CEP",
+                "type": "string"
+              },
+              "phone": {
+                "title": "Telefone",
+                "type": "string"
+              },
+              "mapEmbedUrl": {
+                "title": "URL embed do Google Maps",
+                "type": "string",
+                "description": "Opcional. Caso fique vazio, o componente monta o mapa automaticamente pelo endereço."
+              }
+            }
+          }
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    },
+    "TextSEO": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "TextSEO",
+      "$componentTitle": "Texto SEO da Categoria",
+      "title": "Texto SEO da Categoria",
+      "description": "Renderiza um bloco de texto (aboutCategory ou textSEO) vindo da API de SEO da categoria. Use um por posição na PLP.",
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "title": "Bloco",
+          "type": "string",
+          "enum": [
+            "textSEO",
+            "aboutSEO"
+          ],
+          "default": "textSEO"
+        },
+        "title": {
+          "title": "Título (opcional)",
+          "type": "string",
+          "description": "Se vazio, usa o título padrão."
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    },
+    "TopBar": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "TopBar",
+      "$componentTitle": "Top Bar",
+      "title": "Top Bar",
+      "description": "Barra superior com slider de mensagens e menu de links.",
+      "type": "object",
+      "required": [
+        "itensSlider",
+        "itensMenu"
+      ],
+      "properties": {
+        "itensSlider": {
+          "title": "Itens do Slider",
+          "type": "array",
+          "description": "Mensagens exibidas em carrossel na top bar",
+          "items": {
+            "title": "Item",
+            "type": "object",
+            "properties": {
+              "text": {
+                "title": "Texto",
+                "type": "string"
+              }
+            },
+            "required": [
+              "text"
+            ]
+          },
+          "minItems": 1
+        },
+        "itensMenu": {
+          "title": "Itens do Menu",
+          "type": "array",
+          "description": "Links exibidos no menu da top bar",
+          "items": {
+            "title": "Item de Menu",
+            "type": "object",
+            "properties": {
+              "text": {
+                "title": "Texto",
+                "type": "string"
+              },
+              "link": {
+                "title": "URL",
+                "type": "string",
+                "default": "#"
+              },
+              "image": {
+                "title": "Ícone / Imagem",
+                "type": "string",
+                "widget": {
+                  "ui:widget": "media-gallery",
+                  "restrictMediaTypes": {
+                    "video": true,
+                    "image": [
+                      "png",
+                      "jpg",
+                      "jpeg",
+                      "gif",
+                      "svg",
+                      "webp"
+                    ]
+                  }
+                }
+              }
+            },
+            "required": [
+              "text",
+              "link"
+            ]
+          }
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    },
+    "YourviewsProductInfos": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "YourviewsProductInfos",
+      "$componentTitle": "Yourviews Product Infos",
+      "title": "Yourviews Product Infos",
+      "type": "object",
+      "required": [],
+      "properties": {},
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    }
+  },
+  "$defs": {},
+  "content-types": {}
+}

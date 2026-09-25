@@ -1,0 +1,65 @@
+// BLOCO 04 — galeria de 3 imagens + faixa (card intersect)
+@layer components {
+  .section.section {
+    :global {
+      .vtex-flex-layout-0-x-flexRow--block-franqueado-04 {
+        margin-top: 4.375rem;
+      }
+
+      .lojalevis-store-2-x-block-franqueado-04-container {
+        position: relative;
+      }
+
+      .lojalevis-store-2-x-block-franqueado-04-images-container {
+        display: flex;
+      }
+
+      @media (min-width: 1024px) {
+        .vtex-store-components-3-x-imageElement--block-franqueado-04-image {
+          width: 33.333%;
+        }
+      }
+
+      .lojalevis-store-2-x-block-franqueado-04-card-intersect {
+        position: absolute;
+        left: 50%;
+        bottom: -22px;
+        transform: translateX(-50%);
+        z-index: 2;
+
+        width: min(1006px, 92%);
+
+        .franqShape svg {
+          height: auto;
+        }
+
+        .vtex-rich-text-0-x-paragraph--card-intersect {
+          text-align: center;
+          font-size: 18px;
+          font-weight: 600;
+        }
+      }
+
+      @media (max-width: 1024px) {
+        .vtex-flex-layout-0-x-flexRow--block-franqueado-04 {
+          margin-bottom: 8rem;
+        }
+
+        // imagens empilhadas; a faixa desce para fora da galeria
+        .lojalevis-store-2-x-block-franqueado-04-images-container {
+          flex-direction: column;
+        }
+
+        .lojalevis-store-2-x-block-franqueado-04-card-intersect {
+          position: absolute !important;
+          transform: none;
+          width: 100%;
+          margin-top: 0;
+          left: 0 !important;
+          padding: 0 1rem;
+          bottom: -6rem;
+        }
+      }
+    }
+  }
+}

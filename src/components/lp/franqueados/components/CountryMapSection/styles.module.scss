@@ -1,0 +1,286 @@
+// BLOCO 11 — país (mapa + lojas por região)
+// Figma 3348:14263 (1440x881). Dois SVGs sobrepostos: o mapa-múndi cinza ao
+// fundo e o Brasil vermelho com os pinos por cima. Texto e faixa são ancorados
+// no centro (calc(50% ± n)) para caírem nos x do Figma a 1440.
+@layer components {
+  .section.section {
+    :global {
+      .lojalevis-store-2-x-block-franqueado-11-container {
+        position: relative;
+        height: 881px;
+        overflow: hidden;
+      }
+
+      .lojalevis-store-2-x-block-franqueado-11-map--world {
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 0;
+        width: 1410.07px;
+        height: 881.295px;
+        pointer-events: none;
+        // O asset já vem em cinza-claro (#efefef sobre branco), como o Figma.
+        // Sem opacidade extra ele bate com o design; a 0.1 sumia por completo.
+        opacity: 1;
+      }
+
+      // o box do Group 28 é 542x556.74, mas a arte sangra dele (o inset
+      // negativo do Figma), chegando aos 624.65x639.44 do viewBox
+      .lojalevis-store-2-x-block-franqueado-11-map--brazil {
+        position: absolute;
+        left: calc(50% - 6.4px); // 713.6 quando a seção tem 1440
+        top: 33.65px;
+        z-index: 1;
+        width: 624.647px;
+        height: 639.439px;
+      }
+
+      // variante mobile do mapa: escondida no desktop (o desktop usa --brazil)
+      .lojalevis-store-2-x-block-franqueado-11-map--brazil-mobile {
+        display: none;
+      }
+
+      .vtex-rich-text-0-x-container--block-franqueado-11-container-left-title {
+        position: absolute;
+        left: calc(50% - 538px); // 182 quando a seção tem 1440
+        top: 67px;
+        z-index: 2;
+      }
+
+      .vtex-rich-text-0-x-heading--block-franqueado-11-title {
+        margin: 0;
+        padding: 0;
+        font-size: 40px;
+        line-height: 48px;
+        font-weight: 700;
+        color: #c41230;
+        white-space: nowrap;
+      }
+
+      .vtex-rich-text-0-x-paragraph--block-franqueado-11-subtitle {
+        position: absolute;
+        left: calc(50% - 538px);
+        top: 279px;
+        z-index: 2;
+        margin: 0;
+        font-size: 32px;
+        line-height: 48px;
+        font-weight: 700;
+        color: #202f58;
+      }
+
+      .lojalevis-store-2-x-block-franqueado-11-regions {
+        position: absolute;
+        left: calc(50% - 538px);
+        top: 351px;
+        z-index: 2;
+        display: flex;
+        flex-wrap: wrap;
+        align-content: flex-start;
+        gap: 24px 16px; // 24 entre linhas, 16 entre colunas
+        width: 741px;
+      }
+
+      .lojalevis-store-2-x-block-franqueado-11-region {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .vtex-rich-text-0-x-paragraph--block-franqueado-11-region-value {
+        margin: 0;
+        font-size: 96px;
+        line-height: 118.056px;
+        font-weight: 700;
+        color: #c41230;
+        white-space: nowrap;
+      }
+
+      .vtex-rich-text-0-x-paragraph--block-franqueado-11-region-label {
+        margin: 0;
+        width: 122px;
+        font-size: 24px;
+        line-height: normal;
+        font-weight: 300; // Interstate Light no Figma
+        color: #110b0d;
+      }
+
+      // faixa do total — o SVG_CARD_11 é só o contorno vermelho, sem preenchimento
+      .lojalevis-store-2-x-block-franqueado-11-total {
+        position: absolute;
+        left: calc(50% - 563px); // 157 quando a seção tem 1440
+        top: 637px;
+        z-index: 2;
+        width: 644px;
+        height: 121px;
+
+        .franqShape {
+          position: absolute;
+          inset: 0;
+          z-index: 0;
+          line-height: 0;
+
+          svg {
+            display: block;
+            width: 100%;
+            height: 100%;
+          }
+        }
+
+        .lojalevis-store-2-x-block-franqueado-11-region {
+          position: absolute;
+          left: 186px; // 343 - 157
+          top: 1px;
+          z-index: 1;
+          height: 119px;
+        }
+
+        .vtex-rich-text-0-x-paragraph--block-franqueado-11-region-label {
+          width: 147px;
+          font-weight: 400; // o total usa Interstate Regular, não Light
+        }
+      }
+
+      // ----- mobile. Figma 3366:5480 (390x1059): o layout absoluto do desktop
+      // vira uma coluna centrada — título → mapa do Brasil → "Lojas por região"
+      // → regiões em 2 colunas → pílula do total. O mapa-múndi segue como fundo
+      // tênue cobrindo a seção. `order` reordena porque no DOM os mapas vêm
+      // antes do título. -----
+      @media (max-width: 1024px) {
+        .lojalevis-store-2-x-block-franqueado-11-container {
+          height: auto;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 28px;
+          padding: 40px 24px;
+        }
+
+        // no mobile os demais elementos são estáticos (in-flow), então o
+        // mapa-múndi absoluto (z-index:0) ficava POR CIMA deles e cobria o mapa
+        // do Brasil. z-index:-1 joga o fundo pra trás de todo o conteúdo — o
+        // container já é position:relative, então vira o contexto de empilhamento.
+        .lojalevis-store-2-x-block-franqueado-11-map--world {
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          z-index: -1;
+        }
+
+        // título vermelho, alinhado à esquerda como no Figma
+        .vtex-rich-text-0-x-container--block-franqueado-11-container-left-title {
+          position: static;
+          order: 1;
+          left: auto;
+          top: auto;
+          width: 100%;
+          max-width: 300px;
+        }
+
+        .vtex-rich-text-0-x-heading--block-franqueado-11-title {
+          font-size: 36px;
+          line-height: 40px;
+          white-space: normal;
+        }
+
+        // no mobile o mapa do desktop some e entra o recorte mobile (356x411),
+        // que já vem com os pinos posicionados para a coluna estreita.
+        .lojalevis-store-2-x-block-franqueado-11-map--brazil {
+          display: none;
+        }
+
+        // mapa do Brasil (mobile) entra no fluxo, centrado. Altura em auto para
+        // respeitar a proporção 356x411 do próprio asset (não achatar).
+        .lojalevis-store-2-x-block-franqueado-11-map--brazil-mobile {
+          display: block;
+          order: 2;
+          width: 300px;
+          height: auto;
+          max-width: 100%;
+        }
+
+        .vtex-rich-text-0-x-paragraph--block-franqueado-11-subtitle {
+          position: static;
+          order: 3;
+          left: auto;
+          top: auto;
+          text-align: center;
+        }
+
+        // regiões em grade de 2 colunas; a 5ª (Sul) centraliza sozinha embaixo
+        .lojalevis-store-2-x-block-franqueado-11-regions {
+          position: static;
+          order: 4;
+          left: auto;
+          top: auto;
+          width: auto;
+          max-width: 100%;
+          display: grid;
+          grid-template-columns: repeat(2, auto);
+          justify-content: center;
+          align-items: start;
+          gap: 28px 32px;
+        }
+
+        .lojalevis-store-2-x-block-franqueado-11-regions
+          .lojalevis-store-2-x-block-franqueado-11-region:last-child {
+          grid-column: 1 / -1;
+          justify-self: center;
+        }
+
+        // números menores no mobile
+        .vtex-rich-text-0-x-paragraph--block-franqueado-11-region-value {
+          font-size: 56px;
+          line-height: normal;
+        }
+
+        .vtex-rich-text-0-x-paragraph--block-franqueado-11-region-label {
+          width: 84px;
+          font-size: 14px;
+        }
+
+        // total: a faixa SVG some (não sobrevive estreita, igual blocos 04/06) e
+        // vira uma pílula de borda vermelha com o valor + label centralizados
+        .lojalevis-store-2-x-block-franqueado-11-total {
+          position: static;
+          order: 5;
+          left: auto;
+          top: auto;
+          width: 300px;
+          max-width: 100%;
+          height: auto;
+          min-height: 84px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-top: 8px;
+          padding: 16px 24px;
+          border: 1px solid #c41230;
+          border-radius: 16px;
+
+          .franqShape {
+            display: none;
+          }
+
+          .lojalevis-store-2-x-block-franqueado-11-region {
+            position: static;
+            left: auto;
+            top: auto;
+            height: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+          }
+
+          .vtex-rich-text-0-x-paragraph--block-franqueado-11-region-label {
+            width: 110px;
+            font-weight: 400;
+          }
+        }
+      }
+    }
+  }
+}

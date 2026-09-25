@@ -1,0 +1,246 @@
+{
+  "$extends": [
+    "#/$defs/base-component"
+  ],
+  "$componentKey": "FooterCustom",
+  "$componentTitle": "Footer Custom",
+  "title": "Footer Custom",
+  "description": "Footer com colunas configuráveis (links ou imagens) e barra de copyright com logos e redes sociais.",
+  "type": "object",
+  "properties": {
+    "about": {
+      "title": "Sobre",
+      "description": "Texto da seção 'Sobre' exibido no topo do footer. Aceita formatação (negrito, itálico, listas, links).",
+      "type": "string",
+      "widget": {
+        "ui:widget": "draftjs-rich-text"
+      }
+    },
+    "items": {
+      "title": "Colunas",
+      "description": "Cada coluna pode exibir uma lista de links ou uma lista de imagens.",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "title": "Coluna",
+        "type": "object",
+        "properties": {
+          "groups": {
+            "title": "Grupos",
+            "description": "Uma coluna pode ter mais de um grupo, cada um com seu título. Cada grupo pode ser de menu (links/texto) ou de imagens.",
+            "type": "array",
+            "items": {
+              "title": "Grupo",
+              "type": "object",
+              "properties": {
+                "title": {
+                  "title": "Título",
+                  "type": "string",
+                  "default": ""
+                },
+                "isImage": {
+                  "title": "Grupo de imagens?",
+                  "description": "Quando ativado, o grupo exibe imagens em vez de itens de menu.",
+                  "type": "boolean",
+                  "default": false
+                },
+                "menu": {
+                  "title": "Itens",
+                  "description": "Usado quando 'Grupo de imagens' está desativado.",
+                  "type": "array",
+                  "items": {
+                    "title": "Item",
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "title": "Tipo",
+                        "description": "Link: vira um link clicável (sem URL é apenas um label). Texto: aceita **negrito** e \\n para quebra de linha.",
+                        "type": "string",
+                        "enum": [
+                          "link",
+                          "text"
+                        ],
+                        "enumNames": [
+                          "Link",
+                          "Texto"
+                        ],
+                        "default": "link"
+                      },
+                      "text": {
+                        "title": "Texto",
+                        "description": "No tipo Texto aceita **negrito** e \\n para quebra de linha.",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "link": {
+                        "title": "URL",
+                        "description": "Usado apenas no tipo Link.",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "newAba": {
+                        "title": "Abrir em nova aba?",
+                        "type": "boolean",
+                        "default": false
+                      },
+                      "bold": {
+                        "title": "Negrito?",
+                        "type": "boolean",
+                        "default": false
+                      }
+                    }
+                  }
+                },
+                "images": {
+                  "title": "Imagens",
+                  "description": "Usado quando 'Grupo de imagens' está ativado.",
+                  "type": "array",
+                  "items": {
+                    "title": "Imagem",
+                    "type": "object",
+                    "properties": {
+                      "imageUrl": {
+                        "title": "Imagem",
+                        "type": "string",
+                        "widget": {
+                          "ui:widget": "media-gallery",
+                          "restrictMediaTypes": {
+                            "video": true,
+                            "image": [
+                              "png",
+                              "jpg",
+                              "jpeg",
+                              "gif",
+                              "svg",
+                              "webp"
+                            ]
+                          }
+                        }
+                      },
+                      "alt": {
+                        "title": "Texto alternativo",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "link": {
+                        "title": "URL",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "newAba": {
+                        "title": "Abrir em nova aba?",
+                        "type": "boolean",
+                        "default": false
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "copywrite": {
+      "title": "Copyright",
+      "type": "object",
+      "properties": {
+        "text": {
+          "title": "Texto",
+          "type": "string",
+          "default": ""
+        },
+        "imagesLogo": {
+          "title": "Logos",
+          "type": "array",
+          "items": {
+            "title": "Logo",
+            "type": "object",
+            "properties": {
+              "imageUrl": {
+                "title": "Imagem",
+                "type": "string",
+                "widget": {
+                  "ui:widget": "media-gallery",
+                  "restrictMediaTypes": {
+                    "video": true,
+                    "image": [
+                      "png",
+                      "jpg",
+                      "jpeg",
+                      "gif",
+                      "svg",
+                      "webp"
+                    ]
+                  }
+                }
+              },
+              "alt": {
+                "title": "Texto alternativo",
+                "type": "string",
+                "default": ""
+              },
+              "link": {
+                "title": "URL",
+                "type": "string",
+                "default": ""
+              },
+              "newAba": {
+                "title": "Abrir em nova aba?",
+                "type": "boolean",
+                "default": false
+              }
+            }
+          }
+        },
+        "imagesSocialMedia": {
+          "title": "Redes sociais",
+          "type": "array",
+          "items": {
+            "title": "Rede social",
+            "type": "object",
+            "properties": {
+              "imageUrl": {
+                "title": "Imagem",
+                "type": "string",
+                "widget": {
+                  "ui:widget": "media-gallery",
+                  "restrictMediaTypes": {
+                    "video": true,
+                    "image": [
+                      "png",
+                      "jpg",
+                      "jpeg",
+                      "gif",
+                      "svg",
+                      "webp"
+                    ]
+                  }
+                }
+              },
+              "alt": {
+                "title": "Texto alternativo",
+                "type": "string",
+                "default": ""
+              },
+              "link": {
+                "title": "URL",
+                "type": "string",
+                "default": ""
+              },
+              "newAba": {
+                "title": "Abrir em nova aba?",
+                "type": "boolean",
+                "default": false
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "readOnly": false,
+  "writeOnly": false,
+  "deprecated": false,
+  "$abstract": false
+}

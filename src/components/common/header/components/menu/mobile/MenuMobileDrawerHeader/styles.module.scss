@@ -1,0 +1,53 @@
+@layer components {
+  .subHeaderContainer{
+    padding: 1rem;
+    border-bottom: 1px solid #DBDBDB;
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  .subHeader {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .backBtn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .backIcon {
+    display: flex;
+    align-items: center;
+    // ArrowUpIcon points up — rotate to point left
+    transform: rotate(180deg);
+  }
+
+  .subHeaderTitle {
+    font-size: 1rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: #110B0D;
+    flex: 1;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    text-transform: uppercase;
+  }
+  .closeBtn{
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

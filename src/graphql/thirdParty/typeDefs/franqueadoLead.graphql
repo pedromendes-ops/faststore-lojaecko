@@ -1,0 +1,24 @@
+type CreateFranqueadoLeadResponse {
+  """
+  Status HTTP devolvido pelo Master Data (201 = criado, 400 = e-mail duplicado).
+  """
+  status: Int!
+  success: Boolean!
+  message: String!
+}
+
+input CreateFranqueadoLeadInput {
+  name: String!
+  email: String!
+  celular: String!
+  state: String!
+  city: String!
+  interest: String!
+  message: String
+}
+
+type Mutation {
+  createFranqueadoLead(
+    input: CreateFranqueadoLeadInput!
+  ): CreateFranqueadoLeadResponse!
+}

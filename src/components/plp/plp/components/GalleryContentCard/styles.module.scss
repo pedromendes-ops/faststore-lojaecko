@@ -1,0 +1,166 @@
+.link {
+  display: contents;
+  color: inherit;
+  text-decoration: none;
+}
+
+.card {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+
+  &[data-columns-desktop="1"] {
+    grid-column: span 1;
+  }
+
+  &[data-columns-desktop="2"] {
+    grid-column: span 2;
+  }
+
+  &[data-columns-desktop="3"] {
+    grid-column: span 3;
+  }
+}
+
+.picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.content {
+  padding: 16px;
+}
+
+.title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.text {
+  margin: 0;
+  font-size: 14px;
+}
+.title + .text {
+  margin: 6px 0 0;
+}
+
+.linkLabel {
+  display: inline-block;
+  margin-top: 16px;
+  text-decoration: underline;
+}
+
+.card[data-text-align="left"] .content {
+  text-align: left;
+}
+
+.card[data-text-align="center"] .content {
+  text-align: center;
+}
+
+.card[data-text-align="right"] .content {
+  text-align: right;
+}
+
+.card[data-text-position="overlay-bottom"],
+.card[data-text-position="overlay-center"] {
+  .content {
+    background: rgba(255,255,255,.2);
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    right: 0;
+  }
+}
+
+.card[data-text-position="below"] {
+  display: grid;
+  .content {
+    padding: 16px 0 0;
+  }
+  .title {
+    font-size: 14px;
+  }
+
+  .text {
+    font-size: 13px;
+  }
+}
+
+.card[data-text-position="overlay-bottom"] .content {
+  bottom: 0;
+}
+
+.card[data-text-position="overlay-center"] .content {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@media (max-width: 1024px) {
+  .card[data-columns-tablet="1"] {
+    grid-column: span 1;
+  }
+
+  .card[data-columns-tablet="2"] {
+    grid-column: span 2;
+  }
+
+  .card[data-columns-tablet="3"] {
+    grid-column: span 3;
+  }
+}
+
+@media (max-width: 767px) {
+  .card[data-columns-mobile="1"] {
+    grid-column: span 1;
+  }
+
+  .card[data-columns-mobile="2"] {
+    grid-column: span 2;
+  }
+}
+
+.fullBannerCard {
+  width: 100%;
+  overflow: hidden;
+  
+  position: relative;
+  [data-fs-carousel-bullets] {
+    position: absolute;
+    bottom: 0;  
+  }
+  [data-fs-carousel-track] {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  [data-fs-carousel-item] {
+    margin: 0 !important;
+  }
+  [data-fs-carousel-controls] {
+    opacity: 1 !important;
+    width: 100% !important;
+    padding: 0 10px !important;
+    [data-fs-button] {
+      background-color: rgba(255,255,255,.5);
+      cursor: pointer;
+      min-height: inherit;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      @media(min-width: 1025px){
+        width: 44px;
+        height: 44px;
+      }      
+    }
+  }
+}

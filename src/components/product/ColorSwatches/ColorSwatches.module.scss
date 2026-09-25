@@ -1,0 +1,26 @@
+.swatches {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.colorDot {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+
+  &:hover {
+    transform: scale(1.15);
+  }
+}
+
+.colorDotActive {
+  box-shadow: 0 0 0 1px var(--fs-color-primary-bkg, #111);
+}

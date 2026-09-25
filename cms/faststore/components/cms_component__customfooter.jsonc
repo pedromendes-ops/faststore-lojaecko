@@ -1,0 +1,121 @@
+{
+  "$extends": [
+    "#/$defs/base-component"
+  ],
+  "$componentKey": "CustomFooter",
+  "$componentTitle": "Custom Footer",
+  "title": "Custom Footer",
+  "description": "Footer customizado da loja",
+  "type": "object",
+  "properties": {
+    "instagramTitle": {
+      "title": "Título Instagram",
+      "type": "string",
+      "default": "@levisbrasil"
+    },
+    "instagramImages": {
+      "title": "Imagens Instagram",
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 3,
+      "items": {
+        "title": "Instagram Image",
+        "type": "object",
+        "properties": {
+          "image": {
+            "title": "Imagem",
+            "type": "string",
+            "widget": {
+              "ui:widget": "media-gallery",
+              "restrictMediaTypes": {
+                "video": true,
+                "image": [
+                  "png",
+                  "jpg",
+                  "jpeg",
+                  "gif",
+                  "svg",
+                  "webp"
+                ]
+              }
+            }
+          },
+          "link": {
+            "title": "Link",
+            "type": "string"
+          },
+          "alt": {
+            "title": "Texto alternativo",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "aboutTitle": {
+      "title": "Título Sobre",
+      "type": "string",
+      "default": "SOBRE A LEVI'S®"
+    },
+    "aboutText": {
+      "title": "Texto Sobre",
+      "type": "string",
+      "default": "Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos..."
+    },
+    "paragraphCopyright": {
+      "title": "Copyright",
+      "type": "string",
+      "default": "© 2023 LEVI STRAUSS & CO"
+    },
+    "footerNav": {
+      "title": "Navegação",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "title": "Grupo de links",
+        "type": "object",
+        "properties": {
+          "titleGroup": {
+            "title": "Título do grupo",
+            "type": "string"
+          },
+          "footerLinks": {
+            "title": "Links",
+            "type": "array",
+            "items": {
+              "title": "Link",
+              "type": "object",
+              "properties": {
+                "text": {
+                  "title": "Texto do link",
+                  "type": "string"
+                },
+                "url": {
+                  "title": "URL do link",
+                  "type": "string",
+                  "default": ""
+                },
+                "target": {
+                  "title": "Abrir link",
+                  "type": "string",
+                  "enum": [
+                    "_self",
+                    "_blank"
+                  ],
+                  "enumNames": [
+                    "Mesma aba",
+                    "Nova aba"
+                  ],
+                  "default": "_self"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "readOnly": false,
+  "writeOnly": false,
+  "deprecated": false,
+  "$abstract": false
+}
