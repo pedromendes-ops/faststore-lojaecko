@@ -1,0 +1,58 @@
+{
+  "$extends": [
+    "#/$defs/base-component"
+  ],
+  "$componentKey": "AboutText",
+  "$componentTitle": "Texto Sobre",
+  "title": "Texto Sobre",
+  "description": "Bloco de texto de apoio sobre a Loja.",
+  "type": "object",
+  "properties": {
+    "config": {
+      "title": "Configurações do Bloco",
+      "type": "object",
+      "properties": {
+        "active": {
+          "title": "Ativo?",
+          "type": "boolean",
+          "default": true
+        },
+        "grid": {
+          "title": "Largura do banner",
+          "description": "Define se o banner ocupará toda a largura disponível ou ficará limitado ao container da loja.",
+          "type": "string",
+          "default": "full",
+          "enum": [
+            "full",
+            "container"
+          ],
+          "enumNames": [
+            "Largura total",
+            "Container"
+          ]
+        }
+      }
+    },
+    "title": {
+      "title": "Título",
+      "type": "string",
+      "default": "Sobre a loja"
+    },
+    "shortText": {
+      "title": "Exibir uma previa do texto",
+      "type": "string"
+    },
+    "longText": {
+      "title": "Texto",
+      "description": "Texto completo",
+      "type": "string",
+      "widget": {
+        "ui:widget": "draftjs-rich-text"
+      }
+    }
+  },
+  "readOnly": false,
+  "writeOnly": false,
+  "deprecated": false,
+  "$abstract": false
+}

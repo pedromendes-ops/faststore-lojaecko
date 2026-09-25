@@ -1,0 +1,153 @@
+{
+  "$extends": [
+    "#/$defs/base-component"
+  ],
+  "$componentKey": "TitleSection",
+  "$componentTitle": "Título de Seção",
+  "title": "Título de Seção",
+  "description": "Título de seção com opções de alinhamento, link e contagem regressiva.",
+  "type": "object",
+  "properties": {
+    "config": {
+      "title": "Configurações",
+      "type": "object",
+      "properties": {
+        "label": {
+          "title": "Label",
+          "description": "Identificação única do bloco.",
+          "type": "string"
+        },
+        "active": {
+          "title": "Ativo?",
+          "type": "boolean",
+          "default": true
+        },
+        "grid": {
+          "title": "Largura da seção",
+          "description": "Define se o conteúdo ocupará toda a largura disponível ou ficará limitado ao container da loja.",
+          "type": "string",
+          "default": "container",
+          "enum": [
+            "container",
+            "full"
+          ],
+          "enumNames": [
+            "Container",
+            "Largura total"
+          ]
+        },
+        "marginTop": {
+          "title": "Margem superior",
+          "description": "Espaçamento superior da seção em pixels.",
+          "type": "number",
+          "default": 0,
+          "minimum": 0
+        },
+        "align": {
+          "title": "Alinhamento",
+          "description": "Define o posicionamento do título e dos elementos complementares.",
+          "type": "string",
+          "default": "left",
+          "enum": [
+            "left",
+            "center",
+            "right",
+            "between"
+          ],
+          "enumNames": [
+            "Esquerda",
+            "Centralizado",
+            "Direita",
+            "Título à esquerda / ações à direita"
+          ]
+        },
+        "tag": {
+          "title": "Tag HTML do título",
+          "description": "Define a hierarquia semântica do título.",
+          "type": "string",
+          "default": "h2",
+          "enum": [
+            "h1",
+            "h2",
+            "h3",
+            "h4"
+          ],
+          "enumNames": [
+            "H1",
+            "H2",
+            "H3",
+            "H4"
+          ]
+        }
+      }
+    },
+    "content": {
+      "title": "Conteúdo",
+      "type": "object",
+      "properties": {
+        "text": {
+          "title": "Título",
+          "description": "Texto principal da seção.",
+          "type": "string"
+        },
+        "countdown": {
+          "title": "Contagem regressiva",
+          "description": "Configura um cronômetro regressivo ao lado do título.",
+          "type": "object",
+          "properties": {
+            "active": {
+              "title": "Exibir contagem regressiva?",
+              "type": "boolean",
+              "default": false
+            },
+            "label": {
+              "title": "Texto",
+              "description": "Texto exibido antes da contagem.",
+              "type": "string",
+              "default": "Termina em"
+            },
+            "endDate": {
+              "title": "Data final",
+              "description": "Data e horário em que a contagem regressiva será encerrada.",
+              "type": "string"
+            }
+          }
+        },
+        "link": {
+          "title": "Link",
+          "description": "Link opcional exibido junto ao título.",
+          "type": "object",
+          "properties": {
+            "text": {
+              "title": "Texto do link",
+              "type": "string",
+              "default": "Veja mais"
+            },
+            "href": {
+              "title": "Destino",
+              "description": "URL ou caminho de destino. Ex.: /mais-vendidos",
+              "type": "string"
+            },
+            "target": {
+              "title": "Abrir link em",
+              "type": "string",
+              "default": "_self",
+              "enum": [
+                "_self",
+                "_blank"
+              ],
+              "enumNames": [
+                "Mesma janela",
+                "Nova janela"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "readOnly": false,
+  "writeOnly": false,
+  "deprecated": false,
+  "$abstract": false
+}

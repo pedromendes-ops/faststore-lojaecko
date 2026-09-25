@@ -1,0 +1,54 @@
+// welcome
+.welcome {  
+  @media (min-width: 1025px) {
+    gap: 16px;
+  }
+}
+
+.welcomeLink {
+  gap: 8px;
+  text-decoration: none;
+  color: var(--fs-color-main-1);  
+}
+
+.welcomeIcon {
+  width: 40px;
+  height: 40px;
+
+  svg {
+    display: block;
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.welcomeText {
+  display: none;
+
+  strong,
+  span {
+    display: block;
+    font-size: 10px;
+    padding: 1px 0;
+  }
+
+  span {
+    text-decoration: underline;
+  }
+
+  @media (min-width: 1025px) {
+    display: block;
+    width: calc(100% - 24px);
+  }
+}
+
+.wishlistLink {
+  width: 40px;
+  height: 40px;
+
+  svg {
+    display: block;
+    width: 24px;
+    height: 24px;
+  }
+}

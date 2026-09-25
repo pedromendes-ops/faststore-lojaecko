@@ -1,10 +1,10 @@
 
 module.exports = {
   seo: {
-  "title": "Levi's® Jeans - Loja oficial Levi's® Brasil - Levi's® Brasil",
-  "description": "A loja oficial Levi's® Brasil tem a melhor seleção de jeans masculinos e femininos, acessórios e calçados. Shop the collection!",
-  "titleTemplate": "%s - Levi's® Brasil",
-  "author": "Levi's® Brasil",
+  "title": "Urbane",
+  "description": "A fast and performant store framework",
+  "titleTemplate": "%s | Loja Urbane",
+  "author": "urbane"
 },
 
   // Theming
@@ -15,16 +15,10 @@ module.exports = {
 
   // Platform specific configs for API
   api: {
-    storeId: process.env.NEXT_PUBLIC_STORE_ID || "lojalevis",
+    storeId: process.env.NEXT_PUBLIC_STORE_ID || "lojasurbane",
     workspace: 'master',
     environment: 'vtexcommercestable',
     hideUnavailableItems: true,
-    // Let the skuLoader resolve out-of-stock SKUs (search `sku:` query runs with
-    // hideUnavailableItems: false). Without it, `product(locator:[{key:'id'}])`
-    // throws for unavailable products, so the Quick Buy modal hangs and the PDP
-    // 500s. This only affects direct SKU lookups (PDP / Quick Buy / cart) —
-    // listings still honor `hideUnavailableItems: true`.
-    enableUnavailableItemsOnCart: true,
     incrementAddress: false,
   },
 
@@ -52,17 +46,17 @@ module.exports = {
   },
 
   // Production URLs
-  //storeUrl: "https://lojalevis.vtex.app",
-  storeUrl: "https://www.levi.com.br",
-  checkoutUrl: "https://www.levi.com.br/checkout",
-  loginUrl: "https://www.levi.com.br/api/io/login",
-  accountUrl: "https://www.levi.com.br/api/io/account",
+  storeUrl: "https://lojasurbane.vtex.app",
+  secureSubdomain: "https://secure.vtexfaststore.com/",
+  checkoutUrl: "https://secure.vtexfaststore.com/checkout",
+  loginUrl: "https://secure.vtexfaststore.com/api/io/login",
+  accountUrl: "https://secure.vtexfaststore.com/api/io/account",
 
   previewRedirects: {
     home: '/',
-    plp: "/feminino",
-    search: "/s?q=Levis",
-    pdp: "/calca-jeans-levis-725-high-rise-bootcut-lavagem-media-187590235/p",
+    plp: "/electronics",
+    search: "/s?q=orange",
+    pdp: "/mouse/p",
   },
 
   // Lighthouse CI
@@ -70,8 +64,8 @@ module.exports = {
     server: process.env.BASE_SITE_URL || 'http://localhost:3000',
     pages: {
       home: '/',
-      pdp: "/calca-jeans-levis-725-high-rise-bootcut-lavagem-media-187590235/p",
-      collection: "/feminino",
+      pdp: "/mouse/p",
+      collection: "/electronics",
     },
   },
 
@@ -79,17 +73,17 @@ module.exports = {
   cypress: {
     pages: {
       home: '/',
-      pdp: "/calca-jeans-levis-725-high-rise-bootcut-lavagem-media-187590235/p",
-      collection: "/feminino",
-      collection_filtered: "/feminino/?category-1=feminino&brand=Levis&facets=category-1%2Cbrand%27",
-      search: "/s?q=Levis",
+      pdp: "/mouse/p",
+      collection: "/electronics",
+      collection_filtered: "/electronics/?category-1=electronics&marca=faststore&facets=category-1%2Cmarca%27",
+      search: "/s?q=orange",
     },
     browser: 'electron',
   },
 
   analytics: {
     // https://developers.google.com/tag-platform/tag-manager/web#standard_web_page_installation,
-    gtmContainerId: null,
+    gtmContainerId: "",
   },
 
   experimental: {
@@ -97,9 +91,8 @@ module.exports = {
     cypressVersion: 12,
   },
 
-
   contentSource: {
     type: 'CP',
-    project: "faststore",
+    project: "urbane",
   },
 }

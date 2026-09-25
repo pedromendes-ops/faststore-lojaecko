@@ -1,0 +1,103 @@
+.footerAbout {
+    padding: 40px 0;    
+}
+.footerCtAbout {
+    .title {
+        font-size: 24px;
+        line-height: 30px;
+        font-weight: var(--fs-text-weight-bold);
+        margin-bottom: 10px;
+
+        @media(min-width: 1025px){
+            font-size: 22px;
+            line-height: 28px;
+        }
+    }
+
+    .resume {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        -webkit-line-clamp: 2;
+
+        &.aboutTextOpen {
+            display: block;
+            -webkit-line-clamp: initial;
+        }
+    }
+
+    h2 {
+        margin-top: 20px;
+        color: var(--fs-color-text-theme);
+        font-size: 18px;
+        line-height: 24px;
+        font-weight: var(--fs-text-weight-bold);
+
+        @media(min-width: 1025px){
+            font-size: 20px;
+            line-height: 26px;
+        }
+    }
+    
+    h3 {
+        margin-top: 20px;
+        color: var(--fs-color-text-theme);
+        font-size: 16px;
+        line-height: 20px;
+        font-weight: var(--fs-text-weight-semibold);
+
+        @media(min-width: 1025px){
+            font-size: 18px;
+            line-height: 22px;
+        }
+    }
+
+    
+    p {
+        color: var(--fs-color-text-theme);
+        font-size: 14px;
+        line-height: 22px;
+        padding: 10px 0 0;
+
+        @media(min-width: 1025px){
+            font-size: 16px;
+            line-height: 24px;
+        }
+
+    }
+
+
+    button {
+        margin-top: 20px;
+        font-size: 12px;
+        font-weight: var(--fs-text-weight-bold);
+        padding: 18px 0;              
+        display: flex;
+        align-items: center;
+        column-gap: 10px;
+        cursor: pointer;
+        text-decoration: underline;
+        
+    }
+
+    .aboutIcon {
+        width: 10px;
+        height: 10px;
+        svg {
+            width: 10px;
+            height: 10px;
+        }
+    }
+    .aboutIconOpen {
+        transform: rotate(180deg);
+    }
+    .aboutContent {
+        padding-bottom: 14px;
+        p {
+            padding: 4px 0;
+            font-size: 12px;
+            line-height: 18px;
+        }
+    }
+}

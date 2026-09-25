@@ -1,0 +1,11 @@
+.logo {
+    img {
+        display: block;        
+        height: auto;
+        width: 180px;
+
+        @media(min-width: 1025px){
+            width: 198px;
+        }
+    }
+}

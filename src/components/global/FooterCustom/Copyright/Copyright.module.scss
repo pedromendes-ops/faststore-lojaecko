@@ -1,0 +1,12 @@
+.copyright {
+    p {
+        color: var(--fs-color-light-theme);
+        font-size: 10px;
+        line-height: 16px;
+
+        @media(min-width: 1025px){
+            font-size: 12px;
+            line-height: 18px;
+        }
+    }
+}

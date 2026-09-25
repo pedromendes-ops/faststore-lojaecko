@@ -1,0 +1,248 @@
+/* ---------------------------------------------
+ * CUSOM SELECT
+ * --------------------------------------------- */
+
+.customSelect {
+  position: relative;
+  .trigger {
+    
+    font-size: 14px;
+    padding: 12px 46px 12px 16px;
+    line-height: 1;
+    border-radius: 8px;
+    border: 1px solid #ddd;        
+    //border: 1px solid var(--fs-color-main-1);
+    cursor: pointer;
+    position: relative;    
+
+    .selected {
+      font-weight: var(--fs-text-weight-semibold);
+      margin-left: 6px;
+    }
+    .arrow {
+      position: absolute;
+      right: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      top: 50%;
+      margin-top: -10px;
+      transition: transform 0.25s ease;
+    }
+
+    
+  }
+  [aria-expanded=true] {
+    border-radius: 8px 8px 0 0;
+    .arrow {
+      transform: rotate(180deg);
+    } 
+  }
+  
+  
+
+  .options {
+    position: absolute;    
+    border: 1px solid #ddd;
+    border-top: none;
+    top: 100%;
+    right: 0;
+    z-index: 10;
+    min-width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+
+    
+
+    // largura, sombra, border etc.
+  }
+  .option  + .option  {
+    border-top: 1px solid #ddd;
+  }
+  .option {
+    display: flex;
+    align-items: center;
+    height: 40px;
+    padding: 0 10px;
+    cursor: pointer;
+    font-size: 14px;
+
+    svg {
+      opacity: 0;
+      margin-right: 8px;
+      width: 14px;
+      height: 14px;
+    }
+    &:hover {
+      background-color: #eee; 
+    }
+  }
+
+  .active {
+    cursor: default;
+    background-color: #fff !important;
+
+    svg {
+      opacity: 1;
+    }    
+  }  
+}
+
+[data-expanded=true] {
+  .radioContent {
+    padding: 8px 0 24px;
+  }
+}
+
+
+ 
+
+
+/* ---------------------------------------------
+ * RADIO (FILTER)
+ * --------------------------------------------- */
+.radioGroup {  
+  border: 0;  
+  margin: 0;  
+  padding: 0;
+}
+
+.radioTrigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 16px 0;
+  font-size: 16px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+
+.radioArrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s ease;
+}
+
+.radioContent {
+  display: grid;
+  grid-template-rows: 0fr;  
+  overflow: hidden;
+  transition: grid-template-rows 0.25s ease;
+}
+
+.radioContentInner {
+  min-height: 0;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;  
+
+  @media (min-width: 1025px) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.radioGroup[data-expanded='true'] {
+  .radioContent {
+    grid-template-rows: 1fr;
+  }
+
+  .radioArrow {
+    transform: rotate(180deg);
+  }
+}
+
+.radioItem {
+  display: flex;
+  align-items: center;      
+  column-gap: 6px;
+  cursor: pointer;
+
+  .textItem {
+    font-size: 14px;
+  }
+
+  .iconItem {
+    content: "";
+    position: relative;
+    flex-shrink: 0;
+    height: 14px;
+    width: 14px;
+    border: 1px solid #000000;
+    border-radius: 50%;
+  }
+
+  &:hover .iconItem,
+  input:checked + .iconItem {
+    &::after {
+      content: "";      
+      height: 8px;
+      width: 8px;
+      position: absolute;
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  &:hover .iconItem::after {
+    background-color: #ddd;
+  }
+  input:checked + .iconItem {
+    &::after {
+      background-color: #000000 !important;
+    }
+  }
+}
+
+.radioItem input,
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------------------------------------------
+ * NATIVO VTEX
+ * --------------------------------------------- */
+.vtexSort {
+    [data-fs-select-field] {
+        height: 40px;  
+        font-size: 14px;      
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        border: 1px solid #ddd;        
+        cursor: pointer;
+        padding: 0 16px;
+        line-height: 1;
+        gap: 3px;
+    }
+    [data-fs-icon] {
+        display: none;
+    }
+    select {
+        border: none;
+        background: transparent;        
+        font-weight: var(--fs-text-weight-semibold);
+        font-size: 14px;
+        padding: 0;
+        outline: none;
+
+    }
+}

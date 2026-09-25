@@ -1,0 +1,21 @@
+.productDetailsInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  [data-fs-product-actions] {
+    display: flex;
+    align-items: stretch;
+    gap: 12px;
+
+    [data-fs-buy-button] {
+      flex: 1;
+    }
+  }
+
+  @media (max-width: 641px) {
+    [data-fs-product-actions] {
+      flex-direction: column;
+    }
+  }
+}

@@ -1,0 +1,90 @@
+.paginationWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 40px;  
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.pages {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.page,
+.arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    height: 32px;
+    padding: 0 8px;
+    color: var(--fs-color-main-1);
+    text-decoration: none;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+
+.arrow {
+    //border: none;
+}
+
+.page:hover,
+.arrow:hover {
+    border-color: var(--fs-color-main-1);
+}
+
+.active {
+    color: var(--fs-color-main-2);
+    border-color: var(--fs-color-main-2);
+    font-weight: var(--fs-text-weight-bold);
+}
+
+.ellipsis {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 24px;
+    height: 32px;
+}
+
+.productCount {
+    margin-top: 16px;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+@media (max-width: 641px) {
+    .paginationWrapper {
+        margin-top: 32px;
+    }
+
+    .pagination,
+    .pages {
+        gap: 4px;
+    }
+
+    .page,
+    .arrow {
+        min-width: 32px;
+        height: 32px;
+        padding: 0 6px;
+    }
+
+    .ellipsis {
+        min-width: 16px;
+        height: 32px;
+    }
+
+    .productCount {
+        margin-top: 12px;   
+    }
+}

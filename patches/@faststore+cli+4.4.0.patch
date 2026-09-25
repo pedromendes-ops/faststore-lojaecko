@@ -1,0 +1,12 @@
+diff --git a/node_modules/@faststore/cli/dist/index.js b/node_modules/@faststore/cli/dist/index.js
+--- a/node_modules/@faststore/cli/dist/index.js
++++ b/node_modules/@faststore/cli/dist/index.js
+@@ -2008,7 +2008,7 @@
+   const globby = await import("globby");
+   const basePath = [root, "src", "graphql"];
+   const pathArray = Array.isArray(customPath) ? customPath : [customPath];
+-  return (globby.default ?? globby).globbySync(path12.join(...[...basePath, ...pathArray]), {
++  return (globby.default ?? globby).globbySync(path12.join(...[...basePath, ...pathArray]).split(path12.sep).join("/"), {
+     expandDirectories: {
+       extensions: ["graphql"]
+     }

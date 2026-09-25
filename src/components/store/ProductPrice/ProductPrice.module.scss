@@ -1,0 +1,80 @@
+.productPrice {
+  // estilos do Price
+
+  .listPrice {
+
+  }
+  .price {
+
+  }
+  .discountValue {
+
+  }
+  .discountPercentage {
+
+  }
+  
+  .pixDiscount {
+    // estilos do PIX
+  }
+
+  
+
+  &[data-fs-store-product-price-variant='pdp'] {
+    
+    .listPrice {
+
+    }
+    .price {
+
+    }
+    .discountValue {
+
+    }
+    .discountPercentage {
+
+    }
+    .pixDiscount {
+      // estilos do PIX
+    }
+  }
+
+  &[data-fs-store-product-price-variant='product-card'] {
+    
+     .listPrice {
+
+    }
+    .price {
+
+    }
+    .discountValue {
+
+    }
+    .discountPercentage {
+
+    }
+    .pixDiscount {
+      // estilos do PIX
+    }
+  }
+
+  &[data-fs-store-product-price-variant='quick-view'] {
+
+    .listPrice {
+
+    }
+    .price {
+
+    }
+    .discountValue {
+
+    }
+    .discountPercentage {
+
+    }
+    .pixDiscount {
+      // estilos do PIX
+    }
+  }
+}
+

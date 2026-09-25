@@ -1,0 +1,60 @@
+.footerMenu {
+    flex-direction: column;
+
+    @media(min-width: 1025px){
+        column-gap: 16px;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .title {
+        margin-bottom: 20px;
+        font-size: 12px;
+        text-transform: uppercase;
+        font-weight: var(--fs-text-weight-black);
+    }
+    .titleButton {
+        text-transform: uppercase;
+        padding: 0;
+        font-size: 12px;
+        border-bottom: 1px solid var(--fs-border-color-theme);
+        height: 40px;
+
+        .icon {
+            width: 24px;
+            height: 24px;
+
+            &.iconOpen {
+                transform: rotate(180deg);
+            }
+        }
+    }
+    .titleButton + nav ul {
+        padding: 16px 0;
+    }
+    ul {
+
+        li {
+            padding: 2px 0;
+            a {
+                text-decoration: none;
+                display: inline-block;
+                padding: 3px 0;
+                font-size: 12px;                
+                color: var(--fs-color-main-1);
+                font-weight: var(--fs-text-weight-medium);
+
+                &:hover {
+                    color: var(--fs-color-main-2);
+                }
+            }
+            div,
+            p {
+                padding: 2px 0 0;
+                font-size: 12px;
+            }
+            span {
+                font-size: 10px;
+            }
+        }
+    }
+}

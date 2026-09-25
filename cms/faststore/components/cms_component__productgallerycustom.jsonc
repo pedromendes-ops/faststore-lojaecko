@@ -5,75 +5,56 @@
   "$componentKey": "ProductGalleryCustom",
   "$componentTitle": "Product Gallery Custom",
   "title": "Product Gallery Custom",
-  "description": "Product Gallery configuration",
+  "description": "Configurações da listagem de produtos da PLP e busca.",
   "type": "object",
   "required": [
     "filter"
   ],
   "properties": {
-    "searchTermLabel": {
-      "title": "Search page term label",
-      "type": "string",
-      "default": "Showing results for:"
-    },
-    "totalCountLabel": {
-      "title": "Total count label",
-      "type": "string",
-      "default": "Resultados"
-    },
-    "previousPageButton": {
-      "title": "Previous page button",
+    "config": {
+      "title": "Configurações",
       "type": "object",
-      "required": [
-        "icon",
-        "label"
-      ],
       "properties": {
-        "icon": {
-          "title": "Icon",
-          "type": "object",
-          "properties": {
-            "icon": {
-              "title": "Icon",
-              "type": "string",
-              "enumNames": [
-                "ArrowLeft"
-              ],
-              "enum": [
-                "ArrowLeft"
-              ],
-              "default": "ArrowLeft"
-            },
-            "alt": {
-              "title": "Alternative label",
-              "type": "string",
-              "default": "Arrow Left icon"
-            }
-          }
+        "columnsDesktop": {
+          "title": "Produtos por linha",
+          "description": "Quantidade inicial de produtos exibidos por linha no desktop.",
+          "type": "integer",
+          "enum": [
+            3,
+            4
+          ],
+          "enumNames": [
+            "3 produtos",
+            "4 produtos"
+          ],
+          "default": 4
         },
-        "label": {
-          "title": "Previous page button",
-          "type": "string",
-          "default": "Previous Page"
+        "filtersOpen": {
+          "title": "Exibir filtros inicialmente",
+          "description": "Define se a coluna de filtros inicia aberta no desktop.",
+          "type": "boolean",
+          "default": true
         }
       }
     },
-    "loadMorePageButton": {
-      "title": "Load more products Button",
+    "labels": {
+      "title": "Textos",
       "type": "object",
-      "required": [
-        "label"
-      ],
       "properties": {
-        "label": {
-          "title": "Load more products label",
+        "filter": {
+          "title": "Texto do botão de filtro",
           "type": "string",
-          "default": "Load more products"
+          "default": "Filtrar"
+        },
+        "results": {
+          "title": "Texto da quantidade de resultados",
+          "type": "string",
+          "default": "Resultados"
         }
       }
     },
     "filter": {
-      "title": "Filter",
+      "title": "Filtros",
       "type": "object",
       "required": [
         "title",
@@ -81,17 +62,18 @@
       ],
       "properties": {
         "title": {
-          "title": "Filter title",
+          "title": "Título dos filtros",
           "type": "string",
-          "default": "Filters"
+          "default": "Filtros"
         },
         "ordering": {
-          "title": "Filters ordering",
+          "title": "Ordenação dos filtros",
+          "description": "Configura a ordem dos grupos de filtros e dos valores exibidos dentro deles.",
           "type": "object",
-          "description": "Controls the order of the filter groups and of the values inside each group.",
           "properties": {
             "groups": {
-              "title": "Order of filter groups",
+              "title": "Ordenação dos filtros",
+              "description": "Define a ordenação geral dos grupos de filtros.",
               "type": "string",
               "enum": [
                 "default",
@@ -99,14 +81,15 @@
                 "desc"
               ],
               "enumNames": [
-                "Original (from search)",
-                "Alphabetical A-Z",
-                "Alphabetical Z-A"
+                "Padrão da VTEX",
+                "A - Z",
+                "Z - A"
               ],
               "default": "default"
             },
             "values": {
-              "title": "Order of values inside each filter",
+              "title": "Ordenação das opções",
+              "description": "Define a ordenação das opções dentro de cada filtro.",
               "type": "string",
               "enum": [
                 "default",
@@ -114,39 +97,38 @@
                 "desc"
               ],
               "enumNames": [
-                "Original (from search)",
-                "Alphabetical A-Z",
-                "Alphabetical Z-A"
+                "Padrão da VTEX",
+                "A - Z",
+                "Z - A"
               ],
               "default": "default"
             },
             "lastKeys": {
-              "title": "Filters always shown last",
-              "description": "Filtros sempre exibidos por último (separados por vírgula). Digite a label — ex.: Preço. Ignora maiúsculas/acentos; a chave do facet também funciona.",
-              "type": "string",
-              "default": "price"
+              "title": "Filtros no final",
+              "description": "Informe os nomes dos filtros que devem permanecer no final, separados por vírgula. Exemplo: Preço, Disponibilidade.",
+              "type": "string"
             },
             "pinned": {
-              "title": "Posições fixas de filtros",
-              "description": "Fixa filtros específicos em posições exatas (1 = primeiro, 2 = segundo…). Os demais filtros preenchem os espaços restantes na ordem definida acima. Sobrepõe 'sempre por último' para os filtros listados.",
+              "title": "Posição dos filtros",
+              "description": "Permite definir manualmente a posição de filtros específicos.",
               "type": "array",
               "items": {
+                "title": "Filtro",
                 "type": "object",
-                "title": "Filtro fixo",
                 "required": [
                   "label",
                   "position"
                 ],
                 "properties": {
                   "label": {
-                    "title": "Nome do filtro (label)",
-                    "description": "Digite a label do filtro exatamente como aparece na loja (ex.: Departamento, Preço, Cor, Tamanhos). Ignora maiúsculas e acentos; a chave do facet também funciona.",
+                    "title": "Nome do filtro",
+                    "description": "Nome exibido do filtro. Exemplo: Marca, Cor ou Preço.",
                     "type": "string"
                   },
                   "position": {
-                    "title": "Posição (1 = primeiro)",
+                    "title": "Posição",
+                    "description": "Posição do filtro na listagem. A primeira posição é 1.",
                     "type": "integer",
-                    "default": 1,
                     "minimum": 1
                   }
                 }
@@ -156,25 +138,25 @@
         },
         "hiddenFilter": {
           "title": "Filtros ocultos",
-          "description": "Filtros que não devem aparecer na lista. Digite a label do filtro exatamente como aparece na loja (ex.: Fit, productClusterNames). Ignora maiúsculas e acentos; a chave do facet também funciona.",
+          "description": "Filtros que não devem ser exibidos na listagem.",
           "type": "array",
           "items": {
-            "type": "object",
             "title": "Filtro oculto",
+            "type": "object",
             "required": [
               "label"
             ],
             "properties": {
               "label": {
-                "title": "Nome do filtro (label)",
-                "description": "Label do filtro a esconder (ex.: Fit).",
+                "title": "Nome do filtro",
+                "description": "Nome exibido do filtro que será ocultado. Exemplo: Departamento.",
                 "type": "string"
               }
             }
           }
         },
         "mobileOnly": {
-          "title": "Mobile Only",
+          "title": "Filtros no mobile",
           "type": "object",
           "required": [
             "filterButton",
@@ -183,7 +165,7 @@
           ],
           "properties": {
             "filterButton": {
-              "title": "Show filter button",
+              "title": "Botão de filtros",
               "type": "object",
               "required": [
                 "label",
@@ -191,12 +173,12 @@
               ],
               "properties": {
                 "label": {
-                  "title": "Label",
+                  "title": "Texto",
                   "type": "string",
-                  "default": "Filters"
+                  "default": "Filtrar"
                 },
                 "icon": {
-                  "title": "Icon",
+                  "title": "Ícone",
                   "type": "object",
                   "required": [
                     "icon",
@@ -204,336 +186,34 @@
                   ],
                   "properties": {
                     "icon": {
-                      "title": "Icon",
+                      "title": "Ícone",
                       "type": "string",
-                      "enumNames": [
-                        "FadersHorizontal"
-                      ],
                       "enum": [
                         "FadersHorizontal"
+                      ],
+                      "enumNames": [
+                        "Filtros"
                       ],
                       "default": "FadersHorizontal"
                     },
                     "alt": {
-                      "title": "Alternative label",
+                      "title": "Texto alternativo",
                       "type": "string",
-                      "default": "Open Filters"
+                      "default": "Abrir filtros"
                     }
                   }
                 }
               }
             },
             "clearButtonLabel": {
-              "title": "Clear button label",
+              "title": "Texto do botão limpar",
               "type": "string",
-              "default": "Clear All"
+              "default": "Limpar filtros"
             },
             "applyButtonLabel": {
-              "title": "Apply button label",
+              "title": "Texto do botão aplicar",
               "type": "string",
-              "default": "Apply"
-            }
-          }
-        }
-      }
-    },
-    "itemsPerRow": {
-      "title": "Items per row",
-      "description": "Number of product cards displayed per row in the gallery grid",
-      "type": "integer",
-      "enum": [
-        2,
-        3
-      ],
-      "enumNames": [
-        "2 items",
-        "3 items"
-      ],
-      "default": 2
-    },
-    "stateFilter": {
-      "title": "Filtro fechado no desktop?",
-      "type": "boolean",
-      "default": false
-    },
-    "contentCards": {
-      "title": "Cards entre produtos",
-      "description": "Adiciona banners e/ou blocos de texto entre os produtos da primeira página da galeria.",
-      "type": "array",
-      "items": {
-        "title": "Card editorial",
-        "type": "object",
-        "required": [
-          "position"
-        ],
-        "properties": {
-          "active": {
-            "title": "Ativo?",
-            "type": "boolean",
-            "default": true
-          },
-          "position": {
-            "title": "Posição no grid",
-            "description": "Posição que o card ocupará no grid. Ex.: 4 coloca o card depois dos três primeiros elementos.",
-            "type": "integer",
-            "minimum": 1,
-            "default": 4
-          },
-          "images": {
-            "title": "Imagens",
-            "description": "Cadastre uma ou mais imagens. Com mais de uma imagem, o card será exibido como carrossel.",
-            "type": "array",
-            "items": {
-              "title": "Imagem",
-              "type": "object",
-              "properties": {
-                "image": {
-                  "title": "Imagem desktop",
-                  "type": "string",
-                  "widget": {
-                    "ui:widget": "media-gallery",
-                    "restrictMediaTypes": {
-                      "video": true,
-                      "image": [
-                        "png",
-                        "jpg",
-                        "jpeg",
-                        "gif",
-                        "svg",
-                        "webp"
-                      ]
-                    }
-                  }
-                },
-                "imageMobile": {
-                  "title": "Imagem mobile",
-                  "description": "Opcional. Se não for cadastrada, utiliza a imagem desktop.",
-                  "type": "string",
-                  "widget": {
-                    "ui:widget": "media-gallery",
-                    "restrictMediaTypes": {
-                      "video": true,
-                      "image": [
-                        "png",
-                        "jpg",
-                        "jpeg",
-                        "gif",
-                        "svg",
-                        "webp"
-                      ]
-                    }
-                  }
-                },
-                "imageAlt": {
-                  "title": "Texto alternativo da imagem",
-                  "description": "Descrição da imagem para acessibilidade.",
-                  "type": "string",
-                  "default": ""
-                },
-                "link": {
-                  "title": "Link",
-                  "type": "string",
-                  "default": ""
-                },
-                "linkLabel": {
-                  "title": "Texto do link",
-                  "type": "string",
-                  "default": ""
-                },
-                "target": {
-                  "title": "Abrir link em",
-                  "type": "string",
-                  "enum": [
-                    "_self",
-                    "_blank"
-                  ],
-                  "enumNames": [
-                    "Mesma página",
-                    "Nova aba"
-                  ],
-                  "default": "_self"
-                }
-              }
-            }
-          },
-          "title": {
-            "title": "Título",
-            "type": "string",
-            "default": ""
-          },
-          "text": {
-            "title": "Texto",
-            "type": "string",
-            "default": ""
-          },
-          "columnsDesktop": {
-            "title": "Colunas no desktop",
-            "description": "Quantidade de colunas do grid ocupadas pelo card.",
-            "type": "integer",
-            "enum": [
-              1,
-              2,
-              3
-            ],
-            "enumNames": [
-              "1 coluna",
-              "2 colunas",
-              "3 colunas"
-            ],
-            "default": 1
-          },
-          "columnsTablet": {
-            "title": "Colunas no tablet",
-            "type": "integer",
-            "enum": [
-              1,
-              2,
-              3
-            ],
-            "enumNames": [
-              "1 coluna",
-              "2 colunas",
-              "3 colunas"
-            ],
-            "default": 1
-          },
-          "columnsMobile": {
-            "title": "Colunas no mobile",
-            "type": "integer",
-            "enum": [
-              1,
-              2
-            ],
-            "enumNames": [
-              "1 coluna",
-              "2 colunas"
-            ],
-            "default": 2
-          },
-          "textPosition": {
-            "title": "Posição do texto",
-            "type": "string",
-            "enum": [
-              "below",
-              "overlay-bottom",
-              "overlay-center"
-            ],
-            "enumNames": [
-              "Abaixo da imagem",
-              "Sobre a imagem - inferior",
-              "Sobre a imagem - centralizado"
-            ],
-            "default": "below"
-          },
-          "textAlign": {
-            "title": "Alinhamento do texto",
-            "type": "string",
-            "enum": [
-              "left",
-              "center",
-              "right"
-            ],
-            "enumNames": [
-              "Esquerda",
-              "Centralizado",
-              "Direita"
-            ],
-            "default": "left"
-          }
-        }
-      }
-    },
-    "productCard": {
-      "title": "Product Card Configuration",
-      "type": "object",
-      "properties": {
-        "showDiscountBadge": {
-          "title": "Show discount badge?",
-          "type": "boolean",
-          "default": true
-        },
-        "bordered": {
-          "title": "Cards should be bordered?",
-          "type": "boolean",
-          "default": true
-        },
-        "taxesConfiguration": {
-          "title": "Taxes Configuration",
-          "type": "object",
-          "properties": {
-            "usePriceWithTaxes": {
-              "title": "Should use taxes to calculate the price?",
-              "type": "boolean",
-              "default": false
-            },
-            "taxesLabel": {
-              "title": "Tax label to be displayed",
-              "type": "string",
-              "default": "Tax included"
-            }
-          }
-        },
-        "sponsoredLabel": {
-          "title": "Sponsored Label",
-          "type": "string",
-          "default": "Sponsored"
-        },
-        "showProductClusters": {
-          "title": "Show product cluster tags?",
-          "type": "boolean",
-          "default": true,
-          "description": "Tags exibidas sobre a imagem do produto (ex.: Lançamento, Exclusivo). Quais tags aparecem é cadastro único em Global Sections → CollectionTag, uma seção por coleção."
-        }
-      }
-    },
-    "emptyGallery": {
-      "title": "Empty Gallery",
-      "type": "object",
-      "properties": {
-        "title": {
-          "title": "Title",
-          "type": "string",
-          "default": "Nothing matches with your search"
-        },
-        "firstButton": {
-          "title": "First Button",
-          "type": "object",
-          "properties": {
-            "label": {
-              "type": "string",
-              "title": "Label",
-              "default": "Browse Offers"
-            },
-            "url": {
-              "type": "string",
-              "title": "URL",
-              "default": "/office"
-            },
-            "icon": {
-              "title": "Icon",
-              "type": "string",
-              "default": "CircleWavyWarning"
-            }
-          }
-        },
-        "secondButton": {
-          "title": "Second Button",
-          "type": "object",
-          "properties": {
-            "label": {
-              "type": "string",
-              "title": "Label",
-              "default": "Just Arrived"
-            },
-            "url": {
-              "type": "string",
-              "title": "URL",
-              "default": "/technology"
-            },
-            "icon": {
-              "title": "Icon",
-              "type": "string",
-              "default": "RocketLaunch"
+              "default": "Aplicar"
             }
           }
         }

@@ -1,0 +1,97 @@
+{
+  "$extends": [
+    "#/$defs/base-component"
+  ],
+  "$componentKey": "PitBar",
+  "$componentTitle": "Pit Bar",
+  "title": "Pit Bar",
+  "description": "Barra de benefícios",
+  "type": "object",
+  "properties": {
+    "config": {
+      "title": "Configurações do Bloco",
+      "type": "object",
+      "properties": {
+        "label": {
+          "title": "Identificação do bloco",
+          "type": "string",
+          "default": "Incentivos"
+        },
+        "grid": {
+          "title": "Largura do banner",
+          "description": "Define se o banner ocupará toda a largura disponível ou ficará limitado ao container da loja.",
+          "type": "string",
+          "default": "full",
+          "enum": [
+            "full",
+            "container"
+          ],
+          "enumNames": [
+            "Largura total",
+            "Container"
+          ]
+        },
+        "marginTop": {
+          "title": "Margem superior",
+          "description": "Espaçamento superior da seção em pixels.",
+          "type": "number",
+          "default": 0,
+          "minimum": 0
+        },
+        "background": {
+          "title": "Cor do fundo",
+          "description": "Usar hexadecimal. Ex: #cccccc",
+          "type": "string"
+        }
+      }
+    },
+    "items": {
+      "title": "Cards",
+      "description": "Cadastre as informações, imagem e texto.",
+      "type": "array",
+      "items": {
+        "title": "Ícone",
+        "type": "object",
+        "required": [
+          "image",
+          "line1",
+          "line2"
+        ],
+        "properties": {
+          "line1": {
+            "title": "Texto da primeira linha",
+            "type": "string"
+          },
+          "image": {
+            "title": "Imagem desktop",
+            "description": "Imagem utilizada em telas maiores.",
+            "type": "string",
+            "widget": {
+              "ui:widget": "media-gallery",
+              "restrictMediaTypes": {
+                "video": true,
+                "image": [
+                  "png",
+                  "jpg",
+                  "jpeg",
+                  "gif",
+                  "svg",
+                  "webp"
+                ]
+              }
+            }
+          },
+          "alt": {
+            "title": "Texto alternativo",
+            "description": "Descrição da imagem para acessibilidade. Para imagens apenas decorativas, pode ser deixado vazio.",
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "readOnly": false,
+  "writeOnly": false,
+  "deprecated": false,
+  "$abstract": false
+}

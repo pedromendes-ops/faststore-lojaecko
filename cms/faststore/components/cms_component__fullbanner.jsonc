@@ -1,0 +1,175 @@
+{
+  "$extends": [
+    "#/$defs/base-component"
+  ],
+  "$componentKey": "FullBanner",
+  "$componentTitle": "Full Banner",
+  "title": "Full Banner",
+  "description": "Banner principal com suporte a múltiplos slides, imagens responsivas e carousel.",
+  "type": "object",
+  "properties": {
+    "config": {
+      "title": "Configurações do Bloco",
+      "type": "object",
+      "properties": {
+        "label": {
+          "title": "Label",
+          "description": "Identificação única do bloco.",
+          "type": "string"
+        },
+        "grid": {
+          "title": "Largura do banner",
+          "description": "Define se o banner ocupará toda a largura disponível ou ficará limitado ao container da loja.",
+          "type": "string",
+          "default": "full",
+          "enum": [
+            "full",
+            "container",
+            "containerDesk"
+          ],
+          "enumNames": [
+            "Largura total",
+            "Container",
+            "Somente Desktop"
+          ]
+        },
+        "marginTop": {
+          "title": "Margem superior",
+          "description": "Espaçamento superior da seção em pixels.",
+          "type": "number",
+          "default": 0,
+          "minimum": 0
+        },
+        "height": {
+          "title": "Altura do banner",
+          "description": "Altura das imagens do banner em pixels.",
+          "type": "number",
+          "default": 300,
+          "minimum": 1
+        },
+        "priority": {
+          "title": "Priorizar carregamento?",
+          "description": "Ative apenas se este for o banner principal exibido no topo da página. O primeiro slide será carregado com prioridade.",
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "slider": {
+      "title": "Configurações do Slider",
+      "type": "object",
+      "properties": {
+        "showDots": {
+          "title": "Exibir indicadores?",
+          "description": "Exibe os indicadores de paginação do carousel.",
+          "type": "boolean",
+          "default": true
+        },
+        "showArrows": {
+          "title": "Exibir setas?",
+          "description": "Exibe as setas de navegação do carousel.",
+          "type": "boolean",
+          "default": true
+        },
+        "infiniteMode": {
+          "title": "Carousel infinito?",
+          "description": "Ao chegar ao último banner, continua novamente a partir do primeiro.",
+          "type": "boolean",
+          "default": true
+        },
+        "autoPlay": {
+          "title": "Troca automática?",
+          "description": "Alterna automaticamente entre os banners.",
+          "type": "boolean",
+          "default": false
+        },
+        "autoPlayInterval": {
+          "title": "Intervalo da troca automática",
+          "description": "Tempo entre as trocas automáticas em milissegundos. Ex.: 5000 corresponde a 5 segundos.",
+          "type": "number",
+          "default": 5000,
+          "minimum": 1000
+        }
+      }
+    },
+    "items": {
+      "title": "Banners",
+      "description": "Cadastre as imagens que serão exibidas no carousel.",
+      "type": "array",
+      "items": {
+        "title": "Banner",
+        "type": "object",
+        "required": [
+          "image"
+        ],
+        "properties": {
+          "image": {
+            "title": "Imagem desktop",
+            "description": "Imagem utilizada em telas maiores.",
+            "type": "string",
+            "widget": {
+              "ui:widget": "media-gallery",
+              "restrictMediaTypes": {
+                "video": true,
+                "image": [
+                  "png",
+                  "jpg",
+                  "jpeg",
+                  "gif",
+                  "svg",
+                  "webp"
+                ]
+              }
+            }
+          },
+          "imageMobile": {
+            "title": "Imagem mobile",
+            "description": "Opcional. Se não for cadastrada, será utilizada a imagem desktop.",
+            "type": "string",
+            "widget": {
+              "ui:widget": "media-gallery",
+              "restrictMediaTypes": {
+                "video": true,
+                "image": [
+                  "png",
+                  "jpg",
+                  "jpeg",
+                  "gif",
+                  "svg",
+                  "webp"
+                ]
+              }
+            }
+          },
+          "alt": {
+            "title": "Texto alternativo",
+            "description": "Descrição da imagem para acessibilidade. Para imagens apenas decorativas, pode ser deixado vazio.",
+            "type": "string"
+          },
+          "href": {
+            "title": "Link",
+            "description": "Destino ao clicar no banner. Ex.: /ofertas ou https://exemplo.com.",
+            "type": "string"
+          },
+          "target": {
+            "title": "Abrir link em",
+            "type": "string",
+            "default": "_self",
+            "enum": [
+              "_self",
+              "_blank"
+            ],
+            "enumNames": [
+              "Mesma janela",
+              "Nova janela"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "readOnly": false,
+  "writeOnly": false,
+  "deprecated": false,
+  "$abstract": false
+}

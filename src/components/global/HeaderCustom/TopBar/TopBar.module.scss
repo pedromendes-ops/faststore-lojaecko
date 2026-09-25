@@ -1,0 +1,32 @@
+.topBar {
+    height: 24px;
+
+    @media(min-width: 1025px){
+        height: 32px;
+    }
+
+    .cta {
+        max-width: 420px;        
+    }
+    
+    p {
+        color: #fff;
+        font-size: 12px;
+        padding: 0 24px;
+        white-space: nowrap;
+    }
+
+    :global(.swiper-button-prev),
+    :global(.swiper-button-next) {
+        width: 24px;
+        height: 24px;        
+        margin-top: -12px !important;
+        background-color: transparent !important;
+
+        svg {
+            width: 12px;
+            height: 12px;
+            color: #fff;
+        }
+    }
+}

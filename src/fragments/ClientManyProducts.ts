@@ -1,6 +1,6 @@
-import { gql } from "@faststore/core/api";
+import { gql } from '@faststore/core/api'
 
-//@ts-ignore
+// @ts-ignore
 export const fragment = gql(`
   fragment ClientManyProducts on Query {
     search(
@@ -15,33 +15,23 @@ export const fragment = gql(`
         pageInfo {
           totalCount
         }
+
         edges {
           node {
-            availableInstallments {
-              installmentNumber
-              installmentValue
-              installmentInterest
-              installmentPaymentSystemName
-            }
             productClusters {
               id
               name
             }
-            clusterHighlights {
-              id
-              name
-            }
-            similars {
-              productId
-              sku
-              slug
-              colorName
-              colorHex
-              image
+
+            availableInstallments {
+              installmentPaymentSystemName
+              installmentValue
+              installmentInterest
+              installmentNumber
             }
           }
         }
       }
     }
   }
-`);
+`)

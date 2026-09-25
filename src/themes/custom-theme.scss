@@ -1,66 +1,6 @@
-
 @use "@faststore/ui/src/styles/base/utilities" as u;
-
-@import './variables.scss';
-
-@import '@faststore/ui/src/components/organisms/SearchInput/styles.scss';
-@import "@faststore/ui/src/components/molecules/SearchDropdown/styles.scss";
-@import '@faststore/ui/src/components/molecules/SearchAutoComplete/styles.scss';
-@import '@faststore/ui/src/components/molecules/SearchHistory/styles.scss';
-@import '@faststore/ui/src/components/molecules/SearchInputField/styles.scss';
-@import '@faststore/ui/src/components/molecules/SearchProducts/styles.scss';
-@import '@faststore/ui/src/components/molecules/SearchTop/styles.scss';
-@import '@faststore/ui/src/components/atoms/Input/styles.scss';
-@import "@faststore/ui/src/components/molecules/ProductPrice/styles.scss";
-@import "@faststore/ui/src/components/atoms/Button/styles.scss";
-@import "@faststore/ui/src/components/atoms/Icon/styles.scss";
-@import "@faststore/ui/src/components/atoms/Input/styles.scss";
-@import "@faststore/ui/src/components/atoms/Link/styles.scss";
-@import "@faststore/ui/src/components/atoms/List/styles.scss";
-@import "@faststore/ui/src/components/atoms/Logo/styles.scss";
-@import "@faststore/ui/src/components/atoms/Price/styles.scss";
-@import "@faststore/ui/src/components/molecules/LinkButton/styles.scss";
-@import "@faststore/ui/src/components/molecules/NavbarLinks/styles.scss";
-@import '@faststore/ui/src/components/organisms/NavbarSlider/styles.scss';
-@import '@faststore/ui/src/components/organisms/NavbarSlider/styles.scss';
-@import '@faststore/ui/src/components/organisms/SlideOver/styles.scss';
-@import '@faststore/ui/src/components/organisms/SlideOver/styles.scss';
-@import '@faststore/ui/src/components/molecules/Carousel/styles.scss';
-@import '@faststore/ui/src/components/atoms/Skeleton/styles.scss';
-@import '@faststore/ui/src/components/molecules/Breadcrumb/styles.scss';
-
-
-
-
-@import './template/header.scss';
-@import './template/carousel.scss';
-@import './template/breadcrumb.scss';
-@import './page/landing.scss';
-@import './page/plp.scss';
-@import './page/pdp.scss';
-@import './template/minicart.scss';
-@import './template/shelf.scss';
-
-
-@font-face {
-  font-family: 'DenimINK';
-  src: url('https://lojalevis.vtexassets.com/assets/vtex/assets-builder/lojalevis.store/2.6.11/fonts/DenimINK-Regular___2c004cedfd3a30ea869939f0c5e5ad9b.woff2')
-    format('woff2');
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'DenimINK';
-  src: url('https://lojalevis.vtexassets.com/assets/vtex/assets-builder/lojalevis.store/2.6.11/fonts/DenimINK-Medium___f35a190fb472a27854e24ea56f3d4306.woff2')
-    format('woff2');
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-}
-
-
+@use'./reset';
+@use './grid';
 
 /* Usage with namespace */
 
@@ -70,37 +10,36 @@
 // ----------------------------------------------------------
 
 .theme {
-  &.no-scroll{
-    overflow: hidden !important;
-  }
   // --------------------------------------------------------
   // Colors (Branding Core)
   // --------------------------------------------------------
-  --fs-color-main-1                                     : #110B0D;
-  --fs-color-main-2                                     : #C41230;
-  --fs-color-main-3                                     : #DC1437;
-  --fs-color-main-4                                     : #C41230;
+  --fs-color-main-1                                     : #1A1A1A;
+  --fs-color-main-2                                     : #0366dd;
+  --fs-color-main-3                                     : #0155b7;
+  --fs-color-main-4                                     : #014592;
 
   --fs-color-success-bkg                                : #e9fce3;
   --fs-color-warning-bkg                                : #e9fce3;
   --fs-color-danger-bkg                                 : #f7d1d1;
 
   --fs-color-primary-bkg-light                          : var(--fs-color-neutral-0);
-
-  --fs-color-text-2                                      : #3D3839;
-  --fs-color-text-2                                      : #545051;
-  --container                                            : $container;
+  --fs-color-light-theme                                : #6C7880;
+  --fs-color-text-theme                                 : #4B4B4B;
 
   // --------------------------------------------------------
   // Typography (Branding Core)
   // --------------------------------------------------------
 
   // WEIGHT
+  --fs-text-weight-light                                : 300;
+  --fs-text-weight-regular                              : 400;
+  --fs-text-weight-medium                               : 500;
+  --fs-text-weight-semibold                             : 600;
   --fs-text-weight-bold                                 : 700;
-  --fs-text-weight-black                                : 700;
+  --fs-text-weight-black                                : 900;
 
   // FACE
-  --fs-text-face-body                                   : "DenimINK", -apple-system, system-ui, BlinkMacSystemFont, sans-serif;
+  --fs-text-face-body                                   : "Inter", -apple-system, system-ui, BlinkMacSystemFont, sans-serif;
 
   // HIERARCHY SCALE
   --fs-text-size-title-huge                             : var(--fs-text-size-9);
@@ -132,50 +71,18 @@
 
   // BORDERS
   --fs-border-color                                     : var(--fs-color-neutral-2);
-
+  --fs-border-color-theme                               : #D8D8D8;
   --fs-border-radius                                    : 4px;
 
   // --------------------------------------------------------
   // FS UI Components
   // --------------------------------------------------------
-  [data-fs-fill]{
-    flex: 1;
-  }
-  .section-product-shelf {
-    
-    [data-fs-carousel-bullet] {
-      min-height: inherit !important;
-    }
-  }
 
-  [data-fs-sku-selector-medidas] {
-    margin: 12px 0 0;
-    column-gap: 10px;
-    [data-fs-sku-selector-link-medidas] {
-      border-radius: 4px;
-      background-color: #F8F8F8;
-      height: 36px;
-      padding: 0 10px;
-      display: inline-flex;
-      column-gap: 8px;
-      font-weight: 700;
-      font-size: 12px;
-      color: #C41230;
-      
-      &:hover {
-        background-color: #ddd;
-        text-decoration: none;
-      }
-    }
-  }
   .section {
-    &.section-organization-drawer{
-      margin-top: 0 !important;
-    }
     ////////////////////
     // Global
     ////////////////////
-    
+
     [data-fs-button] {
       --fs-button-padding                               : calc(var(--fs-spacing-1) - (var(--fs-button-border-width) * 2)) var(--fs-spacing-4);
 
@@ -218,20 +125,6 @@
 
     [data-fs-quantity-selector] {
       --fs-qty-selector-border-radius                   : var(--fs-border-radius-pill);
-    }
-    [data-fs-quantity-selector]{
-      height: 56px;
-      &:hover [data-fs-input]{
-        border-color: #DBDBDB !important;
-        box-shadow: none !important;
-      }
-      [data-fs-input]{
-        border-radius: 0;
-        border: 1px solid #DBDBDB !important;
-      }
-      [data-fs-icon]{
-        color: #110B0D !important;
-      }
     }
 
     [data-fs-navbar-header] {
@@ -294,7 +187,7 @@
     ////////////////////
     // HOMEPAGE
     ////////////////////
-
+    /*
     [data-fs-hero] {
       @include u.layout-content;
 
@@ -304,6 +197,7 @@
         }
       }
     }
+    */
 
     [data-fs-tiles] {
       --fs-tiles-gap-notebook                          : var(--fs-grid-gap-4);
@@ -388,8 +282,6 @@
       }
     }
 
-
-
     ////////////////////
     // PLP
     ////////////////////
@@ -425,9 +317,9 @@
     }
 
     [data-fs-product-listing-content-grid] {
-      //column-gap: var(--fs-spacing-6);
+      column-gap: var(--fs-spacing-6);
 
-      @include u.media(">=notebook") { row-gap: 40px; }
+      @include u.media(">=notebook") { row-gap: var(--fs-spacing-3); }
     }
 
     [data-fs-filter] {
@@ -436,7 +328,9 @@
       --fs-filter-accordion-border-radius-notebook            : 0;
       --fs-filter-title-margin-bottom                         : var(--fs-spacing-3);
 
-      
+      [data-fs-filter-title] {
+        font-weight: var(--fs-text-weight-semibold);
+      }
 
       [data-fs-filter-accordion] {
         border-right: 0;
@@ -493,224 +387,85 @@
         padding-bottom: var(--fs-spacing-4);
         padding-left: 0;
       }
-      [data-fs-cart-item-skus]{
-        margin-top: .625rem;
-        display: none;
-      }
-      [data-fs-cart-item-actions]{
-        margin-top: 1rem;
-        justify-content: flex-start;
-        gap: 1.5rem;
-      }
-      [data-fs-cart-item-image]{
-        width: initial !important;
-        height: 100% !important;
-      }
-      [data-fs-product-price] [data-fs-price-variant="listing"]{
-        font-size: 12px !important;
-        color: #242424 !important;
-        line-height: 12px !important;
-      }
-      [data-fs-cart-item-title]{
-        font-size: 14px;
-        font-weight: 500;
-      }
-      [data-fs-price] [data-fs-sr-only]{
-        font-size: 14px;
-        font-weight: 700;
-      }
+
       [data-quantity-selector-input] {
         border-color: var(--fs-border-color);
         border-top-left-radius: var(--fs-border-radius-pill);
         border-top-right-radius: var(--fs-border-radius-pill);
       }
     }
+
+    [data-fs-cart-sidebar-list] li {
+      padding-bottom: var(--fs-spacing-4);
+      &:not(:only-child) { border-bottom: var(--fs-border-width) solid var(--fs-border-color); }
+    }
+
+    ///////////////////
+
+    .text__title-section {
+      font-size: var(--fs-text-size-6);
+      font-weight: var(--fs-text-weight-semibold);
+      letter-spacing: -1.2px;
+    }
   }
-
-  .section-banner + .section-newsletter { background-color: var(--fs-color-neutral-bkg); }
 }
 
-[data-fs-button][data-fs-button-variant=secondary]:hover [data-fs-button-wrapper]{
-  background-color: inherit !important;
+// collection
+.section-product-shelf {
+  .text__title-section {
+    display: none;
+  }
 }
 
-[data-fs-content] {
-  margin: 0;
-}
-
-#sort-select {
-  font-size: 14px;  
-}
-
-
-$text: #6C7880;
-
-
-/* GLOBAL RESET */
-*,
-body,
-[data-fs-product-card],
-[data-fs-carousel-item],
-[data-fs-button]{
-  outline: none !important;
-}
-// utils
-.grid { display: grid;}
-.flex { display: flex; flex-direction: row;}
-.flex-column { flex-direction: column;}
-.items-center { align-items: center;}
-.items-top { align-items: start;}
-.center { align-items: center; justify-content: center;}
-.justify-center { justify-content: center;}
-.justify-between { justify-content: space-between;}
-.justify-end { justify-content: flex-end;}
-.uppercase { text-transform: uppercase;}
-.ml-auto { margin-left: auto;}
-.pointer { cursor: pointer;}
-.no-flex { 
-  @media(max-width: '641px') {
-		display: block;
-	}
-}
-
-/* GRID */
-.wrapper {
+//breadcummb
+[data-fs-breadcrumb] {
   width: 100%;
-}
-
-.container {
-  width: 100%;
-  max-width: $container;
+  max-width: 1440px;
   margin: 0 auto;  
   padding:0 16px;
 
   @media(min-width: 1025px){    
-    padding:0 1rem;
+    padding:0 40px;
   }
-}
-
-/*GALLERY COLLECTION*/
-//section
-.section-product-shelf{
-  //max-width: 1200px;
-  max-width: $container;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 30px;
-  padding:0 16px;
-
-  @media(min-width: 1025px){
-    margin-top: 40px;
-    padding:0 1rem;
+  [data-fs-breadcrumb-list] {
+    margin: 0;
+    padding: 20px 0 0;
+    @media (min-width: 1025px) {
+      padding: 25px 0 0;
+    }
   }
-}
+  [data-fs-breadcrumb-list-item] {
+    padding: 0;
+    font-size: 12px;
+    color: var(--fs-color-main-1);
 
-// title
-.text__title-section {
-  margin-top: 0;
-  text-align: center;
-  color: var(--Primary-BLK, #110B0D);
-  font-size: 22px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 1.2;
-  margin-bottom: 30px;
-
-  @media(min-width: 1025px){
-    font-size: 32px;
-    margin-bottom: 40px;
-    padding-left: 2.5rem;
-    padding-right: 2.5rem;
+    &:first-child {
+      [data-fs-link] {
+        &::before {
+          content: "Home";
+        }
+      }
+    }
   }
-}
-
-/* SECTIONS CUSTOM TITLE */
-.boxTitle {
-  margin-bottom: 30px;
-
-  @media(min-width: 1025px){    
-    margin-bottom: 40px;
-  }
-
-  h1,
-  h2,
-  h3 {
-    margin-top: 0;
-    margin-bottom: 0;
-    font-weight: 700;
-    color: var(--Primary-BLK, #110B0D);
-  }
-  p {
+  [data-fs-breadcrumb-divider] {
     margin-top: 0;
     margin-bottom: 0;
   }
+  [data-fs-link] {
+    font-size: 12px;
+    padding: 0;
+    border-radius: 0;    
+    color: var(--fs-color-text-theme);
 
-  p + p {
-    margin-top: 10px;
-    @media(min-width: 1025px){
-      margin-top: 14px;
-    }
-  }
-  h1 + h2,
-  h2 + h3,
-  h1 + p,
-  h2 + p,
-  h3 + p {
-    margin-top: 20px;
-    @media(min-width: 1025px){
-      margin-top: 15px;
-    }
-  }
-
-  &.small {
-    h1,
-    h2,
-    h3 {
-      font-size: 18px;
-      @media(min-width: 1025px){
-        font-size: 22px;      
-      }
+    svg {
+      display: none;          
     }
 
-    p {
-      font-size: 12px;      
-    }
-  }
-
-  &.medium {
-
-    h1,
-    h2,
-    h3 {
-      font-size: 22px;
-      @media(min-width: 1025px){
-        font-size: 28px;      
-      }
-    }
-
-    p {
-      font-size: 16px;
-      @media(min-width: 1025px){
-        font-size: 14px;
-      }
-    }
-  }
-  &.large {
-    h1,
-    h2,
-    h3 {
-      font-size: 28px;
-      @media(min-width: 1025px){
-        font-size: 36px;      
-      }
-    }
-
-    p {
-      font-size: 17px;
-      @media(min-width: 1025px){
-        font-size: 15px;
-      }
+    &:hover {
+      color: var(--fs-color-main-1);
     }
   }
 }
+
+
 

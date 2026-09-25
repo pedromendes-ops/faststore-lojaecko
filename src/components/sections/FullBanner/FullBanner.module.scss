@@ -1,0 +1,21 @@
+// DOTS
+.fullBanner {
+    :global(.swiper-pagination) {
+        position: absolute !important;
+        padding: 0 0 6px !important;
+        background-color: transparent !important;        
+
+        :global(.swiper-pagination-bullet) {
+            border-radius: 0;
+            background-color: #fff;
+            width: 36px;
+            height: 4px;
+            
+        }
+        :global(.swiper-pagination-bullet-active) {
+            background-color: #000;
+        }
+        
+    }
+}
+    

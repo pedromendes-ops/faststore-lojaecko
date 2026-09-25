@@ -1,0 +1,67 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+
+  span {
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  input,
+  select {
+    width: 100%;
+    min-height: 42px;
+    padding: 0 14px;
+    border: 1px solid #ddd;
+    font-size: 13px;
+    border-radius: 4px;
+  }
+}
+
+.fieldset {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+
+  legend {
+    width: 100%;
+    font-size: 14px;
+    font-weight: 600;
+  }
+}
+
+.option,
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  a {
+    color: var(--fs-color-main-1);
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+.submitButton {
+  min-height: 42px;
+  border: 0;
+  background: var(--fs-color-main-1);
+  color: #fff;
+  font-weight: 500;
+  border-radius: 4px;
+  text-transform: uppercase;
+  font-size: 13px;
+  cursor: pointer;
+  margin-top: 10px;
+
+  &:hover {
+    background-color: var(--fs-color-main-2);
+  }
+}

@@ -1,0 +1,357 @@
+{
+  "$extends": [
+    "#/$defs/base-component"
+  ],
+  "$componentKey": "Banners",
+  "$componentTitle": "Banners",
+  "title": "Banners",
+  "description": "Componente de banners com suporte a grid ou slider responsivo.",
+  "type": "object",
+  "properties": {
+    "config": {
+      "title": "Configurações",
+      "type": "object",
+      "properties": {
+        "label": {
+          "title": "Label",
+          "description": "Identificação única do bloco.",
+          "type": "string"
+        },
+        "active": {
+          "title": "Ativo?",
+          "type": "boolean",
+          "default": true
+        },
+        "grid": {
+          "title": "Largura da seção",
+          "type": "string",
+          "default": "container",
+          "enum": [
+            "container",
+            "full"
+          ],
+          "enumNames": [
+            "Container",
+            "Largura total"
+          ]
+        },
+        "marginTop": {
+          "title": "Margem superior",
+          "description": "Espaçamento superior da seção em pixels.",
+          "type": "number",
+          "default": 0,
+          "minimum": 0
+        },
+        "priority": {
+          "title": "Priorizar primeira imagem?",
+          "description": "Utiliza carregamento prioritário na primeira imagem da seção. Recomendado apenas para conteúdos próximos ao topo da página.",
+          "type": "boolean",
+          "default": false
+        },
+        "layout": {
+          "title": "Layout responsivo",
+          "type": "object",
+          "properties": {
+            "desktop": {
+              "title": "Layout desktop",
+              "type": "string",
+              "default": "grid",
+              "enum": [
+                "grid",
+                "slider"
+              ],
+              "enumNames": [
+                "Grid",
+                "Slider"
+              ]
+            },
+            "columnsDesktop": {
+              "title": "Colunas no desktop",
+              "description": "Quantidade de banners visíveis por linha ou dentro da largura do container.",
+              "type": "number",
+              "default": 3,
+              "minimum": 1
+            },
+            "heightDesktop": {
+              "title": "Altura desktop",
+              "description": "Altura dos banners em pixels.",
+              "type": "number",
+              "default": 300,
+              "minimum": 1
+            },
+            "tablet": {
+              "title": "Layout tablet",
+              "type": "string",
+              "default": "grid",
+              "enum": [
+                "grid",
+                "slider"
+              ],
+              "enumNames": [
+                "Grid",
+                "Slider"
+              ]
+            },
+            "columnsTablet": {
+              "title": "Colunas no tablet",
+              "description": "Quantidade de banners visíveis por linha ou dentro da largura do container.",
+              "type": "number",
+              "default": 2,
+              "minimum": 1
+            },
+            "heightTablet": {
+              "title": "Altura tablet",
+              "description": "Altura dos banners em pixels.",
+              "type": "number",
+              "default": 260,
+              "minimum": 1
+            },
+            "phone": {
+              "title": "Layout mobile",
+              "type": "string",
+              "default": "slider",
+              "enum": [
+                "grid",
+                "slider"
+              ],
+              "enumNames": [
+                "Grid",
+                "Slider"
+              ]
+            },
+            "columnsPhone": {
+              "title": "Colunas no mobile",
+              "description": "Quantidade de banners visíveis por linha ou dentro da largura do container.",
+              "type": "number",
+              "default": 1,
+              "minimum": 1
+            },
+            "heightPhone": {
+              "title": "Altura mobile",
+              "description": "Altura dos banners em pixels.",
+              "type": "number",
+              "default": 220,
+              "minimum": 1
+            },
+            "gap": {
+              "title": "Espaçamento entre banners",
+              "description": "Espaçamento entre os itens em pixels.",
+              "type": "number",
+              "default": 16,
+              "minimum": 0
+            }
+          }
+        },
+        "style": {
+          "title": "Estilo",
+          "type": "object",
+          "properties": {
+            "zoom": {
+              "title": "Zoom no hover?",
+              "type": "boolean",
+              "default": false
+            },
+            "radius": {
+              "title": "Bordas arredondadas?",
+              "type": "boolean",
+              "default": false
+            },
+            "shadow": {
+              "title": "Aplicar sombra?",
+              "type": "boolean",
+              "default": false
+            }
+          }
+        },
+        "slider": {
+          "title": "Configurações do slider",
+          "type": "object",
+          "properties": {
+            "align": {
+              "title": "Alinhamento",
+              "type": "object",
+              "properties": {
+                "desktop": {
+                  "title": "Desktop",
+                  "type": "string",
+                  "default": "default",
+                  "enum": [
+                    "default",
+                    "center",
+                    "container-start"
+                  ],
+                  "enumNames": [
+                    "Normal",
+                    "Centralizado",
+                    "Iniciar no container"
+                  ]
+                },
+                "tablet": {
+                  "title": "Tablet",
+                  "type": "string",
+                  "default": "default",
+                  "enum": [
+                    "default",
+                    "center",
+                    "container-start"
+                  ],
+                  "enumNames": [
+                    "Normal",
+                    "Centralizado",
+                    "Iniciar no container"
+                  ]
+                },
+                "phone": {
+                  "title": "Mobile",
+                  "type": "string",
+                  "default": "center",
+                  "enum": [
+                    "default",
+                    "center",
+                    "container-start"
+                  ],
+                  "enumNames": [
+                    "Normal",
+                    "Centralizado",
+                    "Iniciar no container"
+                  ]
+                }
+              }
+            },
+            "peek": {
+              "title": "Exibir parte do próximo banner",
+              "description": "Quantidade em pixels do próximo banner que deve permanecer visível no modo Iniciar no container.",
+              "type": "object",
+              "properties": {
+                "desktop": {
+                  "title": "Desktop",
+                  "type": "number",
+                  "default": 0,
+                  "minimum": 0
+                },
+                "tablet": {
+                  "title": "Tablet",
+                  "type": "number",
+                  "default": 0,
+                  "minimum": 0
+                },
+                "phone": {
+                  "title": "Mobile",
+                  "type": "number",
+                  "default": 0,
+                  "minimum": 0
+                }
+              }
+            },
+            "showDots": {
+              "title": "Exibir paginação?",
+              "type": "boolean",
+              "default": false
+            },
+            "showArrows": {
+              "title": "Exibir setas?",
+              "type": "boolean",
+              "default": true
+            },
+            "infiniteMode": {
+              "title": "Slider infinito?",
+              "type": "boolean",
+              "default": false
+            },
+            "autoPlay": {
+              "title": "Autoplay?",
+              "type": "boolean",
+              "default": false
+            },
+            "autoPlayInterval": {
+              "title": "Intervalo do autoplay",
+              "description": "Tempo entre as trocas automáticas em milissegundos.",
+              "type": "number",
+              "default": 5000,
+              "minimum": 1000
+            }
+          }
+        }
+      }
+    },
+    "items": {
+      "title": "Banners",
+      "type": "array",
+      "items": {
+        "title": "Banner",
+        "type": "object",
+        "properties": {
+          "active": {
+            "title": "Ativo?",
+            "type": "boolean",
+            "default": true
+          },
+          "image": {
+            "title": "Imagem desktop",
+            "type": "string",
+            "widget": {
+              "ui:widget": "media-gallery",
+              "restrictMediaTypes": {
+                "video": true,
+                "image": [
+                  "png",
+                  "jpg",
+                  "jpeg",
+                  "gif",
+                  "svg",
+                  "webp"
+                ]
+              }
+            }
+          },
+          "imageMobile": {
+            "title": "Imagem mobile",
+            "description": "Opcional. Caso não seja preenchida, utiliza a imagem desktop.",
+            "type": "string",
+            "widget": {
+              "ui:widget": "media-gallery",
+              "restrictMediaTypes": {
+                "video": true,
+                "image": [
+                  "png",
+                  "jpg",
+                  "jpeg",
+                  "gif",
+                  "svg",
+                  "webp"
+                ]
+              }
+            }
+          },
+          "alt": {
+            "title": "Texto alternativo",
+            "description": "Descrição da imagem para acessibilidade. Deixe vazio caso a imagem seja apenas decorativa.",
+            "type": "string"
+          },
+          "href": {
+            "title": "Link",
+            "description": "Opcional. Ex.: /categoria ou https://...",
+            "type": "string"
+          },
+          "target": {
+            "title": "Abrir link em",
+            "type": "string",
+            "default": "_self",
+            "enum": [
+              "_self",
+              "_blank"
+            ],
+            "enumNames": [
+              "Mesma aba",
+              "Nova aba"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "readOnly": false,
+  "writeOnly": false,
+  "deprecated": false,
+  "$abstract": false
+}

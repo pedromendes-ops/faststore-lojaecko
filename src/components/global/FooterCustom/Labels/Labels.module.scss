@@ -1,0 +1,31 @@
+.label {
+    p {
+        margin-bottom: 5px;
+        font-size: 12px;
+    }
+    .links {
+        column-gap: 8px;
+
+        @media(max-width: 1024px){
+            width: 100%;
+            justify-content: center;
+        }
+    }
+
+    .labelLink {
+        
+    }
+}
+
+.powerby {
+    @media(min-width: 1025px){
+        margin-left: auto;
+    }
+
+    .labelLink {
+        img {
+            width: auto;
+            height: 16px;
+        }
+    }
+}

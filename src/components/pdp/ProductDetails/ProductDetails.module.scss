@@ -1,0 +1,34 @@
+.productDetails {
+  width: 100%;
+}
+
+.content {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(320px, 480px);
+  gap: 40px;
+  align-items: start;
+}
+
+.gallery,
+.info {
+  min-width: 0;
+}
+
+@media (max-width: 1024px) {
+  .content {
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(300px, 400px);
+
+    gap: 24px;
+  }
+}
+
+@media (max-width: 641px) {
+  .content {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}

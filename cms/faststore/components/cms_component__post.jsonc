@@ -1,0 +1,183 @@
+{
+  "$extends": [
+    "#/$defs/base-component"
+  ],
+  "$componentKey": "Post",
+  "$componentTitle": "Postagem",
+  "title": "Postagem",
+  "description": "Post de conteúdo com imagem, texto e link",
+  "type": "object",
+  "properties": {
+    "config": {
+      "title": "Configurações",
+      "type": "object",
+      "properties": {
+        "label": {
+          "title": "Label",
+          "description": "Identificação única do bloco.",
+          "type": "string"
+        },
+        "active": {
+          "title": "Ativo",
+          "type": "boolean",
+          "default": true
+        },
+        "grid": {
+          "title": "Largura da seção",
+          "type": "string",
+          "enum": [
+            "container",
+            "full"
+          ],
+          "enumNames": [
+            "Container",
+            "Largura total"
+          ],
+          "default": "container"
+        },
+        "marginTop": {
+          "title": "Margem superior",
+          "description": "Valor em pixels",
+          "type": "number"
+        }
+      }
+    },
+    "layout": {
+      "title": "Layout",
+      "type": "object",
+      "properties": {
+        "desktop": {
+          "title": "Desktop",
+          "type": "string",
+          "enum": [
+            "top",
+            "bottom",
+            "left",
+            "right"
+          ],
+          "enumNames": [
+            "Imagem acima",
+            "Imagem abaixo",
+            "Imagem à esquerda",
+            "Imagem à direita"
+          ],
+          "default": "left"
+        },
+        "tablet": {
+          "title": "Tablet",
+          "type": "string",
+          "enum": [
+            "top",
+            "bottom",
+            "left",
+            "right"
+          ],
+          "enumNames": [
+            "Imagem acima",
+            "Imagem abaixo",
+            "Imagem à esquerda",
+            "Imagem à direita"
+          ],
+          "default": "bottom"
+        },
+        "phone": {
+          "title": "Celular",
+          "type": "string",
+          "enum": [
+            "top",
+            "bottom",
+            "left",
+            "right"
+          ],
+          "enumNames": [
+            "Imagem acima",
+            "Imagem abaixo",
+            "Imagem à esquerda",
+            "Imagem à direita"
+          ],
+          "default": "bottom"
+        },
+        "gap": {
+          "title": "Espaçamento",
+          "description": "Espaçamento entre imagem e conteúdo em pixels",
+          "type": "number",
+          "default": 16
+        }
+      }
+    },
+    "content": {
+      "title": "Conteúdo",
+      "type": "object",
+      "properties": {
+        "imageSrc": {
+          "title": "Imagem",
+          "type": "string",
+          "widget": {
+            "ui:widget": "media-gallery",
+            "restrictMediaTypes": {
+              "video": true,
+              "image": [
+                "png",
+                "jpg",
+                "jpeg",
+                "gif",
+                "svg",
+                "webp"
+              ]
+            }
+          }
+        },
+        "imageAlt": {
+          "title": "Texto alternativo da imagem",
+          "description": "Descrição da imagem para acessibilidade",
+          "type": "string"
+        },
+        "text": {
+          "title": "Texto",
+          "type": "string",
+          "widget": {
+            "ui:widget": "draftjs-rich-text"
+          }
+        },
+        "linkText": {
+          "title": "Texto do link",
+          "type": "string"
+        },
+        "linkHref": {
+          "title": "URL do link",
+          "type": "string"
+        },
+        "linkTarget": {
+          "title": "Abrir link",
+          "type": "string",
+          "enum": [
+            "_self",
+            "_blank"
+          ],
+          "enumNames": [
+            "Na mesma janela",
+            "Em uma nova janela"
+          ],
+          "default": "_self"
+        },
+        "linkStyle": {
+          "title": "Estilo do link",
+          "type": "string",
+          "enum": [
+            "button",
+            "link"
+          ],
+          "enumNames": [
+            "Botão",
+            "Link"
+          ],
+          "default": "button"
+        }
+      }
+    }
+  },
+  "readOnly": false,
+  "writeOnly": false,
+  "deprecated": false,
+  "$abstract": false
+}

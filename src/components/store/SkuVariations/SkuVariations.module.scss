@@ -1,0 +1,135 @@
+.selector {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 20px;
+}
+
+
+
+.title {
+  font-size: 12px;
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.option {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  min-height: 36px;
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: var(--fs-border-radius);
+  font-size: 14px;
+
+  &[data-fs-sku-selector-checked='true'] {
+    border-color: var(--fs-color-main-1);
+    background-color: var(--fs-color-main-1);   
+
+    [data-fs-sku-selector-option-link]  {
+      color: #fff;
+    }
+  }
+
+  [data-fs-sku-selector-option-link] {
+    display: flex;
+    align-items: center;
+    justify-content: center;    
+    color: var(--fs-color-main-1);
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    text-decoration: none;
+    
+  }
+
+  button[data-fs-sku-selector-option-link] {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;    
+  }
+
+  img {
+    display: block;
+    object-fit: cover;
+  }
+}
+
+.color {
+  display: block;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+
+.unavailable {
+  position: relative;
+  opacity: 0.4;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    width: 80%;
+    height: 1px;
+    background: currentColor;
+    transform: rotate(-45deg);
+    pointer-events: none;
+  }
+}
+
+.selectLabel {
+    font-size: 12px;    
+    display: block;
+}
+
+.selectWrapper {      
+  border: 1px solid #ccc;
+  border-radius: var(--fs-border-radius);
+  font-size: 14px;
+  position: relative;
+  overflow: hidden;
+  
+  select {
+    background-color: transparent;
+    position: relative;
+    z-index: 2;
+    padding: 0 10px;
+    width: 100%;
+    height: 36px;
+    border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+  }
+  .selectIcon {
+    position: absolute;
+    right: 0;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    background-color: #fff;
+    height: 36px;
+    right: 0;
+    top: 0;
+    svg {
+      width: 10px;
+      height: 10px;
+    }
+  }
+}

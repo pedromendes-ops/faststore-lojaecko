@@ -1,0 +1,177 @@
+.shippingSimulation {
+  margin-top: 1rem;
+  padding-top: 12px;
+  border-top: 1px solid #dbdbdb;
+
+  h3 {
+    margin: 0;
+    color: #6d686a;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 24px;
+  }
+
+  .cepContainer {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .cepField {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+    max-width: 260px;
+    height: 40px;
+
+    padding: 0 0.5rem 0 1rem;
+
+    border: 1px solid #dbdbdb;
+    background: #fff;
+
+    &[data-fs-shipping-cep-field-error='true'] {
+      border-color: #c41230;
+    }
+
+    input {
+      flex: 1;
+      min-width: 0;
+      height: 100%;
+
+      border: 0;
+      outline: none;
+      background: transparent;
+
+      font-size: 16px;
+      color: #110b0d;
+
+      &::placeholder {
+        color: #beb8b9;
+      }
+    }
+
+    button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      flex-shrink: 0;
+      min-width: 84px;
+
+      padding: 0.5rem 0.75rem;
+
+      border: 0;
+      background: transparent;
+
+      font-size: 14px;
+      font-weight: 700;
+      color: #6d686a;
+
+      cursor: pointer;
+
+      &:disabled {
+        color: #b5b5b5;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  .spinner {
+    display: inline-block;
+
+    width: 16px;
+    height: 16px;
+
+    border: 2px solid rgba(17, 11, 13, 0.25);
+    border-top-color: #110b0d;
+    border-radius: 50%;
+
+    animation: shippingSimulationSpin 0.6s linear infinite;
+  }
+
+  .error {
+    margin: 0.5rem 0 0;
+
+    font-size: 13px;
+    color: #c41230;
+  }
+
+  [data-fs-shipping-simulation-footer] {
+    [data-fs-shipping-simulation-link] {
+      display: inline-flex;
+      align-items: center;
+
+      gap: 0.25rem;
+
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 22px;
+
+      color: #6d686a !important;
+      text-decoration: underline !important;
+
+      svg {
+        color: #6d686a;
+      }
+    }
+  }
+
+  .linkIcon {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .result {
+    margin-top: 1.25rem;
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th {
+      padding: 0.5rem;
+
+      font-size: 12px;
+      font-weight: 700;
+      color: #110b0d;
+      text-align: left;
+
+      &:last-child {
+        text-align: right;
+      }
+    }
+
+    tbody tr {
+      background: #f1f1f1;
+    }
+
+    td {
+      padding: 0.5rem;
+
+      font-size: 12px;
+      color: #222;
+      vertical-align: middle;
+
+      &.price {
+        text-align: right;
+        white-space: nowrap;
+        font-weight: 700;
+      }
+    }
+
+    .note {
+      margin: 0.75rem 0 0;
+
+      font-size: 12px;
+      line-height: 18px;
+    }
+  }
+}
+
+@keyframes shippingSimulationSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}

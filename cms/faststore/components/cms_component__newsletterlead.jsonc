@@ -1,0 +1,132 @@
+{
+  "$extends": [
+    "#/$defs/base-component"
+  ],
+  "$componentKey": "NewsletterLead",
+  "$componentTitle": "Newsletter Lead",
+  "title": "Newsletter Lead",
+  "description": "Bloco de captura de leads para newsletter.",
+  "type": "object",
+  "properties": {
+    "active": {
+      "title": "Ativo?",
+      "type": "boolean",
+      "default": true
+    },
+    "grid": {
+      "title": "Largura do banner",
+      "description": "Define se o banner ocupará toda a largura disponível ou ficará limitado ao container da loja.",
+      "type": "string",
+      "default": "full",
+      "enum": [
+        "full",
+        "container"
+      ],
+      "enumNames": [
+        "Largura total",
+        "Container"
+      ]
+    },
+    "layout": {
+      "title": "Layout",
+      "type": "string",
+      "default": "row",
+      "enum": [
+        "row",
+        "column"
+      ],
+      "enumNames": [
+        "Horizontal",
+        "Vertical"
+      ]
+    },
+    "text": {
+      "title": "Texto",
+      "description": "Texto exibido ao lado ou acima do formulário.",
+      "type": "string",
+      "widget": {
+        "ui:widget": "draftjs-rich-text"
+      }
+    },
+    "successMessage": {
+      "title": "Mensagem de sucesso",
+      "type": "string",
+      "default": "Cadastro efetuado com sucesso!"
+    },
+    "formFields": {
+      "title": "Campos do formulário",
+      "description": "Configure os campos exibidos no formulário.",
+      "type": "array",
+      "items": {
+        "title": "Campo",
+        "type": "object",
+        "properties": {
+          "type": {
+            "title": "Tipo",
+            "type": "string",
+            "default": "text",
+            "enum": [
+              "text",
+              "email",
+              "tel",
+              "checkbox",
+              "radio",
+              "select",
+              "submit"
+            ],
+            "enumNames": [
+              "Texto",
+              "E-mail",
+              "Telefone",
+              "Checkbox",
+              "Radio",
+              "Select",
+              "Botão de envio"
+            ]
+          },
+          "name": {
+            "title": "Nome do campo",
+            "description": "Chave enviada no payload. Ex.: name, email, optin.",
+            "type": "string"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "placeholder": {
+            "title": "Placeholder",
+            "type": "string"
+          },
+          "required": {
+            "title": "Obrigatório?",
+            "type": "boolean",
+            "default": false
+          },
+          "options": {
+            "title": "Opções",
+            "description": "Utilizado apenas para campos Radio e Select.",
+            "type": "array",
+            "items": {
+              "title": "Opção",
+              "type": "object",
+              "properties": {
+                "label": {
+                  "title": "Label",
+                  "type": "string"
+                },
+                "value": {
+                  "title": "Valor",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "readOnly": false,
+  "writeOnly": false,
+  "deprecated": false,
+  "$abstract": false
+}

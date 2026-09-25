@@ -1,0 +1,123 @@
+.miniCart {  
+  position: relative;
+}
+
+.miniCartButton {
+  padding: 0;
+  color: inherit;    
+  width: 40px;
+  height: 40px;
+
+  svg {
+    display: block;
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.miniCartQuantity {
+  width: 16px;
+  height: 16px;
+  font-size: 8px;
+  color: #fff;
+  background-color: var(--fs-color-main-2);
+  top: 0;
+  right: 0;
+}
+
+
+
+
+.sidebar {
+
+  //header
+  [data-fs-slide-over-header] {
+    padding: 0;
+    display: block;
+    position: relative;
+    margin-bottom: 16px;
+
+    [data-fs-cart-sidebar-title] {
+      padding: 0 60px;
+      width: 100%;
+      justify-content: center;
+      font-size: 14px;      
+      column-gap: 4px;
+      height: 60px;
+    }
+    [data-fs-badge-wrapper] {
+      background-color: transparent;
+      padding: 0;
+      &::after {
+        content: ")";
+      }
+      &::before {
+        content: "(";
+      }
+    }
+    [data-fs-button] {
+      position: absolute;
+      left: 0;
+      top: 0;
+      padding: 0;
+      min-height: inherit;
+
+      [data-fs-button-wrapper] {
+        background-color: transparent;
+        padding: 0;
+        width: 60px;
+        height: 60px;
+
+        svg {
+          width: 26px;
+          height: 26px;
+        }
+      }
+    }
+  }
+
+
+  //alert
+  [data-fs-alert] {
+    margin-bottom: 16px;
+    height: 30px;
+    padding: 0 16px;
+    display: none;
+
+  }
+
+  //items
+  .cartItems {
+    padding:0 20px 10px;
+    li {
+      padding-top: 8px;
+    }
+    li + li {
+      margin-top: 8px;
+      border-top: 1px solid var(--fs-border-color-theme);
+    }
+  }
+
+  //footer
+  [data-fs-cart-sidebar-footer] {
+    padding: 20px !important;
+    box-shadow: 0px -4px 16px 0px #00000014;
+  }
+
+  [data-fs-order-summary] {
+    padding-top: 20px;
+  }
+
+  li {
+    span {
+      font-size: 15px;
+    }
+  }
+
+  [data-testid="checkout-button"] {
+    [data-fs-button-wrapper] {
+      border-radius: var(--fs-border-radius);
+      background-color: var(--fs-color-main-1);
+    }
+  }
+}

@@ -33,8 +33,6 @@ yarn build
 - ➜ git commit -m "update sections"
 - ➜ git push origin yourBranch:schema
 
-
-
 ## DEPLOY
 - git pull origin main
 - yarn build

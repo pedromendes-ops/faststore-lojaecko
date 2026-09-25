@@ -1,0 +1,320 @@
+{
+  "$extends": [
+    "#/$defs/base-component"
+  ],
+  "$componentKey": "CollectionGallery",
+  "$componentTitle": "Galeria de coleção",
+  "title": "Galeria de coleção",
+  "description": "Exibe os produtos de uma coleção VTEX utilizando a listagem padrão da loja.",
+  "type": "object",
+  "required": [
+    "collectionId",
+    "filter"
+  ],
+  "properties": {
+    "collectionId": {
+      "title": "ID da coleção",
+      "description": "ID da coleção cadastrada na VTEX.",
+      "type": "string"
+    },
+    "title": {
+      "title": "Título",
+      "type": "string"
+    },
+    "itemsPerPage": {
+      "title": "Produtos por página",
+      "description": "Quantidade de produtos carregados em cada página.",
+      "type": "integer",
+      "minimum": 1,
+      "default": 12
+    },
+    "contentCards": {
+      "title": "Banners na listagem",
+      "description": "Banners que serão exibidos entre os produtos da coleção.",
+      "type": "array",
+      "items": {
+        "title": "Banner",
+        "type": "object",
+        "required": [
+          "position"
+        ],
+        "properties": {
+          "active": {
+            "title": "Ativo",
+            "type": "boolean",
+            "default": true
+          },
+          "position": {
+            "title": "Posição",
+            "description": "Posição em que o banner será inserido na listagem de produtos.",
+            "type": "integer",
+            "minimum": 1,
+            "default": 4
+          },
+          "images": {
+            "title": "Imagens",
+            "description": "Imagens exibidas dentro do banner.",
+            "type": "array",
+            "items": {
+              "title": "Imagem",
+              "type": "object",
+              "properties": {
+                "image": {
+                  "title": "Imagem desktop",
+                  "type": "string",
+                  "widget": {
+                    "ui:widget": "media-gallery",
+                    "restrictMediaTypes": {
+                      "video": true,
+                      "image": [
+                        "png",
+                        "jpg",
+                        "jpeg",
+                        "gif",
+                        "svg",
+                        "webp"
+                      ]
+                    }
+                  }
+                },
+                "imageMobile": {
+                  "title": "Imagem mobile",
+                  "type": "string",
+                  "widget": {
+                    "ui:widget": "media-gallery",
+                    "restrictMediaTypes": {
+                      "video": true,
+                      "image": [
+                        "png",
+                        "jpg",
+                        "jpeg",
+                        "gif",
+                        "svg",
+                        "webp"
+                      ]
+                    }
+                  }
+                },
+                "imageAlt": {
+                  "title": "Texto alternativo",
+                  "type": "string"
+                },
+                "link": {
+                  "title": "Link",
+                  "type": "string"
+                },
+                "linkLabel": {
+                  "title": "Descrição do link",
+                  "description": "Texto utilizado para acessibilidade do link.",
+                  "type": "string"
+                },
+                "target": {
+                  "title": "Abrir link em",
+                  "type": "string",
+                  "enum": [
+                    "_self",
+                    "_blank"
+                  ],
+                  "enumNames": [
+                    "Mesma janela",
+                    "Nova janela"
+                  ],
+                  "default": "_self"
+                }
+              }
+            }
+          },
+          "title": {
+            "title": "Título",
+            "type": "string"
+          },
+          "text": {
+            "title": "Texto",
+            "type": "string"
+          },
+          "columnsDesktop": {
+            "title": "Colunas ocupadas - Desktop",
+            "description": "Quantidade de colunas da grade que o banner ocupará no desktop.",
+            "type": "integer",
+            "enum": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "enumNames": [
+              "1 coluna",
+              "2 colunas",
+              "3 colunas",
+              "4 colunas"
+            ],
+            "default": 1
+          },
+          "columnsTablet": {
+            "title": "Colunas ocupadas - Tablet",
+            "description": "Quantidade de colunas da grade que o banner ocupará no tablet.",
+            "type": "integer",
+            "enum": [
+              1,
+              2,
+              3
+            ],
+            "enumNames": [
+              "1 coluna",
+              "2 colunas",
+              "3 colunas"
+            ],
+            "default": 1
+          },
+          "columnsMobile": {
+            "title": "Colunas ocupadas - Mobile",
+            "description": "Quantidade de colunas da grade que o banner ocupará no mobile.",
+            "type": "integer",
+            "enum": [
+              1,
+              2
+            ],
+            "enumNames": [
+              "1 coluna",
+              "2 colunas"
+            ],
+            "default": 1
+          },
+          "textPosition": {
+            "title": "Posição do texto",
+            "type": "string",
+            "enum": [
+              "below",
+              "overlay-bottom",
+              "overlay-center"
+            ],
+            "enumNames": [
+              "Abaixo da imagem",
+              "Sobre a imagem - Inferior",
+              "Sobre a imagem - Centralizado"
+            ],
+            "default": "below"
+          },
+          "textAlign": {
+            "title": "Alinhamento do texto",
+            "type": "string",
+            "enum": [
+              "left",
+              "center",
+              "right"
+            ],
+            "enumNames": [
+              "Esquerda",
+              "Centro",
+              "Direita"
+            ],
+            "default": "left"
+          }
+        }
+      }
+    },
+    "filter": {
+      "title": "Filtros",
+      "type": "object",
+      "properties": {
+        "title": {
+          "title": "Título dos filtros",
+          "type": "string",
+          "default": "Filtros"
+        },
+        "ordering": {
+          "title": "Ordenação dos filtros",
+          "description": "Configura a ordem dos grupos de filtros e dos valores exibidos dentro deles.",
+          "type": "object",
+          "properties": {
+            "groups": {
+              "title": "Ordenação dos filtros",
+              "type": "string",
+              "enum": [
+                "default",
+                "asc",
+                "desc"
+              ],
+              "enumNames": [
+                "Padrão da VTEX",
+                "A - Z",
+                "Z - A"
+              ],
+              "default": "default"
+            },
+            "values": {
+              "title": "Ordenação das opções",
+              "description": "Define a ordenação das opções dentro de cada filtro.",
+              "type": "string",
+              "enum": [
+                "default",
+                "asc",
+                "desc"
+              ],
+              "enumNames": [
+                "Padrão da VTEX",
+                "A - Z",
+                "Z - A"
+              ],
+              "default": "default"
+            },
+            "lastKeys": {
+              "title": "Filtros no final",
+              "description": "Informe os nomes dos filtros que devem ficar no final, separados por vírgula. Exemplo: Preço, Disponibilidade.",
+              "type": "string"
+            },
+            "pinned": {
+              "title": "Posição dos filtros",
+              "description": "Permite definir manualmente a posição de filtros específicos.",
+              "type": "array",
+              "items": {
+                "title": "Filtro",
+                "type": "object",
+                "required": [
+                  "label",
+                  "position"
+                ],
+                "properties": {
+                  "label": {
+                    "title": "Nome do filtro",
+                    "description": "Exemplo: Marca, Cor ou Preço.",
+                    "type": "string"
+                  },
+                  "position": {
+                    "title": "Posição",
+                    "description": "A primeira posição é 1.",
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                }
+              }
+            }
+          }
+        },
+        "hiddenFilter": {
+          "title": "Filtros ocultos",
+          "description": "Filtros que não devem ser exibidos na listagem.",
+          "type": "array",
+          "items": {
+            "title": "Filtro oculto",
+            "type": "object",
+            "required": [
+              "label"
+            ],
+            "properties": {
+              "label": {
+                "title": "Nome do filtro",
+                "description": "Exemplo: Departamento.",
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "readOnly": false,
+  "writeOnly": false,
+  "deprecated": false,
+  "$abstract": false
+}

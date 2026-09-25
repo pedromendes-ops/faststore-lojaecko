@@ -1,0 +1,245 @@
+{
+  "$extends": [
+    "#/$defs/base-component"
+  ],
+  "$componentKey": "ProductShelfCustom",
+  "$componentTitle": "Vitrine de Produtos",
+  "title": "Vitrine de Produtos",
+  "description": "Vitrine de produtos por coleção.",
+  "type": "object",
+  "required": [
+    "numberOfItems",
+    "after",
+    "sort"
+  ],
+  "properties": {
+    "title": {
+      "type": "string",
+      "title": "Título"
+    },
+    "numberOfItems": {
+      "type": "integer",
+      "title": "Quantidade de produtos",
+      "default": 10,
+      "description": "Quantidade total de produtos carregados pela vitrine."
+    },
+    "itemsPerPage": {
+      "type": "integer",
+      "title": "Itens por página",
+      "default": 5
+    },
+    "after": {
+      "type": "string",
+      "title": "Paginação inicial",
+      "default": "0"
+    },
+    "sort": {
+      "title": "Ordenação",
+      "type": "string",
+      "default": "score_desc",
+      "enum": [
+        "discount_desc",
+        "name_asc",
+        "name_desc",
+        "orders_desc",
+        "price_asc",
+        "price_desc",
+        "release_desc",
+        "score_desc"
+      ],
+      "enumNames": [
+        "Maior desconto",
+        "Nome: A-Z",
+        "Nome: Z-A",
+        "Mais vendidos",
+        "Menor preço",
+        "Maior preço",
+        "Lançamentos",
+        "Relevância"
+      ]
+    },
+    "selectedFacets": {
+      "title": "Coleção",
+      "type": "array",
+      "items": {
+        "title": "Coleção",
+        "type": "object",
+        "required": [
+          "key",
+          "value"
+        ],
+        "properties": {
+          "key": {
+            "title": "Tipo",
+            "type": "string",
+            "default": "productClusterIds"
+          },
+          "value": {
+            "title": "ID da coleção",
+            "description": "Informe o ID da coleção VTEX.",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "carouselConfiguration": {
+      "title": "Configuração do Slider",
+      "type": "object",
+      "properties": {
+        "columnsDesktop": {
+          "title": "Produtos visíveis - Desktop",
+          "description": "Quantidade de produtos visíveis no desktop.",
+          "type": "number",
+          "default": 4
+        },
+        "columnsTablet": {
+          "title": "Produtos visíveis - Tablet",
+          "description": "Quantidade de produtos visíveis no tablet.",
+          "type": "number",
+          "default": 2
+        },
+        "columnsPhone": {
+          "title": "Produtos visíveis - Celular",
+          "description": "Quantidade de produtos visíveis no celular.",
+          "type": "number",
+          "default": 1
+        },
+        "gap": {
+          "title": "Espaçamento entre produtos",
+          "description": "Espaçamento entre os produtos em pixels.",
+          "type": "number",
+          "default": 16
+        },
+        "align": {
+          "title": "Alinhamento do Slider",
+          "type": "object",
+          "properties": {
+            "desktop": {
+              "title": "Desktop",
+              "type": "string",
+              "enum": [
+                "default",
+                "center",
+                "container-start"
+              ],
+              "enumNames": [
+                "Padrão",
+                "Centralizado",
+                "Início do container"
+              ],
+              "default": "default"
+            },
+            "tablet": {
+              "title": "Tablet",
+              "type": "string",
+              "enum": [
+                "default",
+                "center",
+                "container-start"
+              ],
+              "enumNames": [
+                "Padrão",
+                "Centralizado",
+                "Início do container"
+              ],
+              "default": "default"
+            },
+            "phone": {
+              "title": "Celular",
+              "type": "string",
+              "enum": [
+                "default",
+                "center",
+                "container-start"
+              ],
+              "enumNames": [
+                "Padrão",
+                "Centralizado",
+                "Início do container"
+              ],
+              "default": "default"
+            }
+          }
+        },
+        "peek": {
+          "title": "Prévia do próximo produto",
+          "description": "Quantidade em pixels do próximo produto que ficará visível.",
+          "type": "object",
+          "properties": {
+            "desktop": {
+              "title": "Desktop",
+              "type": "number",
+              "default": 0
+            },
+            "tablet": {
+              "title": "Tablet",
+              "type": "number",
+              "default": 0
+            },
+            "phone": {
+              "title": "Celular",
+              "type": "number",
+              "default": 0
+            }
+          }
+        },
+        "showArrows": {
+          "title": "Exibir setas",
+          "type": "boolean",
+          "default": true
+        },
+        "showDots": {
+          "title": "Exibir paginação",
+          "description": "Exibe os indicadores de paginação abaixo do slider.",
+          "type": "boolean",
+          "default": false
+        },
+        "infiniteMode": {
+          "title": "Slider infinito",
+          "type": "boolean",
+          "default": false
+        },
+        "autoPlay": {
+          "title": "Autoplay",
+          "description": "Avança os produtos automaticamente.",
+          "type": "boolean",
+          "default": false
+        },
+        "autoPlayInterval": {
+          "title": "Intervalo do autoplay",
+          "description": "Tempo entre as transições em milissegundos.",
+          "type": "number",
+          "default": 5000
+        }
+      }
+    },
+    "productCardConfiguration": {
+      "title": "Configuração do Card de Produto",
+      "type": "object",
+      "properties": {
+        "showDiscountPercentage": {
+          "title": "Exibir percentual de desconto",
+          "description": "Exibe no card o percentual de desconto do produto.",
+          "type": "boolean",
+          "default": true
+        },
+        "showDiscountValue": {
+          "title": "Exibir valor economizado",
+          "description": "Exibe no card o valor economizado quando o produto possuir desconto.",
+          "type": "boolean",
+          "default": true
+        },
+        "pixDiscountPercentage": {
+          "title": "Desconto no PIX (%)",
+          "description": "Informe o percentual de desconto no PIX. Deixe vazio ou 0 para não exibir.",
+          "type": "number",
+          "default": 0
+        }
+      }
+    }
+  },
+  "readOnly": false,
+  "writeOnly": false,
+  "deprecated": false,
+  "$abstract": false
+}

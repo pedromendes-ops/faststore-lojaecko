@@ -1,0 +1,25 @@
+.SocialMedia {
+    p {
+        margin-bottom: 5px;
+        font-size: 12px;
+    }
+    .links {
+        column-gap: 8px;
+        @media(max-width: 1024px){
+            width: 100%;
+            justify-content: center;
+        }
+    }
+
+    .labelLink {
+        display: block;
+        width: 24px;
+        height: 24px;
+
+        img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+    }
+}

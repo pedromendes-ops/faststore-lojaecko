@@ -1,0 +1,2483 @@
+{
+  "$base": "vtex.faststore@4",
+  "components": {
+    "AboutText": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "AboutText",
+      "$componentTitle": "Texto Sobre",
+      "title": "Texto Sobre",
+      "description": "Bloco de texto de apoio sobre a Loja.",
+      "type": "object",
+      "properties": {
+        "config": {
+          "title": "Configurações do Bloco",
+          "type": "object",
+          "properties": {
+            "active": {
+              "title": "Ativo?",
+              "type": "boolean",
+              "default": true
+            },
+            "grid": {
+              "title": "Largura do banner",
+              "description": "Define se o banner ocupará toda a largura disponível ou ficará limitado ao container da loja.",
+              "type": "string",
+              "default": "full",
+              "enum": [
+                "full",
+                "container"
+              ],
+              "enumNames": [
+                "Largura total",
+                "Container"
+              ]
+            }
+          }
+        },
+        "title": {
+          "title": "Título",
+          "type": "string",
+          "default": "Sobre a loja"
+        },
+        "shortText": {
+          "title": "Exibir uma previa do texto",
+          "type": "string"
+        },
+        "longText": {
+          "title": "Texto",
+          "description": "Texto completo",
+          "type": "string",
+          "widget": {
+            "ui:widget": "draftjs-rich-text"
+          }
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    },
+    "Banners": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "Banners",
+      "$componentTitle": "Banners",
+      "title": "Banners",
+      "description": "Componente de banners com suporte a grid ou slider responsivo.",
+      "type": "object",
+      "properties": {
+        "config": {
+          "title": "Configurações",
+          "type": "object",
+          "properties": {
+            "active": {
+              "title": "Ativo?",
+              "type": "boolean",
+              "default": true
+            },
+            "grid": {
+              "title": "Largura da seção",
+              "type": "string",
+              "default": "container",
+              "enum": [
+                "container",
+                "full"
+              ],
+              "enumNames": [
+                "Container",
+                "Largura total"
+              ]
+            },
+            "marginTop": {
+              "title": "Margem superior",
+              "description": "Espaçamento superior da seção em pixels.",
+              "type": "number",
+              "default": 0,
+              "minimum": 0
+            },
+            "priority": {
+              "title": "Priorizar primeira imagem?",
+              "description": "Utiliza carregamento prioritário na primeira imagem da seção. Recomendado apenas para conteúdos próximos ao topo da página.",
+              "type": "boolean",
+              "default": false
+            },
+            "layout": {
+              "title": "Layout responsivo",
+              "type": "object",
+              "properties": {
+                "desktop": {
+                  "title": "Layout desktop",
+                  "type": "string",
+                  "default": "grid",
+                  "enum": [
+                    "grid",
+                    "slider"
+                  ],
+                  "enumNames": [
+                    "Grid",
+                    "Slider"
+                  ]
+                },
+                "columnsDesktop": {
+                  "title": "Colunas no desktop",
+                  "description": "Quantidade de banners visíveis por linha ou dentro da largura do container.",
+                  "type": "number",
+                  "default": 3,
+                  "minimum": 1
+                },
+                "heightDesktop": {
+                  "title": "Altura desktop",
+                  "description": "Altura dos banners em pixels.",
+                  "type": "number",
+                  "default": 300,
+                  "minimum": 1
+                },
+                "tablet": {
+                  "title": "Layout tablet",
+                  "type": "string",
+                  "default": "grid",
+                  "enum": [
+                    "grid",
+                    "slider"
+                  ],
+                  "enumNames": [
+                    "Grid",
+                    "Slider"
+                  ]
+                },
+                "columnsTablet": {
+                  "title": "Colunas no tablet",
+                  "description": "Quantidade de banners visíveis por linha ou dentro da largura do container.",
+                  "type": "number",
+                  "default": 2,
+                  "minimum": 1
+                },
+                "heightTablet": {
+                  "title": "Altura tablet",
+                  "description": "Altura dos banners em pixels.",
+                  "type": "number",
+                  "default": 260,
+                  "minimum": 1
+                },
+                "phone": {
+                  "title": "Layout mobile",
+                  "type": "string",
+                  "default": "slider",
+                  "enum": [
+                    "grid",
+                    "slider"
+                  ],
+                  "enumNames": [
+                    "Grid",
+                    "Slider"
+                  ]
+                },
+                "columnsPhone": {
+                  "title": "Colunas no mobile",
+                  "description": "Quantidade de banners visíveis por linha ou dentro da largura do container.",
+                  "type": "number",
+                  "default": 1,
+                  "minimum": 1
+                },
+                "heightPhone": {
+                  "title": "Altura mobile",
+                  "description": "Altura dos banners em pixels.",
+                  "type": "number",
+                  "default": 220,
+                  "minimum": 1
+                },
+                "gap": {
+                  "title": "Espaçamento entre banners",
+                  "description": "Espaçamento entre os itens em pixels.",
+                  "type": "number",
+                  "default": 16,
+                  "minimum": 0
+                }
+              }
+            },
+            "style": {
+              "title": "Estilo",
+              "type": "object",
+              "properties": {
+                "zoom": {
+                  "title": "Zoom no hover?",
+                  "type": "boolean",
+                  "default": false
+                },
+                "radius": {
+                  "title": "Bordas arredondadas?",
+                  "type": "boolean",
+                  "default": false
+                },
+                "shadow": {
+                  "title": "Aplicar sombra?",
+                  "type": "boolean",
+                  "default": false
+                }
+              }
+            },
+            "slider": {
+              "title": "Configurações do slider",
+              "type": "object",
+              "properties": {
+                "align": {
+                  "title": "Alinhamento",
+                  "type": "object",
+                  "properties": {
+                    "desktop": {
+                      "title": "Desktop",
+                      "type": "string",
+                      "default": "default",
+                      "enum": [
+                        "default",
+                        "center",
+                        "container-start"
+                      ],
+                      "enumNames": [
+                        "Normal",
+                        "Centralizado",
+                        "Iniciar no container"
+                      ]
+                    },
+                    "tablet": {
+                      "title": "Tablet",
+                      "type": "string",
+                      "default": "default",
+                      "enum": [
+                        "default",
+                        "center",
+                        "container-start"
+                      ],
+                      "enumNames": [
+                        "Normal",
+                        "Centralizado",
+                        "Iniciar no container"
+                      ]
+                    },
+                    "phone": {
+                      "title": "Mobile",
+                      "type": "string",
+                      "default": "center",
+                      "enum": [
+                        "default",
+                        "center",
+                        "container-start"
+                      ],
+                      "enumNames": [
+                        "Normal",
+                        "Centralizado",
+                        "Iniciar no container"
+                      ]
+                    }
+                  }
+                },
+                "peek": {
+                  "title": "Exibir parte do próximo banner",
+                  "description": "Quantidade em pixels do próximo banner que deve permanecer visível no modo Iniciar no container.",
+                  "type": "object",
+                  "properties": {
+                    "desktop": {
+                      "title": "Desktop",
+                      "type": "number",
+                      "default": 0,
+                      "minimum": 0
+                    },
+                    "tablet": {
+                      "title": "Tablet",
+                      "type": "number",
+                      "default": 0,
+                      "minimum": 0
+                    },
+                    "phone": {
+                      "title": "Mobile",
+                      "type": "number",
+                      "default": 0,
+                      "minimum": 0
+                    }
+                  }
+                },
+                "showDots": {
+                  "title": "Exibir paginação?",
+                  "type": "boolean",
+                  "default": false
+                },
+                "showArrows": {
+                  "title": "Exibir setas?",
+                  "type": "boolean",
+                  "default": true
+                },
+                "infiniteMode": {
+                  "title": "Slider infinito?",
+                  "type": "boolean",
+                  "default": false
+                },
+                "autoPlay": {
+                  "title": "Autoplay?",
+                  "type": "boolean",
+                  "default": false
+                },
+                "autoPlayInterval": {
+                  "title": "Intervalo do autoplay",
+                  "description": "Tempo entre as trocas automáticas em milissegundos.",
+                  "type": "number",
+                  "default": 5000,
+                  "minimum": 1000
+                }
+              }
+            }
+          }
+        },
+        "items": {
+          "title": "Banners",
+          "type": "array",
+          "items": {
+            "title": "Banner",
+            "type": "object",
+            "properties": {
+              "active": {
+                "title": "Ativo?",
+                "type": "boolean",
+                "default": true
+              },
+              "image": {
+                "title": "Imagem desktop",
+                "type": "string",
+                "widget": {
+                  "ui:widget": "media-gallery",
+                  "restrictMediaTypes": {
+                    "video": true,
+                    "image": [
+                      "png",
+                      "jpg",
+                      "jpeg",
+                      "gif",
+                      "svg",
+                      "webp"
+                    ]
+                  }
+                }
+              },
+              "imageMobile": {
+                "title": "Imagem mobile",
+                "description": "Opcional. Caso não seja preenchida, utiliza a imagem desktop.",
+                "type": "string",
+                "widget": {
+                  "ui:widget": "media-gallery",
+                  "restrictMediaTypes": {
+                    "video": true,
+                    "image": [
+                      "png",
+                      "jpg",
+                      "jpeg",
+                      "gif",
+                      "svg",
+                      "webp"
+                    ]
+                  }
+                }
+              },
+              "alt": {
+                "title": "Texto alternativo",
+                "description": "Descrição da imagem para acessibilidade. Deixe vazio caso a imagem seja apenas decorativa.",
+                "type": "string"
+              },
+              "href": {
+                "title": "Link",
+                "description": "Opcional. Ex.: /categoria ou https://...",
+                "type": "string"
+              },
+              "target": {
+                "title": "Abrir link em",
+                "type": "string",
+                "default": "_self",
+                "enum": [
+                  "_self",
+                  "_blank"
+                ],
+                "enumNames": [
+                  "Mesma aba",
+                  "Nova aba"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    },
+    "Cards": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "Cards",
+      "$componentTitle": "Cards",
+      "title": "Cards",
+      "description": "Componente de cards com suporte a grid ou slider responsivo.",
+      "type": "object",
+      "properties": {
+        "config": {
+          "title": "Configurações",
+          "type": "object",
+          "properties": {
+            "active": {
+              "title": "Ativo?",
+              "type": "boolean",
+              "default": true
+            },
+            "grid": {
+              "title": "Largura da seção",
+              "type": "string",
+              "default": "container",
+              "enum": [
+                "container",
+                "full"
+              ],
+              "enumNames": [
+                "Container",
+                "Largura total"
+              ]
+            },
+            "marginTop": {
+              "title": "Margem superior",
+              "description": "Espaçamento superior da seção em pixels.",
+              "type": "number",
+              "default": 0,
+              "minimum": 0
+            },
+            "priority": {
+              "title": "Priorizar primeira imagem?",
+              "description": "Utiliza carregamento prioritário na primeira imagem da seção. Recomendado apenas para conteúdos próximos ao topo da página.",
+              "type": "boolean",
+              "default": false
+            },
+            "layout": {
+              "title": "Layout responsivo",
+              "type": "object",
+              "properties": {
+                "desktop": {
+                  "title": "Layout desktop",
+                  "type": "string",
+                  "default": "grid",
+                  "enum": [
+                    "grid",
+                    "slider"
+                  ],
+                  "enumNames": [
+                    "Grid",
+                    "Slider"
+                  ]
+                },
+                "columnsDesktop": {
+                  "title": "Colunas no desktop",
+                  "description": "Quantidade de banners visíveis por linha ou dentro da largura do container.",
+                  "type": "number",
+                  "default": 3,
+                  "minimum": 1
+                },
+                "heightDesktop": {
+                  "title": "Altura desktop",
+                  "description": "Altura dos banners em pixels.",
+                  "type": "number",
+                  "default": 300,
+                  "minimum": 1
+                },
+                "tablet": {
+                  "title": "Layout tablet",
+                  "type": "string",
+                  "default": "grid",
+                  "enum": [
+                    "grid",
+                    "slider"
+                  ],
+                  "enumNames": [
+                    "Grid",
+                    "Slider"
+                  ]
+                },
+                "columnsTablet": {
+                  "title": "Colunas no tablet",
+                  "description": "Quantidade de banners visíveis por linha ou dentro da largura do container.",
+                  "type": "number",
+                  "default": 2,
+                  "minimum": 1
+                },
+                "heightTablet": {
+                  "title": "Altura tablet",
+                  "description": "Altura dos banners em pixels.",
+                  "type": "number",
+                  "default": 260,
+                  "minimum": 1
+                },
+                "phone": {
+                  "title": "Layout mobile",
+                  "type": "string",
+                  "default": "slider",
+                  "enum": [
+                    "grid",
+                    "slider"
+                  ],
+                  "enumNames": [
+                    "Grid",
+                    "Slider"
+                  ]
+                },
+                "columnsPhone": {
+                  "title": "Colunas no mobile",
+                  "description": "Quantidade de banners visíveis por linha ou dentro da largura do container.",
+                  "type": "number",
+                  "default": 1,
+                  "minimum": 1
+                },
+                "heightPhone": {
+                  "title": "Altura mobile",
+                  "description": "Altura dos banners em pixels.",
+                  "type": "number",
+                  "default": 220,
+                  "minimum": 1
+                },
+                "gap": {
+                  "title": "Espaçamento entre banners",
+                  "description": "Espaçamento entre os itens em pixels.",
+                  "type": "number",
+                  "default": 16,
+                  "minimum": 0
+                },
+                "position": {
+                  "title": "Posição do texto",
+                  "description": "Dentro ou fora do banner",
+                  "type": "string",
+                  "default": "out",
+                  "enum": [
+                    "inner",
+                    "out"
+                  ],
+                  "enumNames": [
+                    "Dentro",
+                    "Fora"
+                  ]
+                }
+              }
+            },
+            "style": {
+              "title": "Estilo",
+              "type": "object",
+              "properties": {
+                "radius": {
+                  "title": "Bordas arredondadas?",
+                  "type": "boolean",
+                  "default": false
+                },
+                "background": {
+                  "title": "Cor de fundo",
+                  "type": "string",
+                  "description": "Hexadecimal"
+                }
+              }
+            },
+            "slider": {
+              "title": "Configurações do slider",
+              "type": "object",
+              "properties": {
+                "align": {
+                  "title": "Alinhamento",
+                  "type": "object",
+                  "properties": {
+                    "desktop": {
+                      "title": "Desktop",
+                      "type": "string",
+                      "default": "default",
+                      "enum": [
+                        "default",
+                        "center",
+                        "container-start"
+                      ],
+                      "enumNames": [
+                        "Normal",
+                        "Centralizado",
+                        "Iniciar no container"
+                      ]
+                    },
+                    "tablet": {
+                      "title": "Tablet",
+                      "type": "string",
+                      "default": "default",
+                      "enum": [
+                        "default",
+                        "center",
+                        "container-start"
+                      ],
+                      "enumNames": [
+                        "Normal",
+                        "Centralizado",
+                        "Iniciar no container"
+                      ]
+                    },
+                    "phone": {
+                      "title": "Mobile",
+                      "type": "string",
+                      "default": "center",
+                      "enum": [
+                        "default",
+                        "center",
+                        "container-start"
+                      ],
+                      "enumNames": [
+                        "Normal",
+                        "Centralizado",
+                        "Iniciar no container"
+                      ]
+                    }
+                  }
+                },
+                "peek": {
+                  "title": "Exibir parte do próximo banner",
+                  "description": "Quantidade em pixels do próximo banner que deve permanecer visível no modo Iniciar no container.",
+                  "type": "object",
+                  "properties": {
+                    "desktop": {
+                      "title": "Desktop",
+                      "type": "number",
+                      "default": 0,
+                      "minimum": 0
+                    },
+                    "tablet": {
+                      "title": "Tablet",
+                      "type": "number",
+                      "default": 0,
+                      "minimum": 0
+                    },
+                    "phone": {
+                      "title": "Mobile",
+                      "type": "number",
+                      "default": 0,
+                      "minimum": 0
+                    }
+                  }
+                },
+                "showDots": {
+                  "title": "Exibir paginação?",
+                  "type": "boolean",
+                  "default": false
+                },
+                "showArrows": {
+                  "title": "Exibir setas?",
+                  "type": "boolean",
+                  "default": true
+                },
+                "infiniteMode": {
+                  "title": "Slider infinito?",
+                  "type": "boolean",
+                  "default": false
+                },
+                "autoPlay": {
+                  "title": "Autoplay?",
+                  "type": "boolean",
+                  "default": false
+                },
+                "autoPlayInterval": {
+                  "title": "Intervalo do autoplay",
+                  "description": "Tempo entre as trocas automáticas em milissegundos.",
+                  "type": "number",
+                  "default": 5000,
+                  "minimum": 1000
+                }
+              }
+            }
+          }
+        },
+        "items": {
+          "title": "Banners",
+          "type": "array",
+          "items": {
+            "title": "Banner",
+            "type": "object",
+            "properties": {
+              "active": {
+                "title": "Ativo?",
+                "type": "boolean",
+                "default": true
+              },
+              "image": {
+                "title": "Imagem desktop",
+                "type": "string",
+                "widget": {
+                  "ui:widget": "media-gallery",
+                  "restrictMediaTypes": {
+                    "video": true,
+                    "image": [
+                      "png",
+                      "jpg",
+                      "jpeg",
+                      "gif",
+                      "svg",
+                      "webp"
+                    ]
+                  }
+                }
+              },
+              "imageMobile": {
+                "title": "Imagem mobile",
+                "description": "Opcional. Caso não seja preenchida, utiliza a imagem desktop.",
+                "type": "string",
+                "widget": {
+                  "ui:widget": "media-gallery",
+                  "restrictMediaTypes": {
+                    "video": true,
+                    "image": [
+                      "png",
+                      "jpg",
+                      "jpeg",
+                      "gif",
+                      "svg",
+                      "webp"
+                    ]
+                  }
+                }
+              },
+              "alt": {
+                "title": "Texto alternativo",
+                "description": "Descrição da imagem para acessibilidade. Deixe vazio caso a imagem seja apenas decorativa.",
+                "type": "string"
+              },
+              "href": {
+                "title": "Link",
+                "description": "Opcional. Ex.: /categoria ou https://...",
+                "type": "string"
+              },
+              "target": {
+                "title": "Abrir link em",
+                "type": "string",
+                "default": "_self",
+                "enum": [
+                  "_self",
+                  "_blank"
+                ],
+                "enumNames": [
+                  "Mesma aba",
+                  "Nova aba"
+                ]
+              },
+              "text": {
+                "title": "Texto",
+                "type": "string",
+                "widget": {
+                  "ui:widget": "draftjs-rich-text"
+                }
+              },
+              "link": {
+                "title": "Link",
+                "description": "Opcional. Ex.: Veja mais",
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    },
+    "CollectionGallery": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "CollectionGallery",
+      "$componentTitle": "Galeria de coleção",
+      "title": "Galeria de coleção",
+      "description": "Exibe os produtos de uma coleção VTEX no formato de PLP",
+      "type": "object",
+      "required": [
+        "collectionId"
+      ],
+      "properties": {
+        "collectionId": {
+          "title": "ID da coleção",
+          "description": "ID da coleção cadastrada na VTEX.",
+          "type": "string"
+        },
+        "title": {
+          "title": "Título",
+          "type": "string"
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    },
+    "FooterCustom": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "FooterCustom",
+      "$componentTitle": "Footer Custom",
+      "title": "Footer Custom",
+      "description": "Configurações gerais do rodapé da loja.",
+      "type": "object",
+      "properties": {
+        "logo": {
+          "title": "Logo",
+          "type": "string",
+          "widget": {
+            "ui:widget": "media-gallery",
+            "restrictMediaTypes": {
+              "video": true,
+              "image": [
+                "png",
+                "jpg",
+                "jpeg",
+                "gif",
+                "svg",
+                "webp"
+              ]
+            }
+          }
+        },
+        "menu": {
+          "title": "Menu",
+          "type": "object",
+          "properties": {
+            "phoneSanfona": {
+              "title": "Usar sanfona no mobile/tablet?",
+              "description": "Quando ativo, os grupos do menu ficam fechados por padrão em telas que não são desktop.",
+              "type": "boolean",
+              "default": true
+            },
+            "items": {
+              "title": "Grupos do menu",
+              "type": "array",
+              "items": {
+                "title": "Grupo",
+                "type": "object",
+                "properties": {
+                  "titleGroup": {
+                    "title": "Título do grupo",
+                    "type": "string"
+                  },
+                  "footerLinks": {
+                    "title": "Links",
+                    "type": "array",
+                    "items": {
+                      "title": "Link",
+                      "type": "object",
+                      "properties": {
+                        "text": {
+                          "title": "Texto",
+                          "type": "string"
+                        },
+                        "url": {
+                          "title": "URL",
+                          "description": "Opcional. Caso não seja preenchida, o conteúdo poderá ser exibido como texto.",
+                          "type": "string"
+                        },
+                        "target": {
+                          "title": "Abrir em",
+                          "type": "string",
+                          "default": "_self",
+                          "enum": [
+                            "_self",
+                            "_blank"
+                          ],
+                          "enumNames": [
+                            "Mesma aba",
+                            "Nova aba"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "socialMedia": {
+          "title": "Redes sociais",
+          "type": "object",
+          "properties": {
+            "showTitle": {
+              "title": "Exibir título?",
+              "type": "boolean",
+              "default": true
+            },
+            "title": {
+              "title": "Título",
+              "type": "string",
+              "default": "Siga-nos"
+            },
+            "items": {
+              "title": "Redes sociais",
+              "type": "array",
+              "items": {
+                "title": "Rede social",
+                "type": "object",
+                "properties": {
+                  "label": {
+                    "title": "Nome",
+                    "type": "string"
+                  },
+                  "image": {
+                    "title": "Ícone",
+                    "type": "string",
+                    "widget": {
+                      "ui:widget": "media-gallery",
+                      "restrictMediaTypes": {
+                        "video": true,
+                        "image": [
+                          "png",
+                          "jpg",
+                          "jpeg",
+                          "gif",
+                          "svg",
+                          "webp"
+                        ]
+                      }
+                    }
+                  },
+                  "url": {
+                    "title": "URL",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "payments": {
+          "title": "Pagamento",
+          "description": "Imagem única com as formas de pagamento aceitas.",
+          "type": "object",
+          "properties": {
+            "label": {
+              "title": "Texto alternativo",
+              "type": "string",
+              "default": "Formas de pagamento"
+            },
+            "image": {
+              "title": "Imagem",
+              "type": "string",
+              "widget": {
+                "ui:widget": "media-gallery",
+                "restrictMediaTypes": {
+                  "video": true,
+                  "image": [
+                    "png",
+                    "jpg",
+                    "jpeg",
+                    "gif",
+                    "svg",
+                    "webp"
+                  ]
+                }
+              }
+            },
+            "url": {
+              "title": "URL",
+              "description": "Opcional. Link relacionado à imagem.",
+              "type": "string"
+            }
+          }
+        },
+        "security": {
+          "title": "Segurança",
+          "type": "object",
+          "properties": {
+            "showTitle": {
+              "title": "Exibir título?",
+              "type": "boolean",
+              "default": true
+            },
+            "title": {
+              "title": "Título",
+              "type": "string",
+              "default": "Segurança"
+            },
+            "items": {
+              "title": "Selos de segurança",
+              "type": "array",
+              "items": {
+                "title": "Selo",
+                "type": "object",
+                "properties": {
+                  "label": {
+                    "title": "Texto alternativo",
+                    "type": "string"
+                  },
+                  "image": {
+                    "title": "Imagem",
+                    "type": "string",
+                    "widget": {
+                      "ui:widget": "media-gallery",
+                      "restrictMediaTypes": {
+                        "video": true,
+                        "image": [
+                          "png",
+                          "jpg",
+                          "jpeg",
+                          "gif",
+                          "svg",
+                          "webp"
+                        ]
+                      }
+                    }
+                  },
+                  "url": {
+                    "title": "URL",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "powerBy": {
+          "title": "Desenvolvido por",
+          "type": "object",
+          "properties": {
+            "showTitle": {
+              "title": "Exibir título?",
+              "type": "boolean",
+              "default": false
+            },
+            "title": {
+              "title": "Título",
+              "type": "string"
+            },
+            "items": {
+              "title": "Logos",
+              "type": "array",
+              "items": {
+                "title": "Logo",
+                "type": "object",
+                "properties": {
+                  "label": {
+                    "title": "Texto alternativo",
+                    "type": "string"
+                  },
+                  "image": {
+                    "title": "Imagem",
+                    "type": "string",
+                    "widget": {
+                      "ui:widget": "media-gallery",
+                      "restrictMediaTypes": {
+                        "video": true,
+                        "image": [
+                          "png",
+                          "jpg",
+                          "jpeg",
+                          "gif",
+                          "svg",
+                          "webp"
+                        ]
+                      }
+                    }
+                  },
+                  "url": {
+                    "title": "URL",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "copyright": {
+          "title": "Copyright",
+          "description": "Texto exibido na parte inferior do rodapé.",
+          "type": "string",
+          "widget": {
+            "ui:widget": "draftjs-rich-text"
+          }
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    },
+    "FullBanner": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "FullBanner",
+      "$componentTitle": "Full Banner",
+      "title": "Full Banner",
+      "description": "Banner principal com suporte a múltiplos slides, imagens responsivas e carousel.",
+      "type": "object",
+      "properties": {
+        "config": {
+          "title": "Configurações do Bloco",
+          "type": "object",
+          "properties": {
+            "grid": {
+              "title": "Largura do banner",
+              "description": "Define se o banner ocupará toda a largura disponível ou ficará limitado ao container da loja.",
+              "type": "string",
+              "default": "full",
+              "enum": [
+                "full",
+                "container",
+                "containerDesk"
+              ],
+              "enumNames": [
+                "Largura total",
+                "Container",
+                "Somente Desktop"
+              ]
+            },
+            "marginTop": {
+              "title": "Margem superior",
+              "description": "Espaçamento superior da seção em pixels.",
+              "type": "number",
+              "default": 0,
+              "minimum": 0
+            },
+            "height": {
+              "title": "Altura do banner",
+              "description": "Altura das imagens do banner em pixels.",
+              "type": "number",
+              "default": 300,
+              "minimum": 1
+            },
+            "priority": {
+              "title": "Priorizar carregamento?",
+              "description": "Ative apenas se este for o banner principal exibido no topo da página. O primeiro slide será carregado com prioridade.",
+              "type": "boolean",
+              "default": false
+            }
+          }
+        },
+        "slider": {
+          "title": "Configurações do Slider",
+          "type": "object",
+          "properties": {
+            "showDots": {
+              "title": "Exibir indicadores?",
+              "description": "Exibe os indicadores de paginação do carousel.",
+              "type": "boolean",
+              "default": true
+            },
+            "showArrows": {
+              "title": "Exibir setas?",
+              "description": "Exibe as setas de navegação do carousel.",
+              "type": "boolean",
+              "default": true
+            },
+            "infiniteMode": {
+              "title": "Carousel infinito?",
+              "description": "Ao chegar ao último banner, continua novamente a partir do primeiro.",
+              "type": "boolean",
+              "default": true
+            },
+            "autoPlay": {
+              "title": "Troca automática?",
+              "description": "Alterna automaticamente entre os banners.",
+              "type": "boolean",
+              "default": false
+            },
+            "autoPlayInterval": {
+              "title": "Intervalo da troca automática",
+              "description": "Tempo entre as trocas automáticas em milissegundos. Ex.: 5000 corresponde a 5 segundos.",
+              "type": "number",
+              "default": 5000,
+              "minimum": 1000
+            }
+          }
+        },
+        "items": {
+          "title": "Banners",
+          "description": "Cadastre as imagens que serão exibidas no carousel.",
+          "type": "array",
+          "items": {
+            "title": "Banner",
+            "type": "object",
+            "required": [
+              "image"
+            ],
+            "properties": {
+              "image": {
+                "title": "Imagem desktop",
+                "description": "Imagem utilizada em telas maiores.",
+                "type": "string",
+                "widget": {
+                  "ui:widget": "media-gallery",
+                  "restrictMediaTypes": {
+                    "video": true,
+                    "image": [
+                      "png",
+                      "jpg",
+                      "jpeg",
+                      "gif",
+                      "svg",
+                      "webp"
+                    ]
+                  }
+                }
+              },
+              "imageMobile": {
+                "title": "Imagem mobile",
+                "description": "Opcional. Se não for cadastrada, será utilizada a imagem desktop.",
+                "type": "string",
+                "widget": {
+                  "ui:widget": "media-gallery",
+                  "restrictMediaTypes": {
+                    "video": true,
+                    "image": [
+                      "png",
+                      "jpg",
+                      "jpeg",
+                      "gif",
+                      "svg",
+                      "webp"
+                    ]
+                  }
+                }
+              },
+              "alt": {
+                "title": "Texto alternativo",
+                "description": "Descrição da imagem para acessibilidade. Para imagens apenas decorativas, pode ser deixado vazio.",
+                "type": "string"
+              },
+              "href": {
+                "title": "Link",
+                "description": "Destino ao clicar no banner. Ex.: /ofertas ou https://exemplo.com.",
+                "type": "string"
+              },
+              "target": {
+                "title": "Abrir link em",
+                "type": "string",
+                "default": "_self",
+                "enum": [
+                  "_self",
+                  "_blank"
+                ],
+                "enumNames": [
+                  "Mesma janela",
+                  "Nova janela"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    },
+    "HeaderCustom": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "HeaderCustom",
+      "$componentTitle": "Header Custom",
+      "title": "Header Custom",
+      "description": "Topo global das páginas.",
+      "type": "object",
+      "required": [
+        "imageSrc"
+      ],
+      "properties": {
+        "legend": {
+          "type": "string",
+          "title": "Nome da loja",
+          "default": "Loja"
+        },
+        "imageSrc": {
+          "type": "string",
+          "title": "Logo",
+          "widget": {
+            "ui:widget": "media-gallery",
+            "restrictMediaTypes": {
+              "video": true,
+              "image": [
+                "png",
+                "jpg",
+                "jpeg",
+                "gif",
+                "svg",
+                "webp"
+              ]
+            }
+          }
+        },
+        "topBar": {
+          "title": "TopBar",
+          "type": "object",
+          "properties": {
+            "background": {
+              "title": "Cor de fundo",
+              "type": "string",
+              "default": "#000000",
+              "description": "Hexadecimal"
+            },
+            "items": {
+              "title": "Textos do TopBar",
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "title": "Texto",
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "title": "Texto",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "text"
+                ]
+              }
+            }
+          }
+        },
+        "search": {
+          "title": "Busca",
+          "type": "object",
+          "properties": {
+            "searchButtonDesktop": {
+              "title": "Usar botão no desktop?",
+              "type": "boolean",
+              "default": false
+            },
+            "searchButtonMobile": {
+              "title": "Usar botão no mobile?",
+              "type": "boolean",
+              "default": true
+            },
+            "placeholder": {
+              "title": "Placeholder",
+              "type": "string",
+              "default": "Encontre um produto..."
+            }
+          }
+        },
+        "welcome": {
+          "title": "Minha conta",
+          "description": "Configurações da área de identificação do cliente.",
+          "type": "object",
+          "properties": {
+            "showWishlist": {
+              "title": "Exibir lista de desejos?",
+              "type": "boolean",
+              "default": true
+            },
+            "anonymous": {
+              "title": "Usuário não logado",
+              "type": "object",
+              "properties": {
+                "title": {
+                  "title": "Título",
+                  "type": "string",
+                  "default": "Bem-vindo!"
+                },
+                "text": {
+                  "title": "Texto",
+                  "type": "string",
+                  "default": "Identifique-se aqui"
+                }
+              }
+            },
+            "logged": {
+              "title": "Usuário logado",
+              "type": "object",
+              "properties": {
+                "title": {
+                  "title": "Título",
+                  "type": "string",
+                  "default": "Olá!"
+                },
+                "text": {
+                  "title": "Texto",
+                  "type": "string",
+                  "default": "Acessar a minha conta"
+                }
+              }
+            }
+          }
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    },
+    "NewsletterLead": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "NewsletterLead",
+      "$componentTitle": "Newsletter Lead",
+      "title": "Newsletter Lead",
+      "description": "Bloco de captura de leads para newsletter.",
+      "type": "object",
+      "properties": {
+        "active": {
+          "title": "Ativo?",
+          "type": "boolean",
+          "default": true
+        },
+        "grid": {
+          "title": "Largura do banner",
+          "description": "Define se o banner ocupará toda a largura disponível ou ficará limitado ao container da loja.",
+          "type": "string",
+          "default": "full",
+          "enum": [
+            "full",
+            "container"
+          ],
+          "enumNames": [
+            "Largura total",
+            "Container"
+          ]
+        },
+        "layout": {
+          "title": "Layout",
+          "type": "string",
+          "default": "row",
+          "enum": [
+            "row",
+            "column"
+          ],
+          "enumNames": [
+            "Horizontal",
+            "Vertical"
+          ]
+        },
+        "text": {
+          "title": "Texto",
+          "description": "Texto exibido ao lado ou acima do formulário.",
+          "type": "string",
+          "widget": {
+            "ui:widget": "draftjs-rich-text"
+          }
+        },
+        "successMessage": {
+          "title": "Mensagem de sucesso",
+          "type": "string",
+          "default": "Cadastro efetuado com sucesso!"
+        },
+        "formFields": {
+          "title": "Campos do formulário",
+          "description": "Configure os campos exibidos no formulário.",
+          "type": "array",
+          "items": {
+            "title": "Campo",
+            "type": "object",
+            "properties": {
+              "type": {
+                "title": "Tipo",
+                "type": "string",
+                "default": "text",
+                "enum": [
+                  "text",
+                  "email",
+                  "tel",
+                  "checkbox",
+                  "radio",
+                  "select",
+                  "submit"
+                ],
+                "enumNames": [
+                  "Texto",
+                  "E-mail",
+                  "Telefone",
+                  "Checkbox",
+                  "Radio",
+                  "Select",
+                  "Botão de envio"
+                ]
+              },
+              "name": {
+                "title": "Nome do campo",
+                "description": "Chave enviada no payload. Ex.: name, email, optin.",
+                "type": "string"
+              },
+              "label": {
+                "title": "Label",
+                "type": "string"
+              },
+              "placeholder": {
+                "title": "Placeholder",
+                "type": "string"
+              },
+              "required": {
+                "title": "Obrigatório?",
+                "type": "boolean",
+                "default": false
+              },
+              "options": {
+                "title": "Opções",
+                "description": "Utilizado apenas para campos Radio e Select.",
+                "type": "array",
+                "items": {
+                  "title": "Opção",
+                  "type": "object",
+                  "properties": {
+                    "label": {
+                      "title": "Label",
+                      "type": "string"
+                    },
+                    "value": {
+                      "title": "Valor",
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    },
+    "PitBar": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "PitBar",
+      "$componentTitle": "Pit Bar",
+      "title": "Pit Bar",
+      "description": "Barra de benefícios",
+      "type": "object",
+      "properties": {
+        "config": {
+          "title": "Configurações do Bloco",
+          "type": "object",
+          "properties": {
+            "label": {
+              "title": "Identificação do bloco",
+              "type": "string",
+              "default": "Incentivos"
+            },
+            "grid": {
+              "title": "Largura do banner",
+              "description": "Define se o banner ocupará toda a largura disponível ou ficará limitado ao container da loja.",
+              "type": "string",
+              "default": "full",
+              "enum": [
+                "full",
+                "container"
+              ],
+              "enumNames": [
+                "Largura total",
+                "Container"
+              ]
+            },
+            "marginTop": {
+              "title": "Margem superior",
+              "description": "Espaçamento superior da seção em pixels.",
+              "type": "number",
+              "default": 0,
+              "minimum": 0
+            },
+            "background": {
+              "title": "Cor do fundo",
+              "description": "Usar hexadecimal. Ex: #cccccc",
+              "type": "string"
+            }
+          }
+        },
+        "items": {
+          "title": "Cards",
+          "description": "Cadastre as informações, imagem e texto.",
+          "type": "array",
+          "items": {
+            "title": "Ícone",
+            "type": "object",
+            "required": [
+              "image",
+              "line1",
+              "line2"
+            ],
+            "properties": {
+              "line1": {
+                "title": "Texto da primeira linha",
+                "type": "string"
+              },
+              "image": {
+                "title": "Imagem desktop",
+                "description": "Imagem utilizada em telas maiores.",
+                "type": "string",
+                "widget": {
+                  "ui:widget": "media-gallery",
+                  "restrictMediaTypes": {
+                    "video": true,
+                    "image": [
+                      "png",
+                      "jpg",
+                      "jpeg",
+                      "gif",
+                      "svg",
+                      "webp"
+                    ]
+                  }
+                }
+              },
+              "alt": {
+                "title": "Texto alternativo",
+                "description": "Descrição da imagem para acessibilidade. Para imagens apenas decorativas, pode ser deixado vazio.",
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    },
+    "Post": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "Post",
+      "$componentTitle": "Postagem",
+      "title": "Postagem",
+      "description": "Post de conteúdo com imagem, texto e link",
+      "type": "object",
+      "properties": {
+        "config": {
+          "title": "Configurações",
+          "type": "object",
+          "properties": {
+            "label": {
+              "title": "Identificação da seção",
+              "description": "Descrição utilizada para identificar a seção",
+              "type": "string"
+            },
+            "active": {
+              "title": "Ativo",
+              "type": "boolean",
+              "default": true
+            },
+            "grid": {
+              "title": "Largura da seção",
+              "type": "string",
+              "enum": [
+                "container",
+                "full"
+              ],
+              "enumNames": [
+                "Container",
+                "Largura total"
+              ],
+              "default": "container"
+            },
+            "customClass": {
+              "title": "Classe personalizada",
+              "description": "Classe CSS adicional para customização específica desta seção",
+              "type": "string"
+            },
+            "marginTop": {
+              "title": "Margem superior",
+              "description": "Valor em pixels",
+              "type": "number"
+            }
+          }
+        },
+        "layout": {
+          "title": "Layout",
+          "type": "object",
+          "properties": {
+            "desktop": {
+              "title": "Desktop",
+              "type": "string",
+              "enum": [
+                "top",
+                "bottom",
+                "left",
+                "right"
+              ],
+              "enumNames": [
+                "Imagem acima",
+                "Imagem abaixo",
+                "Imagem à esquerda",
+                "Imagem à direita"
+              ],
+              "default": "left"
+            },
+            "tablet": {
+              "title": "Tablet",
+              "type": "string",
+              "enum": [
+                "top",
+                "bottom",
+                "left",
+                "right"
+              ],
+              "enumNames": [
+                "Imagem acima",
+                "Imagem abaixo",
+                "Imagem à esquerda",
+                "Imagem à direita"
+              ],
+              "default": "bottom"
+            },
+            "phone": {
+              "title": "Celular",
+              "type": "string",
+              "enum": [
+                "top",
+                "bottom",
+                "left",
+                "right"
+              ],
+              "enumNames": [
+                "Imagem acima",
+                "Imagem abaixo",
+                "Imagem à esquerda",
+                "Imagem à direita"
+              ],
+              "default": "bottom"
+            },
+            "gap": {
+              "title": "Espaçamento",
+              "description": "Espaçamento entre imagem e conteúdo em pixels",
+              "type": "number",
+              "default": 16
+            }
+          }
+        },
+        "content": {
+          "title": "Conteúdo",
+          "type": "object",
+          "properties": {
+            "imageSrc": {
+              "title": "Imagem",
+              "type": "string",
+              "widget": {
+                "ui:widget": "media-gallery",
+                "restrictMediaTypes": {
+                  "video": true,
+                  "image": [
+                    "png",
+                    "jpg",
+                    "jpeg",
+                    "gif",
+                    "svg",
+                    "webp"
+                  ]
+                }
+              }
+            },
+            "imageAlt": {
+              "title": "Texto alternativo da imagem",
+              "description": "Descrição da imagem para acessibilidade",
+              "type": "string"
+            },
+            "text": {
+              "title": "Texto",
+              "type": "string",
+              "widget": {
+                "ui:widget": "draftjs-rich-text"
+              }
+            },
+            "linkText": {
+              "title": "Texto do link",
+              "type": "string"
+            },
+            "linkHref": {
+              "title": "URL do link",
+              "type": "string"
+            },
+            "linkTarget": {
+              "title": "Abrir link",
+              "type": "string",
+              "enum": [
+                "_self",
+                "_blank"
+              ],
+              "enumNames": [
+                "Na mesma janela",
+                "Em uma nova janela"
+              ],
+              "default": "_self"
+            },
+            "linkStyle": {
+              "title": "Estilo do link",
+              "type": "string",
+              "enum": [
+                "button",
+                "link"
+              ],
+              "enumNames": [
+                "Botão",
+                "Link"
+              ],
+              "default": "button"
+            }
+          }
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    },
+    "ProductGalleryCustom": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "ProductGalleryCustom",
+      "$componentTitle": "Product Gallery Custom",
+      "title": "Product Gallery Custom",
+      "description": "Configurações da listagem de produtos da PLP e busca.",
+      "type": "object",
+      "required": [
+        "filter"
+      ],
+      "properties": {
+        "config": {
+          "title": "Configurações",
+          "type": "object",
+          "properties": {
+            "columnsDesktop": {
+              "title": "Produtos por linha",
+              "description": "Quantidade inicial de produtos exibidos por linha no desktop.",
+              "type": "integer",
+              "enum": [
+                3,
+                4
+              ],
+              "enumNames": [
+                "3 produtos",
+                "4 produtos"
+              ],
+              "default": 4
+            },
+            "filtersOpen": {
+              "title": "Exibir filtros inicialmente",
+              "description": "Define se a coluna de filtros inicia aberta no desktop.",
+              "type": "boolean",
+              "default": true
+            }
+          }
+        },
+        "labels": {
+          "title": "Textos",
+          "type": "object",
+          "properties": {
+            "filter": {
+              "title": "Texto do botão de filtro",
+              "type": "string",
+              "default": "Filtrar"
+            },
+            "results": {
+              "title": "Texto da quantidade de resultados",
+              "type": "string",
+              "default": "Resultados"
+            }
+          }
+        },
+        "filter": {
+          "title": "Filtros",
+          "type": "object",
+          "required": [
+            "title",
+            "mobileOnly"
+          ],
+          "properties": {
+            "title": {
+              "title": "Título dos filtros",
+              "type": "string",
+              "default": "Filtros"
+            },
+            "ordering": {
+              "title": "Ordenação dos filtros",
+              "description": "Configura a ordem dos grupos de filtros e dos valores exibidos dentro deles.",
+              "type": "object",
+              "properties": {
+                "groups": {
+                  "title": "Ordenação dos filtros",
+                  "description": "Define a ordenação geral dos grupos de filtros.",
+                  "type": "string",
+                  "enum": [
+                    "default",
+                    "asc",
+                    "desc"
+                  ],
+                  "enumNames": [
+                    "Padrão da VTEX",
+                    "A - Z",
+                    "Z - A"
+                  ],
+                  "default": "default"
+                },
+                "values": {
+                  "title": "Ordenação das opções",
+                  "description": "Define a ordenação das opções dentro de cada filtro.",
+                  "type": "string",
+                  "enum": [
+                    "default",
+                    "asc",
+                    "desc"
+                  ],
+                  "enumNames": [
+                    "Padrão da VTEX",
+                    "A - Z",
+                    "Z - A"
+                  ],
+                  "default": "default"
+                },
+                "lastKeys": {
+                  "title": "Filtros no final",
+                  "description": "Informe os nomes dos filtros que devem permanecer no final, separados por vírgula. Exemplo: Preço, Disponibilidade.",
+                  "type": "string"
+                },
+                "pinned": {
+                  "title": "Posição dos filtros",
+                  "description": "Permite definir manualmente a posição de filtros específicos.",
+                  "type": "array",
+                  "items": {
+                    "title": "Filtro",
+                    "type": "object",
+                    "required": [
+                      "label",
+                      "position"
+                    ],
+                    "properties": {
+                      "label": {
+                        "title": "Nome do filtro",
+                        "description": "Nome exibido do filtro. Exemplo: Marca, Cor ou Preço.",
+                        "type": "string"
+                      },
+                      "position": {
+                        "title": "Posição",
+                        "description": "Posição do filtro na listagem. A primeira posição é 1.",
+                        "type": "integer",
+                        "minimum": 1
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "hiddenFilter": {
+              "title": "Filtros ocultos",
+              "description": "Filtros que não devem ser exibidos na listagem.",
+              "type": "array",
+              "items": {
+                "title": "Filtro oculto",
+                "type": "object",
+                "required": [
+                  "label"
+                ],
+                "properties": {
+                  "label": {
+                    "title": "Nome do filtro",
+                    "description": "Nome exibido do filtro que será ocultado. Exemplo: Departamento.",
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "mobileOnly": {
+              "title": "Filtros no mobile",
+              "type": "object",
+              "required": [
+                "filterButton",
+                "clearButtonLabel",
+                "applyButtonLabel"
+              ],
+              "properties": {
+                "filterButton": {
+                  "title": "Botão de filtros",
+                  "type": "object",
+                  "required": [
+                    "label",
+                    "icon"
+                  ],
+                  "properties": {
+                    "label": {
+                      "title": "Texto",
+                      "type": "string",
+                      "default": "Filtrar"
+                    },
+                    "icon": {
+                      "title": "Ícone",
+                      "type": "object",
+                      "required": [
+                        "icon",
+                        "alt"
+                      ],
+                      "properties": {
+                        "icon": {
+                          "title": "Ícone",
+                          "type": "string",
+                          "enum": [
+                            "FadersHorizontal"
+                          ],
+                          "enumNames": [
+                            "Filtros"
+                          ],
+                          "default": "FadersHorizontal"
+                        },
+                        "alt": {
+                          "title": "Texto alternativo",
+                          "type": "string",
+                          "default": "Abrir filtros"
+                        }
+                      }
+                    }
+                  }
+                },
+                "clearButtonLabel": {
+                  "title": "Texto do botão limpar",
+                  "type": "string",
+                  "default": "Limpar filtros"
+                },
+                "applyButtonLabel": {
+                  "title": "Texto do botão aplicar",
+                  "type": "string",
+                  "default": "Aplicar"
+                }
+              }
+            }
+          }
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    },
+    "ProductShelfCustom": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "ProductShelfCustom",
+      "$componentTitle": "Vitrine de Produtos",
+      "title": "Vitrine de Produtos",
+      "description": "Vitrine de produtos por coleção.",
+      "type": "object",
+      "required": [
+        "numberOfItems",
+        "after",
+        "sort"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "title": "Título"
+        },
+        "numberOfItems": {
+          "type": "integer",
+          "title": "Quantidade de produtos",
+          "default": 10,
+          "description": "Quantidade total de produtos carregados pela vitrine."
+        },
+        "itemsPerPage": {
+          "type": "integer",
+          "title": "Itens por página",
+          "default": 5
+        },
+        "after": {
+          "type": "string",
+          "title": "Paginação inicial",
+          "default": "0"
+        },
+        "sort": {
+          "title": "Ordenação",
+          "type": "string",
+          "default": "score_desc",
+          "enum": [
+            "discount_desc",
+            "name_asc",
+            "name_desc",
+            "orders_desc",
+            "price_asc",
+            "price_desc",
+            "release_desc",
+            "score_desc"
+          ],
+          "enumNames": [
+            "Maior desconto",
+            "Nome: A-Z",
+            "Nome: Z-A",
+            "Mais vendidos",
+            "Menor preço",
+            "Maior preço",
+            "Lançamentos",
+            "Relevância"
+          ]
+        },
+        "selectedFacets": {
+          "title": "Coleção",
+          "type": "array",
+          "items": {
+            "title": "Coleção",
+            "type": "object",
+            "required": [
+              "key",
+              "value"
+            ],
+            "properties": {
+              "key": {
+                "title": "Tipo",
+                "type": "string",
+                "default": "productClusterIds"
+              },
+              "value": {
+                "title": "ID da coleção",
+                "description": "Informe o ID da coleção VTEX.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "carouselConfiguration": {
+          "title": "Configuração do Slider",
+          "type": "object",
+          "properties": {
+            "columnsDesktop": {
+              "title": "Produtos visíveis - Desktop",
+              "description": "Quantidade de produtos visíveis no desktop.",
+              "type": "number",
+              "default": 4
+            },
+            "columnsTablet": {
+              "title": "Produtos visíveis - Tablet",
+              "description": "Quantidade de produtos visíveis no tablet.",
+              "type": "number",
+              "default": 2
+            },
+            "columnsPhone": {
+              "title": "Produtos visíveis - Celular",
+              "description": "Quantidade de produtos visíveis no celular.",
+              "type": "number",
+              "default": 1
+            },
+            "gap": {
+              "title": "Espaçamento entre produtos",
+              "description": "Espaçamento entre os produtos em pixels.",
+              "type": "number",
+              "default": 16
+            },
+            "align": {
+              "title": "Alinhamento do Slider",
+              "type": "object",
+              "properties": {
+                "desktop": {
+                  "title": "Desktop",
+                  "type": "string",
+                  "enum": [
+                    "default",
+                    "center",
+                    "container-start"
+                  ],
+                  "enumNames": [
+                    "Padrão",
+                    "Centralizado",
+                    "Início do container"
+                  ],
+                  "default": "default"
+                },
+                "tablet": {
+                  "title": "Tablet",
+                  "type": "string",
+                  "enum": [
+                    "default",
+                    "center",
+                    "container-start"
+                  ],
+                  "enumNames": [
+                    "Padrão",
+                    "Centralizado",
+                    "Início do container"
+                  ],
+                  "default": "default"
+                },
+                "phone": {
+                  "title": "Celular",
+                  "type": "string",
+                  "enum": [
+                    "default",
+                    "center",
+                    "container-start"
+                  ],
+                  "enumNames": [
+                    "Padrão",
+                    "Centralizado",
+                    "Início do container"
+                  ],
+                  "default": "default"
+                }
+              }
+            },
+            "peek": {
+              "title": "Prévia do próximo produto",
+              "description": "Quantidade em pixels do próximo produto que ficará visível.",
+              "type": "object",
+              "properties": {
+                "desktop": {
+                  "title": "Desktop",
+                  "type": "number",
+                  "default": 0
+                },
+                "tablet": {
+                  "title": "Tablet",
+                  "type": "number",
+                  "default": 0
+                },
+                "phone": {
+                  "title": "Celular",
+                  "type": "number",
+                  "default": 0
+                }
+              }
+            },
+            "showArrows": {
+              "title": "Exibir setas",
+              "type": "boolean",
+              "default": true
+            },
+            "showDots": {
+              "title": "Exibir paginação",
+              "description": "Exibe os indicadores de paginação abaixo do slider.",
+              "type": "boolean",
+              "default": false
+            },
+            "infiniteMode": {
+              "title": "Slider infinito",
+              "type": "boolean",
+              "default": false
+            },
+            "autoPlay": {
+              "title": "Autoplay",
+              "description": "Avança os produtos automaticamente.",
+              "type": "boolean",
+              "default": false
+            },
+            "autoPlayInterval": {
+              "title": "Intervalo do autoplay",
+              "description": "Tempo entre as transições em milissegundos.",
+              "type": "number",
+              "default": 5000
+            }
+          }
+        },
+        "productCardConfiguration": {
+          "title": "Configuração do Card de Produto",
+          "type": "object",
+          "properties": {
+            "showDiscountPercentage": {
+              "title": "Exibir percentual de desconto",
+              "description": "Exibe no card o percentual de desconto do produto.",
+              "type": "boolean",
+              "default": true
+            },
+            "showDiscountValue": {
+              "title": "Exibir valor economizado",
+              "description": "Exibe no card o valor economizado quando o produto possuir desconto.",
+              "type": "boolean",
+              "default": true
+            },
+            "pixDiscountPercentage": {
+              "title": "Desconto no PIX (%)",
+              "description": "Informe o percentual de desconto no PIX. Deixe vazio ou 0 para não exibir.",
+              "type": "number",
+              "default": 0
+            }
+          }
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    },
+    "Simpletext": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "Simpletext",
+      "$componentTitle": "Simple Text",
+      "title": "Simple Text",
+      "description": "Demo Simple Text",
+      "type": "object",
+      "properties": {
+        "titleText": {
+          "title": "Título",
+          "type": "string"
+        },
+        "storesText": {
+          "title": "Texto Lojas",
+          "type": "string",
+          "widget": {
+            "ui:widget": "draftjs-rich-text"
+          }
+        },
+        "active": {
+          "title": "Ativo",
+          "type": "boolean"
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    },
+    "TitleSection": {
+      "$extends": [
+        "#/$defs/base-component"
+      ],
+      "$componentKey": "TitleSection",
+      "$componentTitle": "Título de Seção",
+      "title": "Título de Seção",
+      "description": "Título de seção com opções de alinhamento, link e contagem regressiva.",
+      "type": "object",
+      "properties": {
+        "config": {
+          "title": "Configurações",
+          "type": "object",
+          "properties": {
+            "active": {
+              "title": "Ativo?",
+              "type": "boolean",
+              "default": true
+            },
+            "grid": {
+              "title": "Largura da seção",
+              "description": "Define se o conteúdo ocupará toda a largura disponível ou ficará limitado ao container da loja.",
+              "type": "string",
+              "default": "container",
+              "enum": [
+                "container",
+                "full"
+              ],
+              "enumNames": [
+                "Container",
+                "Largura total"
+              ]
+            },
+            "marginTop": {
+              "title": "Margem superior",
+              "description": "Espaçamento superior da seção em pixels.",
+              "type": "number",
+              "default": 0,
+              "minimum": 0
+            },
+            "align": {
+              "title": "Alinhamento",
+              "description": "Define o posicionamento do título e dos elementos complementares.",
+              "type": "string",
+              "default": "left",
+              "enum": [
+                "left",
+                "center",
+                "right",
+                "between"
+              ],
+              "enumNames": [
+                "Esquerda",
+                "Centralizado",
+                "Direita",
+                "Título à esquerda / ações à direita"
+              ]
+            },
+            "tag": {
+              "title": "Tag HTML do título",
+              "description": "Define a hierarquia semântica do título.",
+              "type": "string",
+              "default": "h2",
+              "enum": [
+                "h1",
+                "h2",
+                "h3",
+                "h4"
+              ],
+              "enumNames": [
+                "H1",
+                "H2",
+                "H3",
+                "H4"
+              ]
+            }
+          }
+        },
+        "content": {
+          "title": "Conteúdo",
+          "type": "object",
+          "properties": {
+            "text": {
+              "title": "Título",
+              "description": "Texto principal da seção.",
+              "type": "string"
+            },
+            "countdown": {
+              "title": "Contagem regressiva",
+              "description": "Configura um cronômetro regressivo ao lado do título.",
+              "type": "object",
+              "properties": {
+                "active": {
+                  "title": "Exibir contagem regressiva?",
+                  "type": "boolean",
+                  "default": false
+                },
+                "label": {
+                  "title": "Texto",
+                  "description": "Texto exibido antes da contagem.",
+                  "type": "string",
+                  "default": "Termina em"
+                },
+                "endDate": {
+                  "title": "Data final",
+                  "description": "Data e horário em que a contagem regressiva será encerrada.",
+                  "type": "string"
+                }
+              }
+            },
+            "link": {
+              "title": "Link",
+              "description": "Link opcional exibido junto ao título.",
+              "type": "object",
+              "properties": {
+                "text": {
+                  "title": "Texto do link",
+                  "type": "string",
+                  "default": "Veja mais"
+                },
+                "href": {
+                  "title": "Destino",
+                  "description": "URL ou caminho de destino. Ex.: /mais-vendidos",
+                  "type": "string"
+                },
+                "target": {
+                  "title": "Abrir link em",
+                  "type": "string",
+                  "default": "_self",
+                  "enum": [
+                    "_self",
+                    "_blank"
+                  ],
+                  "enumNames": [
+                    "Mesma janela",
+                    "Nova janela"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "readOnly": false,
+      "writeOnly": false,
+      "deprecated": false,
+      "$abstract": false
+    }
+  },
+  "$defs": {},
+  "content-types": {}
+}
